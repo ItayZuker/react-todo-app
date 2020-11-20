@@ -1,0 +1,10 @@
+.header-container {
+    .user-title {
+        font-size: 50px;
+        font-weight: 500;
+        color:  lightgray;
+        &.red {
+            color: rgba(255, 29, 37, 0.5);
+        }
+    }
+}

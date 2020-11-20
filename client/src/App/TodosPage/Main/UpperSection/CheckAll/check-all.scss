@@ -1,0 +1,18 @@
+.check-all-button {
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 30px;
+    color: lightgray;
+    &.all-complited {
+        color: #ff1d25;
+        opacity: 50%;
+        }
+    &.not-complited {
+        color:#7ac943;
+        opacity: 50%;
+    }
+}
+

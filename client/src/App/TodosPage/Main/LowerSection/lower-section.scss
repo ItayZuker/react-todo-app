@@ -1,0 +1,10 @@
+$test-color: lightgray;
+
+.lower-section-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 50px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 700;
+}

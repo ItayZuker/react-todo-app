@@ -1,0 +1,9 @@
+$background-color: #e6e7e8;
+
+body {
+    background-color: $background-color;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

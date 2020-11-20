@@ -1,0 +1,26 @@
+.filter-display-container {
+    grid-column: 2 / 5;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    color: #e6e7e8;
+    .filter-item {
+        height: auto;
+        background-color: lightgray;
+        padding: 5px 10px 5px 10px;
+        border-radius: 4px;
+        &.on {
+            color: gray;
+            &:hover {
+                background-color: rgba(122, 201, 67, 0.5);
+                color: rgba(255, 29, 37, 0.5);
+            }
+            cursor: pointer;
+            &.selected {
+                background-color: rgba(122, 201, 67, 0.5);
+                color: rgba(255, 29, 37, 0.5);
+            }
+        }   
+    }
+}

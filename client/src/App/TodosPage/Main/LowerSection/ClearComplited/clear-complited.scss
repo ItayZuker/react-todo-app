@@ -1,0 +1,31 @@
+$background-color: #e6e7e8;
+
+.clear-complited-container {
+    grid-column: 5 / 6;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 10px 0px 10px;
+    color: lightgray;
+    background-color: transparent;
+    border: none;
+    font-weight: 700;
+    &:focus {
+        outline: none;
+    }
+    &.active {
+        background-color: lightgray;
+        color: gray;
+        &:hover {
+            background-color:rgba(255, 29, 37, 0.5);
+            color: white;
+        }
+        &.clicker {
+            &:hover {
+                background-color: rgba(122, 201, 67, 0.5);
+                color: rgba(255, 29, 37, 0.5);
+            }
+        }
+    }
+}

@@ -1,0 +1,67 @@
+$red-color: rgba(255, 29, 37, 0.5);
+$opacity-red-color: rgba(255, 29, 37, 0.2);
+$green-color: rgba(122, 201, 67, 0.5);
+$light-gray: lightgray;
+
+.todo-item-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 50px;
+    border-bottom: 2px solid $light-gray;
+    box-sizing: border-box;
+    &:hover .delete-button {
+        color: $light-gray;
+    }
+    .check-and-todo-body {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        .check {
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            font-size: 20px;
+            &.v {
+                color: $green-color;
+            }
+            &.x {
+                color: $red-color;
+            }
+        }
+        .todo-body {
+            font-size: 20px;
+            color: $light-gray;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            max-width: 80%;
+            h4 {
+                font-weight: 500;
+            }
+        }
+        .complited {
+            text-decoration: line-through;
+            text-decoration-color: $red-color;
+        }
+    }
+    .delete-button {
+        width: 50px;
+        border: none;
+        outline: none;
+        font-size: 20px;
+        font-weight: 500;
+        background-color: transparent;
+        color: transparent;
+        &:hover {
+            color: $red-color;
+            cursor: pointer;
+        }
+    }
+    &.hide {
+        display: none;
+    }
+}

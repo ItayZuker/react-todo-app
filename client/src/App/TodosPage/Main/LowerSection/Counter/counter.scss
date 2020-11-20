@@ -1,0 +1,19 @@
+.counter-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: lightgray;
+    border-radius: 4px;
+    p.active {
+        color: gray;
+        span {
+            &.red {
+                color: rgba(255, 29, 37, 0.5);
+            }
+            &.green {
+                color: rgba(122, 201, 67, 0.5);
+            }
+        }
+    }
+}
