@@ -1,14 +1,13 @@
-const { response } = require("express");
 const express = require("express");
 const { ObjectID } = require("mongodb");
 const router = express.Router();
 const mongoose = require("mongoose"); 
-const TodoModel = require('../models/Todo.models.js');
+const TodosModel = require('../models/Todos.model.js');
 
 
 
 router.put("/:id/not-complited", async (req, res) => {
-    const docs = await TodoModel
+    const docs = await TodosModel
         .updateOne({
             _id: req.params.id},
         {
@@ -19,7 +18,7 @@ router.put("/:id/not-complited", async (req, res) => {
 });
 
 router.put("/:id/complited", async (req, res) => {
-    const docs = await TodoModel
+    const docs = await TodosModel
         .updateOne({
             _id: req.params.id,
         },
@@ -31,7 +30,7 @@ router.put("/:id/complited", async (req, res) => {
 });
 
 router.put("/complited", async (req, res) => {
-    const docs = await TodoModel
+    const docs = await TodosModel
         .updateMany({
             complited: false,
         },
@@ -43,7 +42,7 @@ router.put("/complited", async (req, res) => {
 });
 
 router.put("/not-complited", async (req, res) => {
-    const docs = await TodoModel
+    const docs = await TodosModel
         .updateMany({
             complited: true,
         },
@@ -55,7 +54,7 @@ router.put("/not-complited", async (req, res) => {
 });
 
 router.delete('/clear-complited', async (req, res) => {
-    const docs = await TodoModel
+    const docs = await TodosModel
         .deleteMany({
             complited: true
         })
@@ -64,7 +63,7 @@ router.delete('/clear-complited', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-    const docs = await TodoModel
+    const docs = await TodosModel
         .deleteOne({
             _id: ObjectID.createFromHexString(req.params.id)
         })
@@ -73,13 +72,13 @@ router.delete('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const newTodo = await TodoModel(req.body);
+    const newTodo = await TodosModel(req.body);
     newTodo.save();
     res.send(newTodo);
 });
 
 router.get("/", async (req, res) => {
-    const docs = await TodoModel
+    const docs = await TodosModel
         .find({})
         .exec();
         res.json(docs);
