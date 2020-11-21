@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { User } from './User/User.js';
-import './links-container.scss';
+import './users-container.scss';
 import { appContext } from '../../../AppContext.js';
 
 async function fetchUsers() {
@@ -8,32 +8,25 @@ async function fetchUsers() {
     return result.json(); 
 }
 
-export function LinksContainer() {
+export function UsersContainer() {
 
     const context = useContext(appContext);
-
-    const [usersList, setUsersList] = useState([]);
 
     useEffect(() => {
         async function activate() {
             const usersArray = await fetchUsers();
-            setUsersList(usersArray);
+            context.setUsersArray(usersArray)
+            context.setAllUsers(usersArray.length);
         }
         activate();
         context.setRenderUsers(false);
     }, [context.renderUsers]);
 
-    return <div className='links-container'>
-        {usersList.map(user => <User
+    return <div className='users-container'>
+        {context.usersArray.map(user => <User
+                key={user._id}
                 name={user.name}>
             </User>
         )}
-        <button
-            onClick={() => {
-                context.userInput === 'active' ? context.setUserInput('') : context.setUserInput('active');
-            }}>+</button>
     </div>
 }
-
-
-{/* <Link to="/todos-page">Itay</Link> */}

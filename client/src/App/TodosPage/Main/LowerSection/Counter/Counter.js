@@ -17,7 +17,7 @@ export function Counter() {
             ><span
                 className={context.allTodos > 0 ? itemsLeft > 0 ? 'red' : 'green' : ''}
             >
-            {itemsLeft}</span> items left
+            {itemsLeft}</span> left
         </p>
     </div>
 }

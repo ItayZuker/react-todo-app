@@ -4,6 +4,13 @@ const mongoose = require('mongoose');
 const UsersModel = require('../models/Users.model.js');
 
 
+router.post('/', async (req, res) => {
+    console.log(req.body)
+    const newUser = await UsersModel(req.body);
+        newUser.save();
+        res.send(newUser);
+});
+
 router.get('/', async (req, res) => {
     const docs = await UsersModel
         .find({})

@@ -1,3 +1,9 @@
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
 .todo-page-container {
     display: flex;
     flex-direction: column;
@@ -10,7 +16,7 @@
         align-items: center;
     }
     h2 {
-        color: lightgray;
+        color: $blue-color;
         font-size: 50px;
         text-align: center;
         &.hide {

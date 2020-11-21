@@ -23,7 +23,7 @@ export function FilterDisplayPanet() {
                 context.setDisplayTodos('active');
                 setSelectedButton('active')
             }}
-        >active
+        >Active
         </div>
         <div 
             className={'filter-item ' + (context.allTodos > 0 ? 'on ' + (selectedButton === 'complited' ? 'selected' : '') : '')}
@@ -32,6 +32,6 @@ export function FilterDisplayPanet() {
                 setSelectedButton('complited')
             }}
         >
-        complited</div>
+        Complited</div>
     </div>
 }

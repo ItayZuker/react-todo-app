@@ -1,18 +1,23 @@
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
+
+
 .counter-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    color: lightgray;
-    border-radius: 4px;
+    color: $regular-gray;
+    padding: 0px 20px 0px 20px;
     p.active {
-        color: gray;
+        color: $light-gray;
         span {
             &.red {
-                color: rgba(255, 29, 37, 0.5);
-            }
-            &.green {
-                color: rgba(122, 201, 67, 0.5);
+                color: $red-color;
             }
         }
     }

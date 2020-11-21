@@ -77,6 +77,13 @@ router.post('/', async (req, res) => {
     res.send(newTodo);
 });
 
+router.get("/:id", async (req, res) => {
+    const docs = await TodosModel
+        .find({userId: req.params.id})
+        .exec();
+        res.json(docs);
+});
+
 router.get("/", async (req, res) => {
     const docs = await TodosModel
         .find({})

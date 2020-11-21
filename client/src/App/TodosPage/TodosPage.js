@@ -5,7 +5,7 @@ import { Footer } from './Footer/Footer.js';
 import './todos-page.scss';
 import { appContext } from '../../AppContext.js';
 
-export function TodosPage() {
+export function TodosPage(props) {
 
     let context = useContext(appContext);
 
@@ -17,8 +17,8 @@ export function TodosPage() {
 
     return <div className='todo-page-container'>
         <div className='main-header-container'>
-            <Header></Header>
-            <Main></Main>
+            <Header name={props.name}></Header>
+            <Main userId={props.userId}></Main>
         </div>
         <h2
             className={(display ? '' : 'hide')}

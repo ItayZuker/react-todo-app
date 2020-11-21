@@ -1,18 +1,22 @@
-import React from 'react';
-import { LinksContainer } from './LinksContainer/LinksContainer.js';
+import React, {useContext} from 'react';
+import { UsersContainer } from './UsersContainer/UsersContainer.js';
 import { NewUser } from './NewUser/NewUser.js';
 import './enter-page.scss';
+import { appContext } from '../../AppContext.js';
 
 export function EnterPage() {
+
+    const context = useContext(appContext);
+
     return <div className='enter-page-container'>
         <div className='logo-container'>
             <h1>TaDam!</h1>
             <h2>It's Done.</h2>
         </div>
-        <div className='enter-containet'>
-            <h4>Choose / Create your list:</h4>
-            <LinksContainer></LinksContainer>
+        <div className='users-new-users-containet'>
+            <h3>{context.allUsers > 0 ? 'Choose /' : '' } Create your list (<span className={context.allUsers < 5 ? '' : 'max-five'}>{context.allUsers}/5</span>):</h3>
+            <UsersContainer></UsersContainer>
+            <NewUser></NewUser>
         </div>
-        <NewUser></NewUser>
     </div>
 }

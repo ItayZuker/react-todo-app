@@ -20,6 +20,7 @@ export function UpperSection(props) {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
+                        userId: props.userId,
                         body: e.target.todo.value,
                         complited: false,
                     }),
@@ -30,7 +31,6 @@ export function UpperSection(props) {
                 })
         }}>
         <input
-            className={context.allTodos > 0 ? '' : 'red'}
             type='text'
             name='todo'
             placeholder='what needs to be done?'

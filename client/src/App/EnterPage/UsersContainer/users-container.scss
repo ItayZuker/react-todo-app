@@ -4,10 +4,13 @@ $light-gray: lightgray;
 $regular-gray: gray;
 $dark-gray: #232323;
 
-body {
-    background-color: $dark-gray;
-    font-family: sans-serif;
+
+.users-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    flex-wrap: wrap;
+    max-width: 500px;
+    height: auto;
+    margin: 10px 0px 14px 0px;
 }

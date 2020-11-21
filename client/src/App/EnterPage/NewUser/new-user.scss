@@ -1,49 +1,48 @@
-$green-color: rgba(122, 201, 67, 0.5);
-$red-color: rgba(255, 29, 37, 0.5);
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
 
 .new-user-container {
-    margin: 20px 0px 0px 0px;
-    display: none;
-    &.active {
-        display: block;
-    }
+    margin: 0px 0px 0px 0px;
     form {
         margin: 0px 0px 0px 0px;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        height: 40px;
         input {
-            &.submit {
-                background-color: $red-color;
-                color: white;
-                font-size: 16px;
-                font-weight: 500;
-                border-radius: 0px 8px 8px 0px;
-                &:hover {
-                    background-color: $green-color;
-                    color: $red-color;
-                    cursor: pointer;
-                }
-            }
-            background-color: white;
+            width: 200px;
+            height: 100%;
             border: none;
-            height: 40px;
-            padding: 0px 10px 0px 10px;
-            border-radius: 8px 0px 0px 8px;
-            box-sizing: border-box;
-            color: $red-color;
-            font-size: 20px;
-            margin: 0px 0px 0px 0px;
+            border-radius: 0px;
+            padding: 0px 20px 0px 20px;
+            background-color: $light-gray;
+            font-size: 18px;
             font-weight: 700;
-            &::placeholder {
-                color: $green-color;
-                font-size: 20px;
-                margin: 0px;
-                font-weight: 700;
+            color: $dark-gray;
+            &.notification::placeholder {
+                color: $red-color;
             }
             &:focus {
                 outline: none;
+            }
+            &::placeholder {
+                color: $regular-gray;
+                margin: 0px;
+            }
+        }
+        .submit {
+            background-color: $regular-gray;
+            color: $light-gray;
+            width: auto;
+            font-weight: 700;
+            &:hover {
+                color: $dark-gray;
+                cursor: pointer;
             }
         }
     }

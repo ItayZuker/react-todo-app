@@ -1,23 +1,29 @@
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
 .upper-section-container {
-    border-bottom: 2px solid lightgray;
+    border-bottom: 4px solid $dark-gray;
+    border-radius: 4px 4px 0px 0px;
     width: 100%;
+    height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    background-color: $blue-color;
     input {
+        font-weight: 700;
         font-size: 24px;
-        color: rgba(255, 29, 37, 0.5);
-        padding: 2px 0px 0px 0px;
+        color: $dark-gray;
+        background-color: transparent;
+        height: 100%;
         border: none;
         outline: none;
         &::placeholder {
-            color: lightgray;
-        }
-        &.red {
-            &::placeholder {
-                color: rgba(255, 29, 37, 0.5);
-            }
+            color: $dark-gray;
         }
     }
 }

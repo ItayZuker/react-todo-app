@@ -1,0 +1,31 @@
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
+
+
+a:-webkit-any-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: 700;
+    margin: 10px 10px 10px 10px;
+    padding: 0px 20px 0px 20px;
+    height: 40px;
+    background-color: $blue-color;
+    color: $dark-gray;
+    &:hover {
+        background-color: $red-color;
+        color: white;
+        cursor: pointer;
+    }
+    h4 {
+        font-size: 20px;
+        margin: 0px 0px 0px 0px;
+    }
+}
