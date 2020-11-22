@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import { TodosPage } from './TodosPage/TodosPage.js';
 import { appContext } from '../AppContext.js';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
@@ -11,9 +11,9 @@ export function App() {
     let [renderUsers, setRenderUsers] = useState(true);
     let [userInput, setUserInput] = useState('');
     let [allUsers, setAllUsers] = useState(null);
-    let [renderList, setRenderList] = useState(true);
+    let [renderTodos, setRenderTodos] = useState(true);
     let [allTodos, setAllTodos] = useState(null);
-    let [todosComplited, setTodosComplited] = useState(null);
+    let [todosCompleted, setTodosCompleted] = useState(null);
     let [displayTodos, setDisplayTodos] = useState('all');
 
     let contextValue = {
@@ -25,12 +25,12 @@ export function App() {
         setUserInput,
         allUsers,
         setAllUsers,
-        renderList,
-        setRenderList,
+        renderTodos,
+        setRenderTodos,
         allTodos,
         setAllTodos,
-        todosComplited,
-        setTodosComplited,
+        todosCompleted,
+        setTodosCompleted,
         displayTodos,
         setDisplayTodos,
     }

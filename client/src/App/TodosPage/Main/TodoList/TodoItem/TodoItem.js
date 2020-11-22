@@ -1,81 +1,52 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { CheckTodoButton } from './CheckTodoButton/CheckTodoButton.js';
+import { DeleteTodoButton } from './DeleteTodoButton/DeleteTodoButton.js';
 import { appContext } from '../../../../../AppContext.js';
 import './todo-item.scss';
 
 
 
 export function TodoItem(props) {
+
+    console.log(props.completed);
+
     const context = useContext(appContext);
 
-    let [todoComplited, setTodoComplited] = useState(props.complited);
+    let [todoCompleted, setTodoCompleted] = useState(props.completed);
     let [displayStatus, setDisplayStatus] = useState(null);
 
+    // Update completed state for this todo if change is coming from DataBase
+
     useEffect(() => {
-        setTodoComplited(props.complited)
-    }, [props.complited]);
+        setTodoCompleted(props.completed);
+    }, [props.completed]);
 
-
+    // Update display state for this todo
+    
     useEffect(() => {
         if(context.displayTodos === 'active') {
-            todoComplited ? setDisplayStatus(false) : setDisplayStatus(true);
+            todoCompleted ? setDisplayStatus(false) : setDisplayStatus(true);
         } else if(context.displayTodos === 'complited') {
-            todoComplited ? setDisplayStatus(true) : setDisplayStatus(false);
+            todoCompleted ? setDisplayStatus(true) : setDisplayStatus(false);
         } else {
             setDisplayStatus(true);
         };
-    }, [context.displayTodos]);
+    }, [context.displayTodos, context.renderTodos]);
 
     return <div
             className={'todo-item-container ' + (displayStatus ? '' : 'hide')}>
         <div className='check-and-todo-body'>
-            <button
-                className={'check ' + (todoComplited ? 'v' : 'x')}
-                onClick={() => {
-                if(todoComplited) {
-                    if(context.displayTodos === 'complited') {
-                        setDisplayStatus(false);
-                    } 
-                    // update DataBase and state for this todo item ---> complited: false
-                    fetch(`/todos/api/${props.todoId}/not-complited`, {
-                        method: "PUT",
-                    })
-                    .then((res) => {
-                        console.log(res);
-                        setTodoComplited(false);
-                        context.setRenderList(true);
-
-                    });
-                } else {
-                    if(context.displayTodos === 'active') {
-                        setDisplayStatus(false);
-                    } 
-                    // update DataBase and state for this todo item ---> complited: true
-                    fetch(`/todos/api/${props.todoId}/complited`, {
-                        method: "PUT",
-                    })
-                    .then((res) => {
-                        console.log(res);
-                        setTodoComplited(true);
-                        context.setRenderList(true);
-                    })
-                }
-            }}
-            >v</button>
+            <CheckTodoButton
+                todoId={props.todoId}
+                completed={props.completed}
+                ></CheckTodoButton>
             <div
-                className={'todo-body ' + (todoComplited ? 'complited' : '')}>
+                className={'todo-body ' + (todoCompleted ? 'completed' : '')}>
                 <h4>{props.body}</h4>
             </div>
         </div>
-        <button
-            className='delete-button'
-            onClick={() => {
-                fetch(`/todos/api/${props.todoId}`, {
-                    method: 'DELETE',
-                }).then((res) => {
-                    console.log(res);
-                    context.setRenderList(true);
-                })
-            }}
-            >x</button>
+        <DeleteTodoButton
+            todoId={props.todoId}
+            ></DeleteTodoButton>
     </div>
 }

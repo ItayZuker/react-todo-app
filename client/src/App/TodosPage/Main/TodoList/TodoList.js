@@ -14,24 +14,24 @@ export function TodoList(props) {
     let [allTodos, setAllTodos] = useState([]);
 
     useEffect(() => {
-        if(context.renderList) {
+        if(context.renderTodos) {
             async function activate() {
                 const allTodosArray = await fetchList(props.userId);
                 setAllTodos(allTodosArray);
                 context.setAllTodos(allTodosArray.length);
-                context.setTodosComplited(allTodosArray.filter(todo => todo.complited === true).length);
-                context.setRenderList(false);
+                context.setTodosCompleted(allTodosArray.filter(todo => todo.completed === true).length);
+                context.setRenderTodos(false);
             }
             activate();
         }
-    }, [context.renderList]);
+    }, [context.renderTodos]);
 
     return <div className='todo-list-container'>
         { allTodos.map(todo => 
                 <TodoItem key={todo._id}
                     todoId={ todo._id }
                     body={ todo.body }
-                    complited={ todo.complited }
+                    completed={ todo.completed }
                 >
                 </TodoItem>
             )}

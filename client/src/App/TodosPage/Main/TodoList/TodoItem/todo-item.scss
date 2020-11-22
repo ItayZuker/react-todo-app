@@ -17,60 +17,6 @@ $dark-gray: #232323;
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
-        .check {
-            width: 24px;
-            height: 24px;
-            margin: 0px 13px 0px 13px;
-            border-radius: 50%;
-            background-color: $dark-gray;
-            border: none;
-            outline: none;
-            font-size: 16px;
-            &.v {
-                color: $blue-color;
-                &:hover {
-                    color: $red-color;
-                    cursor: pointer;
-                }
-            }
-            &.x {
-                color: $red-color;
-                &:hover {
-                    color: $blue-color;
-                    cursor: pointer;
-                }
-            }
-        }
-        .todo-body {
-            font-size: 20px;
-            color: $dark-gray;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-            max-width: 80%;
-            h4 {
-                font-weight: 700;
-            }
-        }
-        .complited {
-            color: $regular-gray;
-            text-decoration: line-through;
-            text-decoration-color: $red-color;
-        }
-    }
-    .delete-button {
-        width: 50px;
-        border: none;
-        outline: none;
-        font-size: 20px;
-        font-weight: 700;
-        background-color: transparent;
-        color: $regular-gray;
-        &:hover {
-            color: $red-color;
-            cursor: pointer;
-        }
     }
     &.hide {
         display: none;

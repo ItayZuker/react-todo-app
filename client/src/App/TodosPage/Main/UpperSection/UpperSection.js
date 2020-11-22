@@ -22,12 +22,12 @@ export function UpperSection(props) {
                     body: JSON.stringify({
                         userId: props.userId,
                         body: e.target.todo.value,
-                        complited: false,
+                        completed: false,
                     }),
                 }).then((res) => {
                     console.log(res);
                     e.target.todo.value = '';
-                    context.setRenderList(true);
+                    context.setRenderTodos(true);
                 })
         }}>
         <input

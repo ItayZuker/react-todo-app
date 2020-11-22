@@ -10,6 +10,6 @@ export function User(props) {
     return <Link
         to={`/${props.name}/todos`}
         onClick={() => {
-            context.setRenderList(true)
+            context.setRenderTodos(true)
         }}>{props.name}</Link>
 }

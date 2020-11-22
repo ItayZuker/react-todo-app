@@ -32,6 +32,6 @@ export function FilterDisplayPanet() {
                 setSelectedButton('complited')
             }}
         >
-        Complited</div>
+        Completed</div>
     </div>
 }

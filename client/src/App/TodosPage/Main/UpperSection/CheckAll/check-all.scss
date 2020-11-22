@@ -14,14 +14,14 @@ $dark-gray: #232323;
     outline: none;
     font-size: 20px;
     color: $regular-gray;
-    &.all-complited {
+    &.all-completed {
         color: $light-gray;
         &:hover {
             color: $red-color;
             cursor: pointer;
         }
     }
-    &.not-complited {
+    &.not-completed {
         color: $light-gray;
         &:hover {
             color: $blue-color;

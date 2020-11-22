@@ -8,7 +8,7 @@ export function Counter() {
 
     const context = useContext(appContext);
 
-    const itemsLeft = context.allTodos-context.todosComplited;
+    const itemsLeft = context.allTodos-context.todosCompleted;
 
     return <div
         className='counter-container'>
