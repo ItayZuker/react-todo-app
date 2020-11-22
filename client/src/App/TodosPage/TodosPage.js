@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import { Header } from './Header/Header.js';
 import { Main } from './Main/Main.js';
 import { Footer } from './Footer/Footer.js';
+import { Dropdown } from './Dropdown/Dropdown.js';
 import './todos-page.scss';
 import { appContext } from '../../AppContext.js';
 
@@ -16,6 +17,7 @@ export function TodosPage(props) {
     }, [context.allTodos]);
 
     return <div className='todo-page-container'>
+        <Dropdown userId={props.userId}></Dropdown>
         <div className='main-header-container'>
             <Header name={props.name}></Header>
             <Main userId={props.userId}></Main>

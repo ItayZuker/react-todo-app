@@ -1,0 +1,23 @@
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
+.dropdown-container {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    .fas {
+        font-size: 40px;
+        color: $blue-color;
+        &:hover {
+            color: $red-color;
+            cursor: pointer;
+        }
+    }    
+}
