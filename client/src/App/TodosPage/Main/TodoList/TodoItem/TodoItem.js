@@ -2,13 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import { CheckTodoButton } from './CheckTodoButton/CheckTodoButton.js';
 import { DeleteTodoButton } from './DeleteTodoButton/DeleteTodoButton.js';
 import { appContext } from '../../../../../AppContext.js';
+import { TodoBody } from './TodoBody/TodoBody.js';
 import './todo-item.scss';
 
 
 
 export function TodoItem(props) {
-
-    console.log(props.completed);
 
     const context = useContext(appContext);
 
@@ -35,15 +34,16 @@ export function TodoItem(props) {
 
     return <div
             className={'todo-item-container ' + (displayStatus ? '' : 'hide')}>
-        <div className='check-and-todo-body'>
+        <div className='check-button-and-content'>
             <CheckTodoButton
                 todoId={props.todoId}
                 completed={props.completed}
                 ></CheckTodoButton>
-            <div
-                className={'todo-body ' + (todoCompleted ? 'completed' : '')}>
-                <h4>{props.body}</h4>
-            </div>
+            <TodoBody
+                todoId={props.todoId}
+                body={props.body}
+                complited={props.completed}
+                ></TodoBody>
         </div>
         <DeleteTodoButton
             todoId={props.todoId}

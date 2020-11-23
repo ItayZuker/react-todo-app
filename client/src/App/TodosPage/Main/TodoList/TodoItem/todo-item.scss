@@ -12,11 +12,24 @@ $dark-gray: #232323;
     height: 50px;
     border-bottom: 4px solid $dark-gray;
     box-sizing: border-box;
-    .check-and-todo-body {
+    .check-button-and-content {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
+    }
+    .delete-button {
+        width: 50px;
+        border: none;
+        outline: none;
+        font-size: 20px;
+        font-weight: 700;
+        background-color: transparent;
+        color: $regular-gray;
+        &:hover {
+            color: $red-color;
+            cursor: pointer;
+        }
     }
     &.hide {
         display: none;

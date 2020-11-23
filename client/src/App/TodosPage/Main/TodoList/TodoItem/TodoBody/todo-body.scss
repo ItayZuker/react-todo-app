@@ -1,0 +1,40 @@
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
+.todo-body-container {
+    font-size: 20px;
+    color: $dark-gray;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 80%;
+    height: 100%;
+    form {
+        height: 100%;
+        input {
+            box-sizing: border-box;;
+            height: 100%;
+            border: none;
+            background-color: transparent;
+            font-size: 20px;
+            font-weight: 700;
+            &:focus {
+                outline: none;
+            }
+            &:hover {
+                cursor: default;
+            }
+        &.completed {
+            color: $regular-gray;
+            text-decoration: line-through;
+            text-decoration-color: $red-color;
+            }
+        }
+
+    }
+    
+}

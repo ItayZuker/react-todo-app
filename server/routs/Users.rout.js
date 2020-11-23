@@ -13,7 +13,6 @@ router.delete('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    console.log(req.body)
     const newUser = await UsersModel(req.body);
         newUser.save();
         res.send(newUser);

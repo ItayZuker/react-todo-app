@@ -44,7 +44,6 @@ export function NewUser(){
                             name: e.target.user.value,
                         }),
                     }).then((res) => {
-                        console.log(res);
                         e.target.user.value = '';
                         context.setRenderUsers(true);
                     });

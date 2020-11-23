@@ -6,6 +6,18 @@ const TodosModel = require('../models/Todos.model.js');
 
 
 
+router.put('/:id', async (req, res) => {
+    const docs = await TodosModel
+    .updateOne({
+        _id: req.params.id},
+    {
+        body: req.body.body,
+        completed: req.body.completed,
+    })
+    .exec();
+    res.send(docs);
+})
+
 router.put("/:id/not-completed", async (req, res) => {
     const docs = await TodosModel
         .updateOne({
