@@ -8,41 +8,32 @@ import './todo-item.scss';
 
 
 export function TodoItem(props) {
-
     const context = useContext(appContext);
 
-    let [todoCompleted, setTodoCompleted] = useState(props.completed);
     let [displayStatus, setDisplayStatus] = useState(null);
-
-    // Update completed state for this todo if change is coming from DataBase
-
-    useEffect(() => {
-        setTodoCompleted(props.completed);
-    }, [props.completed]);
-
-    // Update display state for this todo
     
-    useEffect(() => {
-        if(context.displayTodos === 'active') {
-            todoCompleted ? setDisplayStatus(false) : setDisplayStatus(true);
-        } else if(context.displayTodos === 'complited') {
-            todoCompleted ? setDisplayStatus(true) : setDisplayStatus(false);
-        } else {
-            setDisplayStatus(true);
-        };
-    }, [context.displayTodos, context.renderTodos]);
+    useEffect(() => {                                                           //
+        if(context.displayTodos === 'active') {                                 //  ---> Update display state for this todo
+            props.completed ? setDisplayStatus(false) : setDisplayStatus(true);   //
+        } else if(context.displayTodos === 'complited') {                       //
+            props.completed ? setDisplayStatus(true) : setDisplayStatus(false);   //
+        } else {                                                                //
+            setDisplayStatus(true);                                             //
+        };                                                                      //
+    }, [context.displayTodos, context.renderTodos]);                            //
 
     return <div
             className={'todo-item-container ' + (displayStatus ? '' : 'hide')}>
         <div className='check-button-and-content'>
             <CheckTodoButton
                 todoId={props.todoId}
+                body={props.body}
                 completed={props.completed}
                 ></CheckTodoButton>
             <TodoBody
                 todoId={props.todoId}
                 body={props.body}
-                complited={props.completed}
+                completed={props.completed}
                 ></TodoBody>
         </div>
         <DeleteTodoButton

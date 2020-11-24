@@ -9,21 +9,35 @@ export function CheckTodoButton(props) {
     return <button
         className={'check ' + (props.completed ? 'v' : 'x')}
         onClick={() => {
-        if(props.completed) { // Update DataBase and state for this todo ---> completed: false
-            fetch(`/todos/api/${props.todoId}/not-completed`, {
+        if(props.completed) {                                      //
+            fetch(`/todos/api/${props.todoId}`, {     //  ---> Update DataBase and completed state for this todo: False
                 method: "PUT",
-            })
-            .then((res) => {
-                console.log(res);
-                context.setRenderTodos(true);
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    body: props.body,
+                    completed: false,
+                })
+            })                                                      //
+            .then((res) => {                                        //
+                console.log(res);                                   //
+                context.setRenderTodos(true);                       //
             });
-        } else { // Update DataBase and state for this todo ---> completed: true
-            fetch(`/todos/api/${props.todoId}/completed`, {
+        } else {                                                   //
+            fetch(`/todos/api/${props.todoId}`, {         //  ---> Update DataBase and completed state for this todo: True
                 method: "PUT",
-            })
-            .then((res) => {
-                console.log(res);
-                context.setRenderTodos(true);
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    body: props.body,
+                    completed: true,
+                })                                      //
+            })                                                      //
+            .then((res) => {                                        //
+                console.log(res);                                   //
+                context.setRenderTodos(true);                       //
             });
         }
     }}

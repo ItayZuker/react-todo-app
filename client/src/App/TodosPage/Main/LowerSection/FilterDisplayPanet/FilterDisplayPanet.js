@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import { appContext } from '../../../../../AppContext.js';
 import './filter-display-panet.scss';
 

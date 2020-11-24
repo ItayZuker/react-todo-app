@@ -8,7 +8,7 @@ export function Dropdown(props) {
 
     return <div className='dropdown-container'>
         <i
-            class="fas fa-angle-down"
+            className="fas fa-angle-down"
             onClick={() => {
                 openDropdown ? setOpenDropdown(false) : setOpenDropdown(true);
             }}></i>

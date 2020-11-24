@@ -6,64 +6,38 @@ const TodosModel = require('../models/Todos.model.js');
 
 
 
-router.put('/:id', async (req, res) => {
-    const docs = await TodosModel
-    .updateOne({
-        _id: req.params.id},
-    {
-        body: req.body.body,
-        completed: req.body.completed,
-    })
-    .exec();
-    res.send(docs);
-})
-
-router.put("/:id/not-completed", async (req, res) => {
+router.put("/:id", async (req, res) => {
     const docs = await TodosModel
         .updateOne({
             _id: req.params.id},
         {
-            completed: false,
+            body: req.body.body,
+            completed: req.body.completed,
         })
         .exec();
         res.send(docs);
 });
 
-router.put("/:id/completed", async (req, res) => {
-    const docs = await TodosModel
-        .updateOne({
-            _id: req.params.id,
-        },
-        {
-            completed: true,
-        })
-        .exec();
-        res.send(docs);
-});
-
-router.put("/completed", async (req, res) => {
+router.put("/", async (req, res) => {
     const docs = await TodosModel
         .updateMany({
-            completed: false,
+            completed: !req.body.completed,
         },
         {
-            completed: true,
+            completed: req.body.completed,
         })
         .exec();
         res.send(docs);
 });
 
-router.put("/not-completed", async (req, res) => {
+router.delete('/user/:id', async (req, res) => {
     const docs = await TodosModel
-        .updateMany({
-            completed: true,
-        },
-        {
-            completed: false,
+        .deleteMany({
+            userId: ObjectID.createFromHexString(req.params.id),
         })
         .exec();
         res.send(docs);
-});
+})
 
 router.delete('/clear-completed', async (req, res) => {
     const docs = await TodosModel

@@ -9,7 +9,7 @@ $dark-gray: #232323;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 50px;
+    min-height: 50px;
     border-bottom: 4px solid $dark-gray;
     box-sizing: border-box;
     .check-button-and-content {
@@ -17,6 +17,7 @@ $dark-gray: #232323;
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
+        width: 100%;
     }
     .delete-button {
         width: 50px;

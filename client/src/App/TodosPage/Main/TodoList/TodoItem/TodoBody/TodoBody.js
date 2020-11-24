@@ -1,55 +1,80 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import { appContext } from '../../../../../../AppContext';
 import './todo-body.scss';
 
 export function TodoBody(props) {
 
-    const context = useContext(appContext);
+    let context = useContext(appContext);
+    
+    let [editActive, setEditActive] = useState(false);
 
-    const todoInput = document.getElementById(`${props.todoId}`);
+    const todoSpan = useRef();
 
-    return <div className={'todo-body-container'}>
-        <form onSubmit={(e) => {
-            e.preventDefault();
-            todoInput.placeholder = e.target.todo.value;
-            if(e.target.todo.value === '') {
-                console.log("123");
-                fetch(`/todos/api/${props.todoId}`, {
-                    method: 'DELETE'
-                }).then((res) => {
-                    console.log(res);
-                    context.setRenderTodos(true);
-                });
+    useEffect(() => {
+        if(editActive) {
+            todoSpan.current.focus();   
+        } else {
+            setEditActive(false);       //  ---> To fix delay bug
+        }
+    }, [editActive])
+
+    function todoReset() {
+        if(editActive && todoSpan.current !== null) {
+            todoSpan.current.innerText = props.body;
+            setEditActive(false)
+        };
+    };
+
+    function pressEnter(e) {
+        if(e.charCode === 13 && editActive) {
+            todoSpan.current.blur();
+            if(todoSpan.current.innerText === '') {
+                fetchDelete();
             } else {
-                fetch(`/todos/api/${props.todoId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        body: e.target.todo.value,
-                        completed: false,
-                    })
-                }).then((res) => {
-                    console.log(res);
-                    todoInput.readOnly=true;
-                    e.target.todo.value = '';
-                    context.setRenderTodos(true);  
-                })
-            }
-        }}>
-            <input
-                id={props.todoId}
-                name='todo'
-                className={props.complited ? 'completed' : ''}
-                readOnly={true}
-                onDoubleClick={() => {
-                    todoInput.readOnly=false;
-                    todoInput.value=props.body;
-                }}
-                placeholder={props.body}></input>
-        </form>
-    </div>
-}
+                fetchEdit(todoSpan.current.innerText);
+            };
+        };
+    };
 
+    function fetchDelete() {
+        fetch(`/todos/api/${props.todoId}`, {
+            method: 'DELETE'
+            })
+            .then((res) => {
+                console.log(res);
+                context.setRenderTodos(true);
+            });
+    };
+
+    function fetchEdit(newBody) {
+        fetch(`/todos/api/${props.todoId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                body: newBody,
+                completed: false,
+            }),
+        })  
+        .then((res) => {
+            console.log(res);
+            context.setRenderTodos(true);
+        });
+    };
+
+    document.addEventListener('click', todoReset);
+    document.addEventListener('keypress', pressEnter);
+
+    return <span
+        className={'todo-body-container ' + (props.completed ? 'completed' : '')}
+        ref={todoSpan}
+        id={props.todoId}
+        contentEditable={editActive ? 'true' : 'false'}
+        onDoubleClick={() => {
+            setEditActive(true);
+        }}
+        >{props.body}
+    </span>             
+}                       
 
