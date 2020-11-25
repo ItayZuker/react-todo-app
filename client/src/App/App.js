@@ -38,7 +38,9 @@ export function App() {
     return <appContext.Provider value={contextValue}>
         <BrowserRouter>
             <Switch>
-                {usersArray.map(user => <Route path={`/${user.name}/todos`}>
+                {usersArray.map(user => <Route
+                    key={user._id}
+                    path={`/${user.name}/todos`}>
                     <TodosPage
                         userId={user._id}
                         name={user.name}

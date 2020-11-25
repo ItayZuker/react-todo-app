@@ -28,7 +28,8 @@ export function TodoList(props) {
 
     return <div className='todo-list-container'>
         { allTodos.map(todo => 
-                <TodoItem key={todo._id}
+                <TodoItem
+                    key={todo._id}
                     todoId={ todo._id }
                     body={ todo.body }
                     completed={ todo.completed }

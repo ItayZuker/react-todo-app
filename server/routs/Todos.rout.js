@@ -30,7 +30,7 @@ router.put("/", async (req, res) => {
         res.send(docs);
 });
 
-router.delete('/user/:id', async (req, res) => {
+router.delete('/user-todos/:id', async (req, res) => {
     const docs = await TodosModel
         .deleteMany({
             userId: ObjectID.createFromHexString(req.params.id),

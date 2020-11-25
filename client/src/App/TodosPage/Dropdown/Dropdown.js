@@ -1,16 +1,19 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import { DropdownMenu } from './DropdownMenu/DropdownMenu.js';
 import './dropdown.scss';
 
 export function Dropdown(props) {
 
-    const [openDropdown, setOpenDropdown] = useState(false)
+    const [openDropdown, setOpenDropdown] = useState(false);
 
-    return <div className='dropdown-container'>
+    const dropdownContainer = useRef();
+
+    return <div
+            className='dropdown-container'>
         <i
             className="fas fa-angle-down"
             onClick={() => {
-                openDropdown ? setOpenDropdown(false) : setOpenDropdown(true);
+                setOpenDropdown(true);
             }}></i>
         <DropdownMenu
             openState={openDropdown}

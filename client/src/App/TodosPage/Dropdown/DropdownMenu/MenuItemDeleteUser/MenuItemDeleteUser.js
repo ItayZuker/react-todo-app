@@ -19,7 +19,7 @@ export function MenuItemDeleteUser(props) {
                 history.push('/');
                 context.setRenderUsers(true);
             }).then(() => {                               
-                fetch(`/todos/api/user/${props.userId}`, {  //  ---> Delete this users todos
+                fetch(`/todos/api/user-todos/${props.userId}`, {  //  ---> Delete this users todos
                     method: 'DELETE'                        //
                 }).then(() => {
 
