@@ -5,10 +5,10 @@ import { LowerSection } from './LowerSection/LowerSection.js';
 import './main.scss';
 
 
-export function Main(props) {
+export function Main() {
     return <div className='main-container'>
-            <UpperSection userId={props.userId}></UpperSection>
-            <TodoList userId={props.userId}></TodoList>
+            <UpperSection></UpperSection>
+            <TodoList></TodoList>
             <LowerSection></LowerSection>
     </div>
 }

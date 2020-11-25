@@ -6,7 +6,7 @@ import { Dropdown } from './Dropdown/Dropdown.js';
 import './todos-page.scss';
 import { appContext } from '../../AppContext.js';
 
-export function TodosPage(props) {
+export function TodosPage() {
 
     let context = useContext(appContext);
 
@@ -17,10 +17,10 @@ export function TodosPage(props) {
     }, [context.allTodos]);
 
     return <div className='todo-page-container'>
-        <Dropdown userId={props.userId}></Dropdown>
+        <Dropdown></Dropdown>
         <div className='main-header-container'>
-            <Header name={props.name}></Header>
-            <Main userId={props.userId}></Main>
+            <Header></Header>
+            <Main></Main>
         </div>
         <h2
             className={(display ? '' : 'hide')}

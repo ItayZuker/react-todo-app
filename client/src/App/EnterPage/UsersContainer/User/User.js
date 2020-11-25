@@ -8,7 +8,7 @@ export function User(props) {
     const context = useContext(appContext);
 
     return <Link
-        to={`/${props.name}/todos`}
+        to={`/todos/${props.userId}`}
         onClick={() => {
             context.setRenderTodos(true)
         }}>{props.name}</Link>

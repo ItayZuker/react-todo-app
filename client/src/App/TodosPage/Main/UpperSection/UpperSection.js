@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import { appContext } from '../../../../AppContext.js';
 import { CheckAll } from './CheckAll/CheckAll.js';
 import './upper-section.scss';
@@ -8,6 +9,8 @@ import './upper-section.scss';
 export function UpperSection(props) {
 
     let context = useContext(appContext);
+
+    const user = useParams();
 
     return <div className='upper-section-container'>
         <CheckAll></CheckAll>
@@ -20,7 +23,7 @@ export function UpperSection(props) {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        userId: props.userId,
+                        userId: user.userId,
                         body: e.target.todo.value,
                         completed: false,
                     }),

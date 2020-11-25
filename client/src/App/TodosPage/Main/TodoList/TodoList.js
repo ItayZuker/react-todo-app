@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import { TodoItem } from './TodoItem/TodoItem.js';
 import { appContext } from '../../../../AppContext.js';
 import './todo-list.scss';
@@ -8,15 +9,17 @@ async function fetchList(userId) {
     return result.json();
 }
 
-export function TodoList(props) {
+export function TodoList() {
 
     const context = useContext(appContext);
     let [allTodos, setAllTodos] = useState([]);
 
+    const user = useParams()
+
     useEffect(() => {
         if(context.renderTodos) {
             async function activate() {
-                const allTodosArray = await fetchList(props.userId);
+                const allTodosArray = await fetchList(user.userId);
                 setAllTodos(allTodosArray);
                 context.setAllTodos(allTodosArray.length);
                 context.setTodosCompleted(allTodosArray.filter(todo => todo.completed === true).length);

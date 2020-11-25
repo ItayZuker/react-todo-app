@@ -4,7 +4,6 @@ $light-gray: lightgray;
 $regular-gray: gray;
 $dark-gray: #232323;
 
-
 .enter-page-container {
     display: flex;
     flex-direction: column;
@@ -25,6 +24,12 @@ $dark-gray: #232323;
         h2 {
             color: $blue-color;
             margin: 0px;
+            &:hover {
+                color: $regular-gray;
+                text-decoration: line-through;
+                text-decoration-color: $blue-color;
+                cursor: default;
+            }
         }
     }
     .users-new-users-containet {

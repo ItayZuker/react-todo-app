@@ -1,23 +1,16 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import { DropdownMenu } from './DropdownMenu/DropdownMenu.js';
 import './dropdown.scss';
 
-export function Dropdown(props) {
-
-    const [openDropdown, setOpenDropdown] = useState(false);
-
-    const dropdownContainer = useRef();
+export function Dropdown() {
 
     return <div
             className='dropdown-container'>
         <i
             className="fas fa-angle-down"
-            onClick={() => {
-                setOpenDropdown(true);
-            }}></i>
+            id='dropdown-button'
+            ></i>
         <DropdownMenu
-            openState={openDropdown}
-            userId={props.userId}
             ></DropdownMenu>
     </div>
 }

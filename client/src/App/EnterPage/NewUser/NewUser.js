@@ -28,7 +28,7 @@ export function NewUser(){
                 } else if(context.usersArray.find(user => {
                     if(user.name === e.target.user.value) return true})) {
                     e.target.user.value = '';
-                    setNotification('No doubles..');
+                    setNotification("That's to many..");
                     handleError();
                 } else if(context.usersArray.length >= 5) {
                     e.target.user.value = '';

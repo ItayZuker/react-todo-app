@@ -10,7 +10,7 @@ router.delete('/:id', async (req, res) => {
         .deleteOne({_id: ObjectID.createFromHexString(req.params.id)})
         .exec();
         res.send(docs);
-})
+});
 
 router.post('/', async (req, res) => {
     const newUser = await UsersModel(req.body);
@@ -18,12 +18,20 @@ router.post('/', async (req, res) => {
         res.send(newUser);
 });
 
+router.get('/:id', async (req, res) => {
+    const docs = await UsersModel
+        .findById({_id: ObjectID.createFromHexString(req.params.id)})
+        .exec();
+        res.send(docs);
+});
+
 router.get('/', async (req, res) => {
     const docs = await UsersModel
         .find({})
-        .exec()
-        res.send(docs)
+        .exec();
+        res.send(docs);
 });
+
 
 
 module.exports = router;

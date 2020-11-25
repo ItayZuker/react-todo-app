@@ -4,6 +4,11 @@ $light-gray: lightgray;
 $regular-gray: gray;
 $dark-gray: #232323;
 
+*::selection {
+    color: $blue-color;
+    background-color: $red-color;
+}
+
 body {
     background-color: $dark-gray;
     font-family: sans-serif;
