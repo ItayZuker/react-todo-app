@@ -40,14 +40,14 @@ export function TodoItem(props) {
     }, [context.displayTodos, context.renderTodos]);                             //
 
     return <div
-        className={'todo-item-container'}
+        className={'todo-item-container ' + (displayStatus ? '' : 'hide')}
         >
         <div
             className={'tadam-contaoner ' + (deleted ? 'active' : '')}>
             <h3>{deleted ? 'TaDam!' : ''}</h3>
         </div>
         <div
-            className={'todo-components-container ' + (displayStatus ? '' : 'hide') + (deleted ? 'hide' : '')}
+            className={'todo-components-container ' + (deleted ? 'hide' : '')}
             >
             <CheckTodo
                 todoId={props.todoId}

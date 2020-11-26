@@ -13,14 +13,8 @@ $dark-gray: #232323;
     width: 100%;
     border-bottom: 4px solid $dark-gray;
     box-sizing: border-box;
-    .todo-components-container {
-        display: grid;
-        width: 100%;
-        grid-template-columns: 50px auto 50px;
-        min-height: 50px;
-        &.hide {
-            display: none;
-        }   
+    &.hide {
+        display: none;
     }
     .tadam-contaoner {
         display: none;
@@ -39,4 +33,13 @@ $dark-gray: #232323;
             color: white;
         }
     }    
+    .todo-components-container {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 50px auto 50px;
+        min-height: 50px;
+        &.hide {
+            display: none;
+        }   
+    }
 }
