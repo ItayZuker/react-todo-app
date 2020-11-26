@@ -8,9 +8,11 @@ export function FilterDisplayPanet() {
 
     let [selectedButton, setSelectedButton] = useState('all');
 
+    const allTodos = context.todosArray.length;
+
     return <div className='filter-display-container'>
         <div 
-            className={'filter-item ' + (context.allTodos > 0 ? 'on ' + (selectedButton === 'all' ? 'selected' : '') : '')}
+            className={'filter-item ' + (allTodos > 0 ? 'on ' + (selectedButton === 'all' ? 'selected' : '') : '')}
             onClick={() => {
                 context.setDisplayTodos('all');
                 setSelectedButton('all')
@@ -18,7 +20,7 @@ export function FilterDisplayPanet() {
         >
         All</div>
         <div 
-            className={'filter-item ' + (context.allTodos > 0 ? 'on ' + (selectedButton === 'active' ? 'selected' : '') : '')}
+            className={'filter-item ' + (allTodos > 0 ? 'on ' + (selectedButton === 'active' ? 'selected' : '') : '')}
             onClick={() => {
                 context.setDisplayTodos('active');
                 setSelectedButton('active')
@@ -26,7 +28,7 @@ export function FilterDisplayPanet() {
         >Active
         </div>
         <div 
-            className={'filter-item ' + (context.allTodos > 0 ? 'on ' + (selectedButton === 'complited' ? 'selected' : '') : '')}
+            className={'filter-item ' + (allTodos > 0 ? 'on ' + (selectedButton === 'complited' ? 'selected' : '') : '')}
             onClick={() => {
                 context.setDisplayTodos('complited');
                 setSelectedButton('complited')

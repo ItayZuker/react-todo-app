@@ -8,16 +8,17 @@ export function Counter() {
 
     const context = useContext(appContext);
 
-    const itemsLeft = context.allTodos-context.todosCompleted;
+    const allTodos = context.todosArray.length;
+    const todosNotCompleted = (context.todosArray.filter(todo => todo.completed === false).length);
 
     return <div
         className='counter-container'>
         <p
-            className={context.allTodos > 0 ? 'active' : ''}
+            className={allTodos > 0 ? 'active' : ''}
             ><span
-                className={context.allTodos > 0 ? itemsLeft > 0 ? 'red' : 'green' : ''}
+                className={allTodos > 0 ? todosNotCompleted > 0 ? 'red' : 'green' : ''}
             >
-            {itemsLeft}</span> left
+            {todosNotCompleted}</span> left
         </p>
     </div>
 }

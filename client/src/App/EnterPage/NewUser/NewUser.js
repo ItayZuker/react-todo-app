@@ -6,14 +6,14 @@ export function NewUser(){
 
     const context = useContext(appContext);
 
-    const [notification, setNotification] = useState('');
-    const [renderNotification, setRenderNotification] = useState(false);
+    const [newUserNotification, setNewUserNotification] = useState('');
+    const [renderNewUserNotification, setRenderNewUserNotification] = useState(false);
 
-    function handleError() {
-        setRenderNotification(true)
+    function handleNewUserError() {
+        setRenderNewUserNotification(true)
         setTimeout(() => {
-            setRenderNotification(false)
-            setNotification('')
+            setRenderNewUserNotification(false)
+            setNewUserNotification('')
         }, 1500);
     }
 
@@ -23,17 +23,17 @@ export function NewUser(){
                 e.preventDefault();
                 if(e.target.user.value === '') {
                     e.target.user.value = '';
-                    setNotification('Enter name!');
-                    handleError();
+                    setNewUserNotification('Enter name!');
+                    handleNewUserError();
                 } else if(context.usersArray.find(user => {
                     if(user.name === e.target.user.value) return true})) {
                     e.target.user.value = '';
-                    setNotification("That's to many..");
-                    handleError();
+                    setNewUserNotification("That's to many..");
+                    handleNewUserError();
                 } else if(context.usersArray.length >= 5) {
                     e.target.user.value = '';
-                    setNotification('Max five users');
-                    handleError();
+                    setNewUserNotification('Max five users');
+                    handleNewUserError();
                 } else {
                     fetch('/users/api', {
                         method: 'POST',
@@ -50,9 +50,9 @@ export function NewUser(){
                 }              
         }}>
             <input
-                className={renderNotification ? 'notification' : ''}
+                className={renderNewUserNotification ? 'notification' : ''}
                 name='user'
-                placeholder={renderNotification ? notification : 'Enter name'}></input>
+                placeholder={renderNewUserNotification ? newUserNotification : 'Enter name'}></input>
             <input className='submit' type='submit' value='Add'></input>
         </form>
     </div>

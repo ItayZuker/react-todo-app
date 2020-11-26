@@ -1,0 +1,23 @@
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
+form {
+    input {
+        font-weight: 700;
+        font-size: 24px;
+        color: $dark-gray;
+        background-color: transparent;
+        height: 100%;
+        border: none;
+        outline: none;
+        &.notification::placeholder {
+            color: $red-color;
+        }
+        &::placeholder {
+            color: $dark-gray;
+        }
+    }
+}

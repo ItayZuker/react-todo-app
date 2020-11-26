@@ -10,10 +10,8 @@ export function App() {
     let [usersArray, setUsersArray] = useState([])
     let [renderUsers, setRenderUsers] = useState(true);
     let [userInput, setUserInput] = useState('');
-    let [allUsers, setAllUsers] = useState(null);
     let [renderTodos, setRenderTodos] = useState(true);
-    let [allTodos, setAllTodos] = useState(null);
-    let [todosCompleted, setTodosCompleted] = useState(null);
+    let [todosArray, setTodosArray] = useState([]);
     let [displayTodos, setDisplayTodos] = useState('all');
 
     let contextValue = {
@@ -23,14 +21,10 @@ export function App() {
         setRenderUsers,
         userInput,
         setUserInput,
-        allUsers,
-        setAllUsers,
         renderTodos,
         setRenderTodos,
-        allTodos,
-        setAllTodos,
-        todosCompleted,
-        setTodosCompleted,
+        todosArray,
+        setTodosArray,
         displayTodos,
         setDisplayTodos,
     }

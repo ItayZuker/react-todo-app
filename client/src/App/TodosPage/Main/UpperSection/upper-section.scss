@@ -14,16 +14,4 @@ $dark-gray: #232323;
     justify-content: flex-start;
     align-items: center;
     background-color: $blue-color;
-    input {
-        font-weight: 700;
-        font-size: 24px;
-        color: $dark-gray;
-        background-color: transparent;
-        height: 100%;
-        border: none;
-        outline: none;
-        &::placeholder {
-            color: $dark-gray;
-        }
-    }
 }

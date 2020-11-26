@@ -21,8 +21,7 @@ export function TodoList() {
             async function activate() {
                 const allTodosArray = await fetchList(user.userId);
                 setAllTodos(allTodosArray);
-                context.setAllTodos(allTodosArray.length);
-                context.setTodosCompleted(allTodosArray.filter(todo => todo.completed === true).length);
+                context.setTodosArray(allTodosArray);
                 context.setRenderTodos(false);
             }
             activate();

@@ -16,7 +16,6 @@ export function UsersContainer() {
         async function activate() {
             const usersArray = await fetchUsers();
             context.setUsersArray(usersArray)
-            context.setAllUsers(usersArray.length);
         }
         activate();
         context.setRenderUsers(false);

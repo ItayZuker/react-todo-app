@@ -9,9 +9,13 @@ export function CheckAll() {
     let [allCheck, setAllCheck] = useState(false);
     let [activeButton, setActiveButton] = useState(false);
     
+    const allTodos = context.todosArray.length;
+    const todosCompleted = (context.todosArray.filter(todo => todo.completed === true).length);
+
+
     useEffect(() => {
-        context.allTodos > 0 ? setActiveButton(true) : setActiveButton(false); 
-        context.allTodos === context.todosCompleted ? setAllCheck(true) : setAllCheck(false);
+        allTodos > 0 ? setActiveButton(true) : setActiveButton(false); 
+        allTodos === todosCompleted ? setAllCheck(true) : setAllCheck(false);
     }, [context.renderTodos]);
 
     return <button
@@ -50,6 +54,6 @@ export function CheckAll() {
             };
         }}
     >
-        {context.allTodos > 0  ? allCheck ? 'x' : 'v' : 'x'}
+        {allTodos > 0  ? allCheck ? 'x' : 'v' : 'x'}
     </button>
 }
