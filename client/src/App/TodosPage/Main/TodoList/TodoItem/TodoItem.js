@@ -31,6 +31,7 @@ export function TodoItem(props) {
                 completed={props.completed}
                 ></CheckTodoButton>
             <TodoBody
+                userId={props.userId}
                 todoId={props.todoId}
                 body={props.body}
                 completed={props.completed}

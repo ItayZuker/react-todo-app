@@ -1,42 +1,25 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import { useParams } from 'react-router-dom';
 import { appContext } from '../../../../../../AppContext';
 import './todo-body.scss';
 
 export function TodoBody(props) {
 
-    let context = useContext(appContext);
-    
-    let [editActive, setEditActive] = useState(false);
+    const context = useContext(appContext);
 
-    const todoSpan = useRef();
+    const [editActive, setEditActive] = useState(false);
 
-    useEffect(() => {
-        if(editActive) {
-            todoSpan.current.focus();   
-        } else {
-            setEditActive(false);       //  ---> To fix delay bug
+    const user = useParams();
+
+    const thisTodo = document.getElementById(props.todoId);
+
+    useEffect(() => {                                               // ---> If there was a change in active state
+        if(thisTodo !== null) {                                     // ---> If document.thisTodo was activeted
+            editActive ? thisTodo.focus() : thisTodo.blur();        // ---> Update focus
         }
-    }, [editActive])
+    }, [editActive]);
 
-    function todoReset() {
-        if(editActive && todoSpan.current !== null) {
-            todoSpan.current.innerText = props.body;
-            setEditActive(false)
-        };
-    };
-
-    function pressEnter(e) {
-        if(e.charCode === 13 && editActive) {
-            todoSpan.current.blur();
-            if(todoSpan.current.innerText === '') {
-                fetchDelete();
-            } else {
-                fetchEdit(todoSpan.current.innerText);
-            };
-        };
-    };
-
-    function fetchDelete() {
+    function fetchDelete() {                                        // ---> Fetch ---> Delete todo & render list
         fetch(`/todos/api/${props.todoId}`, {
             method: 'DELETE'
             })
@@ -46,7 +29,7 @@ export function TodoBody(props) {
             });
     };
 
-    function fetchEdit(newBody) {
+    function fetchEdit(newBody) {                                   // ---> Fetch ---> Update todo & render list
         fetch(`/todos/api/${props.todoId}`, {
             method: 'PUT',
             headers: {
@@ -63,18 +46,43 @@ export function TodoBody(props) {
         });
     };
 
-    document.addEventListener('click', todoReset);
+    function blurTodo(e) {                                          // ---> On mouse click
+        if(window.location.pathname.indexOf(user.userId) !== -1) {  // ---> If this is this users todo page
+            if(thisTodo !== null) {                                 // ---> If document.thisTodo was activeted 
+                if(thisTodo.innerText !== props.body) {
+                    thisTodo.innerText = props.body;                // ---> If todo was edit ---> Reset text
+                    setEditActive(false);                           // ---> Set edit false
+                }
+                    setEditActive(false);                           // ---> If todo was just double clicked ---> Set edit false 
+            };    
+        };
+    };
+
+    function pressEnter(e) {                                        // ---> On key press
+        if(window.location.pathname.indexOf(user.userId) !== -1) {  // ---> If this is todo page
+            if(e.charCode === 13) {                                 // ---> If enter was press
+                if(editActive) {                                    // ---> If this todo was double clicked
+                    setEditActive(false);                           // ---> Set edit false
+                    if(thisTodo.innerText === '') {
+                        fetchDelete();                              // ---> If text was deleted ---> Delete todo
+                    } else {
+                        fetchEdit(thisTodo.innerText);              // ---> If text was change ---> Update todo
+                    };
+                };
+            };
+        };
+    };
+
+    document.addEventListener('click', blurTodo);
     document.addEventListener('keypress', pressEnter);
 
     return <span
         className={'todo-body-container ' + (props.completed ? 'completed' : '')}
-        ref={todoSpan}
         id={props.todoId}
-        contentEditable={editActive ? 'true' : 'false'}
         onDoubleClick={() => {
             setEditActive(true);
         }}
+        contentEditable={editActive ? 'true' : 'false'}
         >{props.body}
     </span>             
-}                       
-
+}

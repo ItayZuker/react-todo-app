@@ -33,8 +33,9 @@ export function TodoList() {
         { allTodos.map(todo => 
                 <TodoItem
                     key={todo._id}
-                    todoId={ todo._id }
-                    body={ todo.body }
+                    userId={todo.userId}
+                    todoId={todo._id}
+                    body={todo.body}
                     completed={ todo.completed }
                 >
                 </TodoItem>
