@@ -36,6 +36,7 @@ export function TodoList() {
                     todoId={todo._id}
                     body={todo.body}
                     completed={ todo.completed }
+                    deleted={todo.deleted}
                 >
                 </TodoItem>
             )}

@@ -42,6 +42,7 @@ export function TodoInput() {
                         userId: user.userId,
                         body: e.target.todo.value,
                         completed: false,
+                        deleted: false,
                     }),
                 }).then((res) => {
                     console.log(res);

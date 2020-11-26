@@ -13,10 +13,16 @@ export function ClearCompleted() {
         className={'clear-complited-container ' + (allTodos > 0 ? 'active ' + (todosCompleted > 0 ? 'clicker' : '') : '')}
         onClick={async () => {
             if(todosCompleted > 0) {
-                await fetch('/todos/api/clear-completed', {
-                    method: 'DELETE',
-                });
-                context.setRenderTodos(true);
+                await fetch('/todos/api/clear-completed', {     //
+                    method: 'PUT',                              // ---> This fetch updates deleted key: true
+                    heders: {                                   //      for all this users todos
+                        'Content-Type': 'application/json',     //      -
+                    },                                          //      The delete fetch is activeted
+                    body: JSON.stringify({                      //      at the todoItem component
+                        completed: true,                        //
+                    })                                          //
+                });                                             //
+                context.setRenderTodos(true);                   //
             };
         }}
         >

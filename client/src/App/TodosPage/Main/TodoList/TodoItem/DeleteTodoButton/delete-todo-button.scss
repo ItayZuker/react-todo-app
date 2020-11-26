@@ -5,6 +5,7 @@ $regular-gray: gray;
 $dark-gray: #232323;
 
 .delete-button {
+    grid-column: 3 / 4;
     width: 50px;
     border: none;
     outline: none;
@@ -12,6 +13,7 @@ $dark-gray: #232323;
     font-weight: 700;
     background-color: transparent;
     color: $regular-gray;
+    z-index: 1;
     &:hover {
         color: $red-color;
         cursor: pointer;
