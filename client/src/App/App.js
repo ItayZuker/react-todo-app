@@ -13,6 +13,8 @@ export function App() {
     let [renderTodos, setRenderTodos] = useState(true);
     let [todosArray, setTodosArray] = useState([]);
     let [displayTodos, setDisplayTodos] = useState('all');
+    let [clearCompletedClick, setClearCompletedClick] = useState(false);
+    let [clearCompletedId, setClearCompletedId] = useState('');
 
     let contextValue = {
         usersArray,
@@ -27,6 +29,10 @@ export function App() {
         setTodosArray,
         displayTodos,
         setDisplayTodos,
+        clearCompletedClick,
+        setClearCompletedClick,
+        clearCompletedId,
+        setClearCompletedId,
     }
 
     return <appContext.Provider value={contextValue}>

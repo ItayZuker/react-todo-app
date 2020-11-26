@@ -6,10 +6,10 @@ const TodosModel = require('../models/Todos.model.js');
 
 
 
-router.put("/:id", async (req, res) => {
+router.put("/:todoId", async (req, res) => {
     const docs = await TodosModel
         .updateOne({
-            _id: req.params.id},
+            _id: req.params.todoId},
         {
             body: req.body.body,
             completed: req.body.completed,
@@ -18,9 +18,10 @@ router.put("/:id", async (req, res) => {
         res.send(docs);
 });
 
-router.put("/", async (req, res) => {
+router.put("/check-all/:userId", async (req, res) => {
     const docs = await TodosModel
         .updateMany({
+            userId: ObjectID.createFromHexString(req.params.userId),
             completed: !req.body.completed,
         },
         {
@@ -30,28 +31,29 @@ router.put("/", async (req, res) => {
         res.send(docs);
 });
 
-router.delete('/user-todos/:id', async (req, res) => {
+router.delete('/clear-user-todos/:userId', async (req, res) => {
     const docs = await TodosModel
         .deleteMany({
-            userId: ObjectID.createFromHexString(req.params.id),
-        })
-        .exec();
-        res.send(docs);
-})
-
-router.delete('/clear-completed', async (req, res) => {
-    const docs = await TodosModel
-        .deleteMany({
-            completed: true
+            userId: ObjectID.createFromHexString(req.params.userId),
         })
         .exec();
         res.send(docs);
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/clear-completed/:userId', async (req, res) => {
+    const docs = await TodosModel
+        .deleteMany({
+            userId: ObjectID.createFromHexString(req.params.userId),
+            completed: true,
+        })
+        .exec();
+        res.send(docs);
+});
+
+router.delete('/:todoId', async (req, res) => {
     const docs = await TodosModel
         .deleteOne({
-            _id: ObjectID.createFromHexString(req.params.id)
+            _id: ObjectID.createFromHexString(req.params.todoId)
         })
         .exec();
         res.send(docs);
@@ -63,9 +65,9 @@ router.post('/', async (req, res) => {
     res.send(newTodo);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:todoId", async (req, res) => {
     const docs = await TodosModel
-        .find({userId: req.params.id})
+        .find({userId: req.params.todoId})
         .exec();
         res.json(docs);
 });
