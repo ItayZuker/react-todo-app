@@ -2,6 +2,13 @@ import React, {useState, useContext} from 'react';
 import { appContext } from '../../../AppContext';
 import './new-user.scss';
 
+async function getNewUser(userName) {
+    const result = await fetch(`/users/api/get-user/${userName}`, {
+        method: 'GET',
+    })
+    return result.json();
+}
+
 export function NewUser(){
 
     const context = useContext(appContext);
@@ -35,19 +42,24 @@ export function NewUser(){
                     setNewUserNotification('Max five users');
                     handleNewUserError();
                 } else {
-                    fetch('/users/api', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            name: e.target.user.value,
-                        }),
-                    }).then((res) => {
-                        e.target.user.value = '';
-                        context.setRenderUsers(true);
+                    fetch('/users/api/create-user', {                   //////  ---> Create new user and then gets
+                        method: 'POST',                                     // 
+                        headers: {                                          //       
+                            'Content-Type': 'application/json',             //       
+                        },                                                  //
+                        body: JSON.stringify({                              //
+                            name: e.target.user.value,                      //
+                        }),                                                 //
+                    })                                                      //
+                    .then(res => res.json())                                //  ---> Then use .json() to get the new user _id
+                    .then(res => {                                          //  ---> Then create first empty list for this user
+                        fetch(`/lists/api/create-list/${res._id}`, {        //       -
+                                method: 'POST',                             //       Activeted on submit 
+                            })                                          //////
+                            e.target.user.value = '';
+                            context.setRenderUsers(true);
                     });
-                }              
+                };              
         }}>
             <input
                 className={renderNewUserNotification ? 'notification' : ''}

@@ -1,0 +1,29 @@
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
+.delete-button-container {
+    width: 50px;
+    border: none;
+    font-size: 20px;
+    font-weight: 700;
+    background-color: transparent;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .delete-button {
+        color: $regular-gray;
+        font-size: 20px;
+        &:hover {
+            color: $red-color;
+            cursor: pointer;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+}

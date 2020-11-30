@@ -1,30 +1,60 @@
 import React, {useState, useEffect, useContext} from 'react';
-import { Header } from './Header/Header.js';
-import { Main } from './Main/Main.js';
-import { Footer } from './Footer/Footer.js';
-import { Dropdown } from './Dropdown/Dropdown.js';
+import {useParams} from 'react-router-dom';
+import {Header} from './Header/Header.js';
+import {Main} from './Main/Main.js';
+import {Footer} from './Footer/Footer.js';
+import {Dropdown} from './Dropdown/Dropdown.js';
+import {appContext} from '../../AppContext.js';
 import './todos-page.scss';
-import { appContext } from '../../AppContext.js';
 
 export function TodosPage() {
 
-    let context = useContext(appContext);
+    const context = useContext(appContext);
 
-    let [display, setDisplay] = useState(Boolean);
+    const url = useParams();
 
-    useEffect(() => {
-        context.allTodos > 0 ? setDisplay(false) : setDisplay(true);
-    }, [context.allTodos]);
+    let [user, setUser] = useState({});
+    let [allListsArray, setAllListsArray] = useState([]);
 
-    return <div className='todo-page-container'>
-        <Dropdown></Dropdown>
-        <div className='main-header-container'>
-            <Header></Header>
-            <Main></Main>
+
+    useEffect(() => {                                                           //////  ---> Get the user object
+        async function getUser() {                                                  //       -
+            const result = await fetch(`/users/api/get-user/${url.userId}`);        //       Activeted when component init
+            const object = await result.json();                                     //       and when editing user detiles
+            setUser(object);                                                        //       at (NOT YET EXIST)
+            context.setRenderUser(false);                                           //       
+        };                                                                          //
+        getUser();                                                                  //
+    }, [context.renderUser]);                                                   //////
+
+        
+    useEffect(() => {                                                           //////  ---> Get this users array of lists
+            async function activate() {                                             //       - 
+                const result = await fetch(`/lists/api/get-lists/${url.userId}`);   //       activeted when component init 
+                const array = await (result.json());                                //       and when new list is created
+                setAllListsArray(array);                                          //       at (NOT YET EXIST) 
+                context.setRenderUser(false);                                       //       
+            }                                                                       //
+            activate();                                                             //
+    }, [context.renderUser]);                                                   //////
+
+
+    return <div
+        className='todo-page-container'>
+        <Dropdown
+            user={user}
+            ></Dropdown>
+        <div
+            className='main-header-container'>
+            <Header
+                user={user}
+                ></Header>
+            <Main
+                userId={url.userId}
+                allListsArray={allListsArray}
+                ></Main>
         </div>
-        <h2
-            className={(display ? '' : 'hide')}
-        >Nothing<br/>Todo...</h2>
-        <Footer></Footer>
+        <Footer
+            ></Footer>
     </div>
 }

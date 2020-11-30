@@ -3,22 +3,20 @@ import { User } from './User/User.js';
 import './users-container.scss';
 import { appContext } from '../../../AppContext.js';
 
-async function fetchUsers() {
-    const result = await fetch('/users/api');
-    return result.json(); 
-}
-
 export function UsersContainer() {
 
     const context = useContext(appContext);
 
     useEffect(() => {
-        async function activate() {
-            const usersArray = await fetchUsers();
-            context.setUsersArray(usersArray)
+        if(context.renderUsers) {
+            async function activate() {
+                const resulte = await fetch('/users/api');
+                const usersArray = await resulte.json();
+                context.setUsersArray(usersArray)
+            }
+            activate();
+            context.setRenderUsers(false);
         }
-        activate();
-        context.setRenderUsers(false);
     }, [context.renderUsers]);
 
     return <div className='users-container'>

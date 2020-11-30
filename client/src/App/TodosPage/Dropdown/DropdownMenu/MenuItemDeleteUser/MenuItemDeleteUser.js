@@ -3,30 +3,37 @@ import {useHistory, useParams} from 'react-router-dom';
 import { appContext } from '../../../../../AppContext';
 import './menu-item-delete-user.scss';
 
-export function MenuItemDeleteUser() {
+export function MenuItemDeleteUser(props) {
 
     const context = useContext(appContext);
 
-    const params = useParams();
+    const url = useParams();
+    const history = useHistory();
 
-    const history = useHistory();                                        // ---> This hook is for navigation control
 
     return <div
-        className='menu-item-container'                                  //
-        onClick={() => {                                                 //
-            fetch(`/users/api/${params.userId}`, {                       //  ---> Delete this user
+        className='menu-item-container'
+        onClick={() => {
+            fetch(`/todos/api/delete-user/${props.user._id}`, {      //////  ---> Delete all this users todos
                 method: 'DELETE'                                         //
-            }).then((res) => {                                           //
+            })                                                           //
+            .then((res) => {                                             //
+                console.log(res);                                    //////
+            });
+            fetch(`/lists/api/delete-user/${props.user._id}`, {      //////  ---> Delete all this users lists
+                method: 'DELETE'                                         //
+            })                                                           //
+            .then((res) => {                                             //
+                console.log(res)                                     //////
+            });
+            fetch(`/users/api/delete-user/${props.user._id}`, {      //////  ---> Delete this user
+                method: 'DELETE'                                         //       and then go to home page
+            })                                                           //
+            .then((res) => {                                             //
                 console.log(res)                                         //
-                history.push('/');                                       //
                 context.setRenderUsers(true);                            //
-            }).then(() => {                                              //
-                fetch(`/todos/api/clear-user-todos/${params.userId}`, {  //  ---> Delete this users todos
-                    method: 'DELETE'                                     //
-                }).then(() => {                                          //
-
-                })
-            })
+                history.push('/');                                   //////
+            });
         }}
         >
         <p>Delete user</p>

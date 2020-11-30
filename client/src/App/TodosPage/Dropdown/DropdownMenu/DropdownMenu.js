@@ -2,9 +2,7 @@ import React, {useState} from 'react';
 import './dropdown-menu.scss';
 import { MenuItemDeleteUser } from './MenuItemDeleteUser/MenuItemDeleteUser.js';
 
-
-
-export function DropdownMenu() {
+export function DropdownMenu(props) {
 
     let [open, setOpen] = useState(false);
  
@@ -24,6 +22,8 @@ export function DropdownMenu() {
         className={'dropdown-menu-container ' + (open ? 'open' : '')}
         id='dropdown-container'
         >
-        <MenuItemDeleteUser></MenuItemDeleteUser>
+        <MenuItemDeleteUser
+            user={props.user}
+            ></MenuItemDeleteUser>
     </div>
 }

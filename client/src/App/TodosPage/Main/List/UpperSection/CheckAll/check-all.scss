@@ -1,0 +1,34 @@
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
+.all-green-button {
+    width: 34px;
+    height: 34px;
+    margin: 0px 8px 0px 8px;
+    background-color: $dark-gray;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    &.not-active {
+        color: $regular-gray; 
+    }
+    &.true {
+        color: $light-gray;
+        &:hover {
+            color: $red-color;
+            cursor: pointer;
+        }
+    }
+    &.false {
+        color: $light-gray;
+        &:hover {
+            color: $blue-color;
+            cursor: pointer;
+        }
+    }
+}
+

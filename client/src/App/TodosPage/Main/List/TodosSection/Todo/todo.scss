@@ -1,0 +1,45 @@
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
+.todo-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+    width: 100%;
+    border-bottom: 4px solid $dark-gray;
+    box-sizing: border-box;
+    &.hide {
+        display: none;
+    }
+    .tadam-contaoner {
+        display: none;
+        background-color: $red-color;
+        width: 100%;
+        height: 50px;
+        &.active {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        h3 {
+            margin: 0px;
+            font-size: 30px;
+            color: white;
+        }
+    }    
+    .todo-components-container {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 50px auto minmax(50px, max-content);
+        min-height: 50px;
+        &.hide {
+            display: none;
+        }   
+    }
+}

@@ -1,14 +1,17 @@
 import React from 'react';
-import { UpperSection } from './UpperSection/UpperSection.js';
-import { TodoList } from './TodoList/TodoList.js';
-import { LowerSection } from './LowerSection/LowerSection.js';
+import {List} from './List/List.js';
 import './main.scss';
 
+export function Main(props) {
 
-export function Main() {
     return <div className='main-container'>
-            <UpperSection></UpperSection>
-            <TodoList></TodoList>
-            <LowerSection></LowerSection>
+        {props.allListsArray.map(list => {
+            return <List
+                key={list._id}
+                listId={list._id}
+                userId={props.userId}
+            >
+            </List>
+        })}
     </div>
 }

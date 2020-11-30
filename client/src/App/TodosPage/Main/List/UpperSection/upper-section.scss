@@ -1,0 +1,17 @@
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
+.upper-section-container {
+    border-bottom: 4px solid $dark-gray;
+    border-radius: 10px 50px 0px 0px;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: $blue-color;
+}

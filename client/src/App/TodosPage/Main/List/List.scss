@@ -4,9 +4,9 @@ $light-gray: lightgray;
 $regular-gray: gray;
 $dark-gray: #232323;
 
-.main-container {
+.list-container {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    width: 500px;
+    height: auto;
 }
