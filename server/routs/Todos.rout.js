@@ -167,8 +167,26 @@ router.post('/new-todo', async (req, res) => {                             /////
 });                                                                        //////
 
 
+router.get("/get-todos/:userId", async (req, res) => {                     //////  ---> This router sends all todos
+    await TodosModel                                                           //       For spcific user
+        .find({                                                                //       -
+            userId: req.params.userId,                                         //       Activeted at Header component
+        }, (err, docs) => {                                                    //
+            if(err) {                                                          //
+                console.log(err);                                              //
+                res.status(500).send();                                        //
+            } else {                                                           //
+                if(!docs) {                                                    //
+                    res.status(404).send();                                    //
+                }                                                              //
+                res.json(docs);                                                //
+            };                                                                 //
+        });                                                                    //
+});                                                                        //////
+
+
 router.get("/get-list/:listId", async (req, res) => {                      //////  ---> This router sends all todos
-    const docs = await TodosModel                                              //       For spcific list
+    await TodosModel                                                           //       For spcific list
         .find({                                                                //       -
             listId: req.params.listId,                                         //       Activeted at List component
         }, (err, docs) => {                                                    //

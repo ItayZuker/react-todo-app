@@ -4,13 +4,45 @@ $light-gray: lightgray;
 $regular-gray: gray;
 $dark-gray: #232323;
 
+
 .header-container {
-    .user-title {
-        font-size: 50px;
-        font-weight: 500;
-        color:  $regular-gray;
-        &.red {
-            color: $red-color;
+    width: 100%;
+    margin: 0px 0px 50px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    .left-side {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 10px 10px 10px 20px;
+        .fas {
+            font-size: 40px;
+            color: $blue-color;
+            margin: 0px 00px 0px 0px;
+            &:hover {
+                color: $red-color;
+                cursor: pointer;
+            }
         }
+        h1 {
+            font-weight: 500;
+            font-size: 24px;
+            padding: 0px 0px 0px 0px;
+            margin: 0px 0px 0px 20px;
+            color:  $regular-gray;
+            &.red {
+                color: $red-color;
+            }
+        }
+    
+    }
+    .right-side {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin: 10px 20px 10px 10px;
     }
 }

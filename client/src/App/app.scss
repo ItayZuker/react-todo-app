@@ -5,14 +5,13 @@ $regular-gray: gray;
 $dark-gray: #232323;
 
 *::selection {
-    color: $blue-color;
-    background-color: $red-color;
+    color: white;
+    background-color: rgba(255, 110, 110, 0.9);
 }
 
 body {
     background-color: $dark-gray;
     font-family: sans-serif;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    width: 100%;
+    margin: 0px;
 }

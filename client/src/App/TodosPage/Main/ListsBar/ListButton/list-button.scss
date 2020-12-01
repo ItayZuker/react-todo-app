@@ -1,0 +1,24 @@
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
+.list-button-container {
+    width: auto;
+    button {
+        background: $regular-gray;
+        border-radius: 0px 30px 4px 0px;
+        color: $light-gray;
+        font-size: 20px;
+        font-weight: 500;
+        padding: 8px 30px 8px 20px;
+        &.active {
+            background: $red-color;
+            color: white;
+            &.completed {
+                background: $blue-color;
+            }
+        }
+    }
+}

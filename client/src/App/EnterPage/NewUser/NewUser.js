@@ -2,13 +2,6 @@ import React, {useState, useContext} from 'react';
 import { appContext } from '../../../AppContext';
 import './new-user.scss';
 
-async function getNewUser(userName) {
-    const result = await fetch(`/users/api/get-user/${userName}`, {
-        method: 'GET',
-    })
-    return result.json();
-}
-
 export function NewUser(){
 
     const context = useContext(appContext);
@@ -42,7 +35,7 @@ export function NewUser(){
                     setNewUserNotification('Max five users');
                     handleNewUserError();
                 } else {
-                    fetch('/users/api/create-user', {                   //////  ---> Create new user and then gets
+                    fetch('/users/api/create-user', {                       //////  ---> Create new user and then gets
                         method: 'POST',                                     // 
                         headers: {                                          //       
                             'Content-Type': 'application/json',             //       
@@ -55,7 +48,13 @@ export function NewUser(){
                     .then(res => {                                          //  ---> Then create first empty list for this user
                         fetch(`/lists/api/create-list/${res._id}`, {        //       -
                                 method: 'POST',                             //       Activeted on submit 
-                            })                                          //////
+                                headers: {                                  //
+                                    'Content-Type': 'application/json',     //
+                                },                                          //
+                                body: JSON.stringify({                      //
+                                    listName: 'Master list'                 //
+                                }),                                         //       
+                            });                                             //////
                             e.target.user.value = '';
                             context.setRenderUsers(true);
                     });

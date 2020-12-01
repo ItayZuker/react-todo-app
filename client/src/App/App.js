@@ -9,14 +9,13 @@ export function App() {
 
     let [renderUsers, setRenderUsers] = useState(true);
     let [usersArray, setUsersArray] = useState([]);
-    let [renderUser, setRenderUser] = useState(true);
+    let [renderUser, setRenderUser] = useState('');
     let [renderList, setRenderList] = useState('');
-    let [listId, setListId] = useState('');
-    let [todoId, setTodoId] = useState('');
+    let [newArray, setNewArray] = useState('');
     let [todoCompleted, setTodoCompleted] = useState('');
+    let [todoNotCompleted, setTodoNotCompleted] = useState('');
     let [allTodosCompleted, setAllTodosCompleted] = useState('');
     let [allTodosNotCompleted, setAllTodosNotCompleted] = useState('');
-    let [todoNotCompleted, setTodoNotCompleted] = useState('');
     let [allCompleted, checkAllCompleted] = useState('')
     let [allNotCompleted, checkAllNotCompleted] = useState('')
     let [deleteTodo, setDeleteTodo] = useState('');
@@ -34,10 +33,8 @@ export function App() {
         setRenderUser,
         renderList,
         setRenderList,
-        listId,
-        setListId,
-        todoId,
-        setTodoId,
+        newArray,
+        setNewArray,
         todoCompleted,
         setTodoCompleted,
         allTodosCompleted,

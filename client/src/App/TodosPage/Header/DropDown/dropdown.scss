@@ -5,9 +5,6 @@ $regular-gray: gray;
 $dark-gray: #232323;
 
 .dropdown-container {
-    position: absolute;
-    top: 10px;
-    right: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

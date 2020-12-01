@@ -7,11 +7,16 @@ const UsersModel = require('../models/Users.model.js');
 
 router.delete('/delete-user/:userId', async (req, res) => {                                 //////  ---> Delete this user
     await UsersModel                                                                            //       -
-        .deleteOne({_id: ObjectID.createFromHexString(req.params.userId)}, (err, docs) => {     //       Activeted at
-            if(err) {                                                                           //       MenuItemDeleteUser component
-                console.log(err);                                                               //       
+        .deleteOne({                                                                            //       Activeted at
+            _id: ObjectID.createFromHexString(req.params.userId),                               //       MenuItemDeleteUser component
+        }, (err, docs) => {                                                                     //       
+            if(err) {                                                                           //       
+                console.log(err);                                                               //
+                res.status(500).send();                                                         //       
+            } else if(!docs) {                                                                  //
+                res.status(404).send();                                                         //
             } else {                                                                            //
-                res.json(docs)                                                                  //
+                res.json(docs);                                                                 //
             };                                                                                  //
         });                                                                                     //
 });                                                                                         //////
