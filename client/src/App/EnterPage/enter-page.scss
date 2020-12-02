@@ -19,10 +19,12 @@ $dark-gray: #232323;
         margin: 0px 0px 10vh 0px;
         h1 {
             font-size: 80px;
+            font-weight: 400;
             margin: 0px;
         }
         h2 {
             color: $blue-color;
+            font-weight: 500;
             margin: 0px;
             &:hover {
                 color: $regular-gray;

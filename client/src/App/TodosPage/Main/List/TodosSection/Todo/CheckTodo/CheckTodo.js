@@ -6,6 +6,7 @@ export function CheckTodo(props) {
     
     const context = useContext(appContext);
 
+
     return <div
         className='check-todo-container'
         >
@@ -32,6 +33,9 @@ export function CheckTodo(props) {
                     });
                 }
             }}
-        >v</button>
+        >{props.completed ? <i class="fas fa-check"></i> : <i class="fas fa-times"></i>}
+            
+            
+            </button>
     </div>
 }

@@ -11,8 +11,9 @@ $dark-gray: #232323;
     align-items: center;
     h2 {
         color: $regular-gray;
-        font-size: 30px;
-        font-weight: 500;
+        font-size: 40px;
+        font-weight: 400;
+        margin: 0px 0px 0px 0px;
         &.active {
             color: $red-color;
             &.completed {
@@ -21,8 +22,8 @@ $dark-gray: #232323;
         }
     }
     .check-all-input-container {
-        border-bottom: 4px solid $dark-gray;
-        border-radius: 10px 50px 0px 0px;
+        border-radius: 4px 40px 4px 4px;
+        margin: 20px 0px 4px 0px;
         width: 100%;
         height: 50px;
         display: flex;

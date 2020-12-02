@@ -6,22 +6,35 @@ import './main.scss';
 export function Main(props) {
 
     return <div className='main-container'>
-        <ListsBar
-            allListsArray={props.allListsArray}
-            ></ListsBar>
         <div
-            className='list-container'
+            className='left-grid'
             >
-            {props.allListsArray.map(list => {
-                return <List
-                    key={list._id}
-                    listId={list._id}
-                    userId={props.user._id}
-                    listName={list.listName}
-                    listCompleted={list.completed}
+            <ListsBar
+                allListsArray={props.allListsArray}
+                ></ListsBar>
+        </div>
+        <div
+            className='center-grid'
+            >
+            <div
+                className='list-container'
                 >
-                </List>
-            })}
+                {props.allListsArray.map(list => {
+                    return <List
+                        key={list._id}
+                        listId={list._id}
+                        userId={props.user._id}
+                        listName={list.listName}
+                        listCompleted={list.completed}
+                    >
+                    </List>
+                })}
+            </div>
+        </div>
+        <div
+            className='right-grid'
+            >
+
         </div>
     </div>
 }

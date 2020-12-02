@@ -5,10 +5,9 @@ $regular-gray: gray;
 $dark-gray: #232323;
 
 .list-button-container {
-    width: auto;
     button {
         background: $regular-gray;
-        border-radius: 0px 30px 4px 0px;
+        border-radius: 0px 4px 4px 0px;
         color: $light-gray;
         font-size: 20px;
         font-weight: 500;

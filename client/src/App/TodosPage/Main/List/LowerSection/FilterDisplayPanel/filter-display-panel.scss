@@ -16,6 +16,7 @@ $dark-gray: #232323;
         color: $dark-gray;
         padding: 5px 15px 5px 15px;
         font-weight: 700;
+        border-radius: 2px 2px 2px 2px;
         &.on {
             background-color: $dark-gray;
             color: $light-gray;

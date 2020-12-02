@@ -14,6 +14,8 @@ export function DeleteButton(props) {
             onClick={() => {
                 context.setDeleteTodo(props.todoId);
             }}
-        >x</button>
+        >
+        <i class="fas fa-times"></i>
+        </button>
     </div>
 }

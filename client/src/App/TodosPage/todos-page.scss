@@ -9,7 +9,7 @@ $dark-gray: #232323;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 100vh;
+    min-height: 100vh;
     .main-header-container {
         display: flex;
         flex-direction: column;
