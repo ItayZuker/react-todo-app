@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
-import { UpperSection } from './UpperSection/UpperSection.js';
+import { InputSection } from './InputSection/InputSection.js';
 import { TodosSection } from './TodosSection/TodosSection.js';
-import { LowerSection } from './LowerSection/LowerSection.js';
+import { FilterSection } from './FilterSection/FilterSection.js';
 import { appContext } from '../../../../AppContext.js';
 import './List.scss';
 
@@ -74,19 +74,19 @@ export function List(props) {
 
 
     return <div className='list-container'>
-        <UpperSection
+        <FilterSection
+            listId={props.listId}
+            todosArray={todosArray}
+            listName={props.listName}
+            ></FilterSection>
+        <InputSection
             userId={props.userId}
             listId={props.listId}
-            listName={props.listName}
             todosArray={todosArray}
-            ></UpperSection>
+            ></InputSection>
         <TodosSection
             listId={props.listId}
             todosArray={todosArray}
             ></TodosSection>
-        <LowerSection
-            listId={props.listId}
-            todosArray={todosArray}
-            ></LowerSection>
     </div>
 }

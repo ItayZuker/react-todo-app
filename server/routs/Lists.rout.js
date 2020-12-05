@@ -44,6 +44,7 @@ router.delete('/delete-user/:userId', async (req, res) => {         //////  --->
 
 
 router.post('/create-list/:userId', async (req, res) => {           //////  ---> Create new list for this user
+    console.log("123")
     await ListsModel                                                    //       -
         .create({                                                       //       Activeted at NewUser component
             userId: req.params.userId,                                  //       when creating new user

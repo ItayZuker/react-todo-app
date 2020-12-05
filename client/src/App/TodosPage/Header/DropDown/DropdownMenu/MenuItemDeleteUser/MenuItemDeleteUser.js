@@ -37,6 +37,6 @@ export function MenuItemDeleteUser(props) {
         }}
         >
         <p>Delete user</p>
-        <i class="fas fa-times"></i>
+        <i className="fas fa-times"></i>
     </div>
 }

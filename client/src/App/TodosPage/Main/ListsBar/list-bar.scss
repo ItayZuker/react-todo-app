@@ -5,8 +5,10 @@ $regular-gray: gray;
 $dark-gray: #232323;
 
 .list-bar-container {
-    grid-column: 1 / 2;
-    margin: 10px 4px 0px 0px;
+    position: fixed;
+    top: 30px;
+    left: 0px;
+    margin: 55px 4px 0px 0px;
     height: 100%;
     width: fit-content;
     display: flex;

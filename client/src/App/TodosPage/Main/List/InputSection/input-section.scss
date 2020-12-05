@@ -4,21 +4,24 @@ $light-gray: lightgray;
 $regular-gray: gray;
 $dark-gray: #232323;
 
-.lower-section-container {
+.upper-section-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    .lower-pannel{
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: 50px;
+    .check-all-input-container {
+        border-radius: 4px 4px 4px 4px;
+        margin: 10px 0px 4px 0px;
         width: 100%;
-        font-size: 16px;
-        font-weight: 700;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: $blue-color;
     }
     h2 {
-        color: $blue-color;
+        color: $regular-gray;
         font-size: 50px;
         text-align: center;
         &.hide {

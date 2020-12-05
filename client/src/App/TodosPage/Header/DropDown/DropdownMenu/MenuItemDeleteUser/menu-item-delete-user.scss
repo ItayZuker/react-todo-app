@@ -10,7 +10,9 @@ $dark-gray: #232323;
     justify-content: space-between;
     align-items: center;
     margin: 0px 0px 0px 0px;
-    border-top: 4px solid $dark-gray;
+    // border-top: 4px solid $blue-color;
+    background-color: $light-gray;
+    border-radius: 4px;
     color: $dark-gray;
     &:hover {
         background-color: $red-color;

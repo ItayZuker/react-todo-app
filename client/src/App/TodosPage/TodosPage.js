@@ -43,7 +43,7 @@ export function TodosPage() {
                 setAllListsArray(array);                                            //       
             }                                                                       //
             activet();                                                              //                                                                          //
-    }, [user]);                                                                 //////
+    }, [user, context.renderUser]);                                                                 //////
 
 
     useEffect(() => {                                                           //////  ---> Get this users array of todos

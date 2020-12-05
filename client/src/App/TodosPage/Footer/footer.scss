@@ -5,5 +5,26 @@ $regular-gray: gray;
 $dark-gray: #232323;
 
 .footer-container {
+    position: fixed;
+    bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
     color: $regular-gray;
+    width: 100%;
+    p {
+        margin: 0px 10px 0px 0px
+    }
+    .fa-linkedin {
+        font-size: 20px;
+        margin: 0px 20px 0px 0px;
+        padding: 0px;
+        height: auto;
+        background-color: transparent;
+        color: $regular-gray;
+        &:hover {
+            color: $light-gray;
+            background-color: transparent;
+        }
+    }
 }

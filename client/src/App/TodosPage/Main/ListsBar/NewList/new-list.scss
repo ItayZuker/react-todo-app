@@ -4,20 +4,17 @@ $light-gray: lightgray;
 $regular-gray: gray;
 $dark-gray: #232323;
 
-
-.new-user-container {
-    margin: 0px 0px 0px 0px;
+.new-list-container {
     form {
-        margin: 0px 0px 0px 0px;
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        align-items: center;
+        justify-content: flex-start;
+        margin: 0px 0px 10px 0px;
         height: 40px;
         width: auto;
         input {
             font-family: 'Quicksand', sans-serif;
-            width: 200px;
+            width: 150px;
             height: 100%;
             border: none;
             border-radius: 0px;
@@ -26,7 +23,7 @@ $dark-gray: #232323;
             font-size: 20px;
             font-weight: 700;
             color: $dark-gray;
-            border-radius: 4px 0px 0px 4px;
+            border-radius: 0px 0px 0px 0px;
             &.notification::placeholder {
                 color: $red-color;
             }
@@ -39,11 +36,11 @@ $dark-gray: #232323;
             }
         }
         .submit {
-            border-radius: 0px 4px 4px 0px;
             background-color: $regular-gray;
+            width: 40px;
             color: $light-gray;
-            width: auto;
             font-weight: 700;
+            border-radius: 0px 4px 4px 0px;
             &:hover {
                 color: $dark-gray;
                 cursor: pointer;

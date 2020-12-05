@@ -5,13 +5,17 @@ $regular-gray: gray;
 $dark-gray: #232323;
 
 .list-button-container {
+    margin: 0px 0px 10px 0px;
+    max-width: 190px;
     button {
         background: $regular-gray;
         border-radius: 0px 4px 4px 0px;
         color: $light-gray;
         font-size: 20px;
+        text-align: left;
         font-weight: 500;
-        padding: 8px 30px 8px 20px;
+        width: auto;
+        padding: 8px 20px 8px 20px;
         &.active {
             background: $red-color;
             color: white;

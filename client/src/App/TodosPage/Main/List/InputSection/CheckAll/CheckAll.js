@@ -55,6 +55,6 @@ export function CheckAll(props) {
             };                                                                                         //
         }}                                                                                         //////
         >
-        {props.todosArray.length > 0  ? allCompleted ? <i class="fas fa-times"></i> : <i class="fas fa-check"></i> : <i class="fas fa-times"></i>}
+        {props.todosArray.length > 0  ? allCompleted ? <i className="fas fa-times"></i> : <i className="fas fa-check"></i> : <i className="fas fa-times"></i>}
     </button>
 }
