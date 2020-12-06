@@ -5,17 +5,21 @@ $regular-gray: gray;
 $dark-gray: #232323;
 
 .list-button-container {
-    margin: 0px 0px 10px 0px;
-    max-width: 190px;
+    margin: 0px 0px 5px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    max-width: 240px;
     button {
         background: $regular-gray;
-        border-radius: 0px 4px 4px 0px;
+        border-radius: 0px 2px 2px 0px;
         color: $light-gray;
         font-size: 20px;
         text-align: left;
         font-weight: 500;
-        width: auto;
-        padding: 8px 20px 8px 20px;
+        min-height: 50px;
+        padding: 10px 20px 10px 20px;
+        overflow: hidden;
         &.active {
             background: $red-color;
             color: white;

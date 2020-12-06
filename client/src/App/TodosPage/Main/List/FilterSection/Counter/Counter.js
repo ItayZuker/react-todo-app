@@ -5,8 +5,8 @@ import './counter.scss';
 
 export function Counter(props) {
 
-    const allTodosInList = props.todosArray.length;
-    const notCompletedTodos = props.todosArray.filter(todo => todo.completed === false).length;
+    const allTodosInList = props.list.length;
+    const notCompletedTodos = props.list.filter(todo => todo.completed === false).length;
 
     
     return <div

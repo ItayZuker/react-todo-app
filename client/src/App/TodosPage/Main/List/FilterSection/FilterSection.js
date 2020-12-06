@@ -8,51 +8,37 @@ import { appContext } from '../../../../../AppContext.js';
 export function FilterSection(props) {
 
     const context = useContext(appContext)
+    let [listCompleted, setListCompleted] = useState(null)
+    let [active, setButtonActive] = useState(null);
 
 
+    useEffect(() => {                                                                   //////  ---> Update active component state    
+        props.list.length > 0 ? setButtonActive(true) : setButtonActive(false);             //       for every list.length change
+    }, [props.list]);                                                                   //////
 
-    let [completed, setCompleted] = useState(null);
-    let [moreThenOne, setMoreThenOne] = useState(null);
 
-    useEffect(() => {                                               //////  ---> Update completed state
-        if(context.allTodosCompleted) {                                 //       fot this component
-            setCompleted(true);                                         //       this array is renderd
-        };                                                              //
-    }, [context.allTodosCompleted]);                                    //
-                                                                        //
-    useEffect(() => {                                                   //
-        if(context.allTodosNotCompleted) {                              //
-            setCompleted(false);                                        //
-        };                                                              //
-    }, [context.allTodosNotCompleted]);                             //////
-
-    useEffect(() => {                                               //////  ---> Update moreThenOne state
-        if(context.newArray[0] === props.listId) {                      //       for this component every time
-            if(context.newArray[1].length > 0) {                        //       this array is renderd
-                setMoreThenOne(true);                                   //
-            } else {                                                    //
-                setMoreThenOne(false);                                  //
-            };                                                          //
-        };                                                              //
-    }, [context.newArray]);                                         //////
-
+    useEffect(() => {                                                                   //////  ---> Update listCompleted state
+        if (context.listCompleted[0] === props.listId) {                                    //       for this h2 title
+            context.listCompleted[1] ? setListCompleted(true) : setListCompleted(false);    //
+        }                                                                                   //
+    }, [context.listCompleted])                                                         //////
 
     return <div
-            className='lower-section-container'>
+            className='upper-section-container'>
             <h2
-                className={moreThenOne > 0 ? 'active ' + (completed ? 'completed' : '') : ''}
+                className={active > 0 ? 'active ' + (listCompleted ? 'completed' : '') : ''}
                 >{props.listName}</h2>
-        <div className='lower-pannel'>
+        <div className='filter-data-pannel'>
             <Counter
-                todosArray={props.todosArray}
+                list={props.list}
                 ></Counter>
             <FilterDisplayPanel
                 listId={props.listId}
-                todosArray={props.todosArray}
+                list={props.list}
                 ></FilterDisplayPanel>
             <ClearCompleted
                 listId={props.listId}
-                todosArray={props.todosArray}
+                list={props.list}
             ></ClearCompleted>
         </div>
     </div>

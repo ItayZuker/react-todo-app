@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {useHistory, useParams} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import { appContext } from '../../../../../../AppContext';
 import './menu-item-delete-user.scss';
 
@@ -7,7 +7,6 @@ export function MenuItemDeleteUser(props) {
 
     const context = useContext(appContext);
 
-    const url = useParams();
     const history = useHistory();
 
 
@@ -31,7 +30,7 @@ export function MenuItemDeleteUser(props) {
             })                                                           //
             .then((res) => {                                             //
                 console.log(res)                                         //
-                context.setRenderUsers(true);                            //
+                context.setRenderUsers(props.user._Id);                  //
                 history.push('/');                                   //////
             });
         }}

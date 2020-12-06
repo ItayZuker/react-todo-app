@@ -167,7 +167,7 @@ router.post('/new-todo', async (req, res) => {                             /////
 });                                                                        //////
 
 
-router.get("/get-todos/:userId", async (req, res) => {                     //////  ---> This router sends all todos
+router.get("/get-user-todos/:userId", async (req, res) => {                     //////  ---> This router sends all todos
     await TodosModel                                                           //       For spcific user
         .find({                                                                //       -
             userId: req.params.userId,                                         //       Activeted at Header component
@@ -185,7 +185,7 @@ router.get("/get-todos/:userId", async (req, res) => {                     /////
 });                                                                        //////
 
 
-router.get("/get-list/:listId", async (req, res) => {                      //////  ---> This router sends all todos
+router.get("/get-todos-list/:listId", async (req, res) => {                      //////  ---> This router sends all todos
     await TodosModel                                                           //       For spcific list
         .find({                                                                //       -
             listId: req.params.listId,                                         //       Activeted at List component

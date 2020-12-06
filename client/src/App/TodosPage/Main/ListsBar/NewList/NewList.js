@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import { appContext } from '../../../../../AppContext';
-// import { List } from '../../List/List';
 import './new-list.scss';
 
 export function NewList(props) {
@@ -23,9 +22,9 @@ export function NewList(props) {
                 })
                 .then((res) => {
                     console.log(res);
-                    context.setRenderUser(props.userId);
+                    e.target.listName.value = '';
+                    context.setRenderLists(props.userId);
                 })
-
             }}
             >
             <input
@@ -33,7 +32,7 @@ export function NewList(props) {
                 className='new-list'
                 type='text'
                 placeholder='Add list'
-            >
+                >
             </input>
             <button
                 type='submit'

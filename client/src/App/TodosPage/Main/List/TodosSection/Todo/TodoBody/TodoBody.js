@@ -21,10 +21,10 @@ export function TodoBody(props) {
                                                                 
     function resetTodo(e) {                                     //////  ---> Reset this todo's body
         if(thisTodo.current !== null) {                             //       if click outside befour submit
-            if(context.editActive === props.todoId) {               //                          //
-                context.setEditActive('');
+            if(context.editActive === props.todoId) {               //
+                context.setEditActive('');                          //
                 if(e.target.id !== props.todoId) {                  //
-                    thisTodo.current.innerText = props.body;        ////
+                    thisTodo.current.innerText = props.body;        //
                     setEditActive(false);                           //
                 };                                                  //
             };                                                      //
@@ -63,13 +63,13 @@ export function TodoBody(props) {
         })                                                          //
         .then((res) => {                                            //
             console.log(res);                                       //
-            context.setRenderList(props.listId);                    //
+            context.setRenderList(true);                            //
         });                                                         //
     };                                                          //////
 
 
     return <span
-        className={'todo-body-container ' + (props.completed ? 'completed' : '')}
+        className={'todo-body-container ' + (props.todoCompleted ? 'completed' : '')}
         suppressContentEditableWarning={true}
         id={props.todoId}
         ref={thisTodo}

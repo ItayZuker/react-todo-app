@@ -6,40 +6,37 @@ export function ListButton(props) {
 
     const context = useContext(appContext);
 
-
-    let [completed, setCompleted] = useState(null);
-    let [moreThenOne, setMoreThenOne] = useState(null);
-
-    useEffect(() => {                                               //////  ---> Update every time
-        if(context.newArray[0] === props.listId) {                      //       this array is updated
-            if(context.newArray[1].length > 0) {                        //
-                setMoreThenOne(true);                                   //
-            } else {                                                    //
-                setMoreThenOne(false);                                  //
-            };                                                          //
-        };                                                              //
-    }, [context.newArray]);                                         //////
+    // let [selected, setSelected] = useState(null);
+    let [active, setActive] = useState(() => props.todos > 0 ? true : false);
+    let [completed, setCompleted] = useState(props.completed);
 
 
-    useEffect(() => {
-        if(context.allTodosCompleted === props.listId) {
-            setCompleted(true);
-        }
-    }, [context.allTodosCompleted])
+    // useEffect(() => {                                                           //////  ---> Update listCompleted state
+    //     if (context.listCompleted[0] === props.listId) {                            //       
+    //         context.listCompleted[1] ? setCompleted(true) : setCompleted(false);    //
+    //     }                                                                           //
+    // }, [context.listCompleted])                                                 //////
 
 
-    useEffect(() => {
-        if(context.allTodosNotCompleted === props.listId) {
-            setCompleted(false);
-        }
-    }, [context.allTodosNotCompleted])
+    useEffect(() => {                                               //////  ---> Update completed state for this todo
+        if(context.allTodosCompleted === props.listId) {                //
+            setCompleted(true);                                         //
+        }                                                               //
+    }, [context.allTodosCompleted])                                     //
+                                                                        
+    useEffect(() => {                                                   //
+        if(context.allTodosNotCompleted === props.listId) {             //
+            setCompleted(false);                                        //
+        }                                                               //
+    }, [context.allTodosNotCompleted])                              //////
 
 
     return <div
         className='list-button-container'
         >
         <button
-            className={moreThenOne ? 'active ' + (completed ? 'completed' : '') : ''}
+            className={active ? 'active ' + (completed ? 'completed' : '') : ''}
+            onClick={() => {context.setSelectedList(props.listId)}}
             >{props.listName}</button>
     </div>
 }

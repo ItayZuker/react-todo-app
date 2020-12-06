@@ -25,7 +25,7 @@ export function TodoInput(props) {
                 e.target.todo.value = '';                               //       triger notification
                 setTodoNotification('Nothig todo...');                  //
                 handleNewTodoError();                                   
-            } else if(props.todosArray.find(todo => {                   //  
+            } else if(props.list.find(todo => {                   //  
                 if(todo.body === e.target.todo.value) return true})) {  //  ---> Submit with string that's
                 e.target.todo.value = '';                               //       alredy exist would block submit
                 setTodoNotification("Don't do it twice!");              //       and triger notification

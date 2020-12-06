@@ -65,24 +65,24 @@ router.post('/create-list/:userId', async (req, res) => {           //////  --->
 
 
 
-router.get('/get-list/:listId', async (req, res) => {               //////  ---> This fetch send one list item
-    await ListsModel                                                    //       for this user
-        .findOne({                                                      //       -
-            _id: ObjectID.createFromHexString(req.params.listId),       //       (NOT ACTIVETED)
-        }, (err, docs) => {                                             //       
-            if(err) {                                                   //       
-                console.log(err);                                       //
-                res.status(500).send();                                 //       
-            } else if(!docs) {                                          //
-                res.status(404).send();                                 //
-            } else {                                                    //
-                res.json(docs);                                         //
-            };                                                          //
-        });                                                             //
-});                                                                 //////
+// router.get('/get-list/:listId', async (req, res) => {               //////  ---> This fetch send one list item
+//     await ListsModel                                                    //       for this user
+//         .findOne({                                                      //       -
+//             _id: ObjectID.createFromHexString(req.params.listId),       //       (NOT ACTIVETED)
+//         }, (err, docs) => {                                             //       
+//             if(err) {                                                   //       
+//                 console.log(err);                                       //
+//                 res.status(500).send();                                 //       
+//             } else if(!docs) {                                          //
+//                 res.status(404).send();                                 //
+//             } else {                                                    //
+//                 res.json(docs);                                         //
+//             };                                                          //
+//         });                                                             //
+// });                                                                 //////
 
 
-router.get('/get-lists/:userId', async (req, res) => {              //////  ---> This fetch send all the lists
+router.get('/get-user-lists/:userId', async (req, res) => {              //////  ---> This fetch send all the lists
     await ListsModel                                                    //       for this user
         .find({                                                         //       -
             userId: req.params.userId,                                  //       Activeted in TodosPage component

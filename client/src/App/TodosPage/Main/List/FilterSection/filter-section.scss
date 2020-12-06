@@ -4,7 +4,7 @@ $light-gray: lightgray;
 $regular-gray: gray;
 $dark-gray: #232323;
 
-.lower-section-container {
+.upper-section-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -21,12 +21,13 @@ $dark-gray: #232323;
             }
         }
     }
-    .lower-pannel{
+    .filter-data-pannel{
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: 50px;
         width: 100%;
         font-size: 16px;
         font-weight: 700;
+        margin: 5px 0px 0px 0px;
     }
 }

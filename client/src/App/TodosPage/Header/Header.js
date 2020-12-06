@@ -20,7 +20,7 @@ export function Header(props) {
                 >
             </i>
             <h1
-                className={props.allTodosArray.length > 0 ? 'red' : ''}
+                className={props.todos.length > 0 ? 'red' : ''}
                 >{props.user.name} todos
             </h1>
         </div>

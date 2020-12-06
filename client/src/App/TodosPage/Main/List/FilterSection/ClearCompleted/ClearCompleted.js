@@ -6,8 +6,8 @@ export function ClearCompleted(props) {
 
     const context = useContext(appContext);
 
-    const allTodosInList = props.todosArray.length;
-    const completedTodos = props.todosArray.filter(todo => todo.completed === true).length;
+    const allTodosInList = props.list.length;
+    const completedTodos = props.list.filter(todo => todo.completed === true).length;
 
     return <button 
         className={'clear-complited-container ' + (allTodosInList > 0 ? 'active ' + (completedTodos > 0 ? 'clicker' : '') : '')}

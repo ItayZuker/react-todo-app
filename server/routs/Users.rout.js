@@ -56,7 +56,7 @@ router.get('/get-user/:userId', async (req, res) => {                           
 });                                                                                         //////
 
 
-router.get('/', async (req, res) => {                                                       //////  ---> Send all users
+router.get('/get-users', async (req, res) => {                                                       //////  ---> Send all users
     await UsersModel                                                                            //       -
         .find({}, (err, docs) => {                                                              //       Activeted at UsersContainer component
             if(err) {                                                                           //

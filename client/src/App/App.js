@@ -7,22 +7,22 @@ import './app.scss';
 
 export function App() {
 
-    let [renderUsers, setRenderUsers] = useState(true);
+    let [renderUsers, setRenderUsers] = useState(true); // Boolean
     let [usersArray, setUsersArray] = useState([]);
-    let [renderUser, setRenderUser] = useState('');
+    let [renderUser, setRenderUser] = useState(''); // userId
     let [renderList, setRenderList] = useState('');
-    let [newArray, setNewArray] = useState('');
-    let [todoCompleted, setTodoCompleted] = useState('');
-    let [todoNotCompleted, setTodoNotCompleted] = useState('');
-    let [allTodosCompleted, setAllTodosCompleted] = useState('');
-    let [allTodosNotCompleted, setAllTodosNotCompleted] = useState('');
-    let [allCompleted, checkAllCompleted] = useState('')
-    let [allNotCompleted, checkAllNotCompleted] = useState('')
+    let [renderLists, setRenderLists] = useState(''); // userId
+    let [selectedList, setSelectedList] = useState('')
+    let [listCompleted, setListCompleted] = useState([]);
+    let [todoCompleted, setTodoCompleted] = useState([]);
+    let [checkAllCompleted, setCheckAllCompleted] = useState([]);
     let [deleteTodo, setDeleteTodo] = useState('');
     let [saveTodo, setSaveTodo] = useState('');
     let [editActive, setEditActive] = useState('');
     let [displayListState, setDisplayListState] = useState([]);
     let [clearCompletedClick, setClearCompletedClick] = useState(false);
+
+
 
     let contextValue = {
         renderUsers,
@@ -33,20 +33,16 @@ export function App() {
         setRenderUser,
         renderList,
         setRenderList,
-        newArray,
-        setNewArray,
+        renderLists,
+        setRenderLists,
+        selectedList,
+        setSelectedList,
+        listCompleted,
+        setListCompleted,
         todoCompleted,
         setTodoCompleted,
-        allTodosCompleted,
-        setAllTodosCompleted,
-        allTodosNotCompleted,
-        setAllTodosNotCompleted,
-        todoNotCompleted,
-        setTodoNotCompleted,
-        allCompleted,
         checkAllCompleted,
-        allNotCompleted,
-        checkAllNotCompleted,
+        setCheckAllCompleted,
         deleteTodo,
         setDeleteTodo,
         saveTodo,

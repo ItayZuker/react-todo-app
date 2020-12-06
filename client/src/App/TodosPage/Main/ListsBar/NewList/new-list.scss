@@ -9,8 +9,8 @@ $dark-gray: #232323;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
-        margin: 0px 0px 10px 0px;
-        height: 40px;
+        margin: 0px 0px 5px 0px;
+        height: 50px;
         width: auto;
         input {
             font-family: 'Quicksand', sans-serif;
@@ -37,10 +37,11 @@ $dark-gray: #232323;
         }
         .submit {
             background-color: $regular-gray;
-            width: 40px;
+            width: 50px;
             color: $light-gray;
+            font-size: 26px;
             font-weight: 700;
-            border-radius: 0px 4px 4px 0px;
+            border-radius: 0px 2px 2px 0px;
             &:hover {
                 color: $dark-gray;
                 cursor: pointer;

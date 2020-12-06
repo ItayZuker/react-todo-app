@@ -11,9 +11,9 @@ $dark-gray: #232323;
     align-items: center;
     min-height: 50px;
     width: 100%;
-    margin: 0px 0px 4px 0px;
+    margin: 5px 0px 0px 0px;
     background-color: $light-gray;
-    border-radius: 4px 4px 4px 4px;
+    border-radius: 2px 2px 2px 2px;
     box-sizing: border-box;
     &.hide {
         display: none;
@@ -21,7 +21,7 @@ $dark-gray: #232323;
     .tadam-contaoner {
         display: none;
         background-color: $red-color;
-        border-radius: 4px 4px 4px 4px;
+        border-radius: 2px 2px 2px 2px;
         width: 100%;
         height: 50px;
         &.active {

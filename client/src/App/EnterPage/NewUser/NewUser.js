@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import { appContext } from '../../../AppContext';
 import './new-user.scss';
 
-export function NewUser(){
+export function NewUser(props){
 
     const context = useContext(appContext);
 
@@ -56,7 +56,7 @@ export function NewUser(){
                                 }),                                         //       
                             });                                             //////
                             e.target.user.value = '';
-                            context.setRenderUsers(true);
+                            context.setRenderUsers(props.userId);
                     });
                 };              
         }}>
