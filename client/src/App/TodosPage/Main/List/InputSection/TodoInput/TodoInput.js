@@ -31,6 +31,7 @@ export function TodoInput(props) {
                 setTodoNotification("Don't do it twice!");              //       and triger notification
                 handleNewTodoError();                                   //
             } else {                                                    
+                context.setListActive([props.listId, true])
                 fetch('/todos/api/new-todo', {                          //  
                     method: 'POST',                                     //  ---> This fech create a new todo      
                     headers: {                                          //       for a specific list and then 

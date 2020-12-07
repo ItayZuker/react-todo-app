@@ -1,0 +1,21 @@
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
+.list-menu-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-column: 3 / 4;
+    .fa-ellipsis-h {
+        font-size: 20px;
+        color: $regular-gray;
+        &:hover {
+            color: $light-gray;
+            cursor: pointer;
+        }
+    }
+}

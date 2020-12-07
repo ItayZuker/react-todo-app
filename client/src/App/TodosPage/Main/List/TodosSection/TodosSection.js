@@ -8,11 +8,11 @@ export function TodosSection(props) {
         {props.list.map(todo => 
             <Todo
                 key={todo._id}
-                userId={todo.userIs}
+                userId={todo.userId}
+                listId={props.listId}
                 todoId={todo._id}
                 body={todo.body}
                 todoCompleted={todo.completed}
-                listId={props.listId}
             >
             </Todo>
         )}

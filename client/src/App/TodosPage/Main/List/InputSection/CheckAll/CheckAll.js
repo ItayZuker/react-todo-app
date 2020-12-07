@@ -14,11 +14,9 @@ export function CheckAll(props) {
         props.list.length > 0 ? setButtonActive(true) : setButtonActive(false);                         //       after list render
     }, [props.list])                                                                                //////
 
-
     useEffect(() => {                                                                               //////  ---> Update listCompleted state
         setlistCompleted(props.listCompleted)                                                           //       after list render to reconfirm
     }, [props.listCompleted])                                                                       //////       or chenge back if the fetch hed problem
-
 
     useEffect(() => {                                                                               //////  ---> Update listCompleted instantly false
         if (context.listCompleted[0] === props.listId) {                                                //       when any CheckTodo update false
@@ -38,6 +36,7 @@ export function CheckAll(props) {
                 })                                                                                      //       then activeButton state and listCompleted state
                 .then((res) => {                                                                        //       reconfirm or chenge back if the fetch hed problem
                     console.log(res);                                                                   //
+                    context.setCheckAllCompleted([])                                                    //
                     context.setRenderList(props.listId)                                                 //
                 });                                                                                     //
             } else {                                                                                    //
@@ -48,6 +47,7 @@ export function CheckAll(props) {
                 })                                                                                      //
                 .then((res) => {                                                                        //
                     console.log(res);                                                                   //
+                    context.setCheckAllCompleted([])                                                    //
                     context.setRenderList(props.listId)                                                 //
                 });                                                                                     //
             };                                                                                          //

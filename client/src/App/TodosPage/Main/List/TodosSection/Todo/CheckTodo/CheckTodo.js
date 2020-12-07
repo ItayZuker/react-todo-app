@@ -23,7 +23,7 @@ export function CheckTodo(props) {
                         context.setRenderList(props.listId);                //
                     });                                                     //
                 } else {                                                    //
-                    context.setTodoCompleted([props.todoId, true]);         //
+                    context.setTodoCompleted([props.todoId, true, props.listId]);         //
                     fetch(`/todos/api/todo-true/${props.todoId}`, {         //
                         method: "PUT",                                      //
                     })                                                      //

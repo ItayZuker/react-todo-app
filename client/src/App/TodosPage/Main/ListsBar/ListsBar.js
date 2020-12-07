@@ -17,7 +17,7 @@ export function ListsBar(props) {
                 listId={list._id}
                 listName={list.listName}
                 todos={list.todos}
-                completed={list.completed}
+                listCompleted={list.completed}
                 ></ListButton>
             )}
     </div>

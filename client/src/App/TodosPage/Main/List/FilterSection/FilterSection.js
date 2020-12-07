@@ -8,38 +8,35 @@ import { appContext } from '../../../../../AppContext.js';
 export function FilterSection(props) {
 
     const context = useContext(appContext)
-    let [listCompleted, setListCompleted] = useState(null)
-    let [active, setButtonActive] = useState(null);
+    let [active, setActive] = useState(null);
 
 
-    useEffect(() => {                                                                   //////  ---> Update active component state    
-        props.list.length > 0 ? setButtonActive(true) : setButtonActive(false);             //       for every list.length change
-    }, [props.list]);                                                                   //////
+    useEffect(() => {                                                                       //////  ---> Update active component state    
+        props.list.length > 0 ? setActive(true) : setActive(false);                             //       with data from render
+    }, [props.list]);                                                                       //////
 
+    useEffect(() => {                                                                       //////  ---> Update active component state true instantly                                                   //       instantly when creating new todo
+        if (context.listActive[0] === props.listId) {                                           //       and update false if no todos after
+            context.listActive[1] ? setActive(true) : setActive(false);                         //       fetch list
+        }                                                                                       //
+    }, [context.listActive])                                                                //////
 
-    useEffect(() => {                                                                   //////  ---> Update listCompleted state
-        if (context.listCompleted[0] === props.listId) {                                    //       for this h2 title
-            context.listCompleted[1] ? setListCompleted(true) : setListCompleted(false);    //
-        }                                                                                   //
-    }, [context.listCompleted])                                                         //////
-
-    return <div
-            className='upper-section-container'>
-            <h2
-                className={active > 0 ? 'active ' + (listCompleted ? 'completed' : '') : ''}
-                >{props.listName}</h2>
-        <div className='filter-data-pannel'>
-            <Counter
-                list={props.list}
-                ></Counter>
-            <FilterDisplayPanel
-                listId={props.listId}
-                list={props.list}
-                ></FilterDisplayPanel>
-            <ClearCompleted
-                listId={props.listId}
-                list={props.list}
-            ></ClearCompleted>
-        </div>
+    
+    return <div className='filter-section-container'>
+        <Counter
+            list={props.list}
+            active={active}
+            listId={props.listId}
+            ></Counter>
+        <FilterDisplayPanel
+            listId={props.listId}
+            list={props.list}
+            active={active}
+            ></FilterDisplayPanel>
+        <ClearCompleted
+            listId={props.listId}
+            list={props.list}
+            active={active}
+        ></ClearCompleted>
     </div>
 }

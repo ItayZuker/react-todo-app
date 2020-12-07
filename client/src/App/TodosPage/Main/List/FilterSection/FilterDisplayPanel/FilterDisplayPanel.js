@@ -10,7 +10,7 @@ export function FilterDisplayPanel(props) {
 
     return <div className='filter-display-container'>
         <div
-            className={'filter-item ' + (props.list.length > 0 ? 'on ' + (selectedButton === 'all' ? 'selected' : '') : '')}
+            className={'filter-item ' + (props.active ? 'on ' + (selectedButton === 'all' ? 'selected' : '') : '')}
             onClick={() => {
                 context.setDisplayListState([props.listId, 'all']);
                 setSelectedButton('all');  
@@ -18,7 +18,7 @@ export function FilterDisplayPanel(props) {
         >
         All</div>
         <div
-            className={'filter-item ' + (props.list.length > 0 ? 'on ' + (selectedButton === 'active' ? 'selected' : '') : '')}
+            className={'filter-item ' + (props.active ? 'on ' + (selectedButton === 'active' ? 'selected' : '') : '')}
             onClick={() => {
                 context.setDisplayListState([props.listId, 'active']);
                 setSelectedButton('active');
@@ -26,7 +26,7 @@ export function FilterDisplayPanel(props) {
         >Active
         </div>
         <div
-            className={'filter-item ' + (props.list.length > 0 ? 'on ' + (selectedButton === 'completed' ? 'selected' : '') : '')}
+            className={'filter-item ' + (props.active ? 'on ' + (selectedButton === 'completed' ? 'selected' : '') : '')}
             onClick={() => {
                 context.setDisplayListState([props.listId, 'completed']);
                 setSelectedButton('completed');

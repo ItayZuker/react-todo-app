@@ -1,0 +1,19 @@
+$blue-color: #6DD3FF;
+$red-color: #FF6E6E;
+$light-gray: lightgray;
+$regular-gray: gray;
+$dark-gray: #232323;
+
+.menu-container {
+    position: absolute;
+    transform: translate(-75px, 55px);
+    height: auto;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    &.hide {
+        display: none;
+    }
+}

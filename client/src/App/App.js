@@ -13,13 +13,14 @@ export function App() {
     let [renderList, setRenderList] = useState('');
     let [renderLists, setRenderLists] = useState(''); // userId
     let [selectedList, setSelectedList] = useState('')
-    let [listCompleted, setListCompleted] = useState([]);
-    let [todoCompleted, setTodoCompleted] = useState([]);
-    let [checkAllCompleted, setCheckAllCompleted] = useState([]);
+    let [listCompleted, setListCompleted] = useState([]); // [listId, boolean]
+    let [listActive, setListActive] = useState([]) // [listId, boolean]
+    let [todoCompleted, setTodoCompleted] = useState([]); // [todoId, boolean, listId]
+    let [checkAllCompleted, setCheckAllCompleted] = useState([]); // [listId, boolean]
     let [deleteTodo, setDeleteTodo] = useState('');
     let [saveTodo, setSaveTodo] = useState('');
     let [editActive, setEditActive] = useState('');
-    let [displayListState, setDisplayListState] = useState([]);
+    let [displayListState, setDisplayListState] = useState([]); // [listId, string]
     let [clearCompletedClick, setClearCompletedClick] = useState(false);
 
 
@@ -39,6 +40,8 @@ export function App() {
         setSelectedList,
         listCompleted,
         setListCompleted,
+        listActive,
+        setListActive,
         todoCompleted,
         setTodoCompleted,
         checkAllCompleted,

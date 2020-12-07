@@ -27,14 +27,11 @@ export function Todo(props) {
         }                                                                                       //
     }, [context.todoCompleted])                                                             //////
 
-
     useEffect(() => {                                                                       //////  ---> Update todoCompleted stat
         if (context.checkAllCompleted[0] === props.listId) {                                    //       when CheckAll click
             context.checkAllCompleted[1] ? setTodoCompleted(true) : setTodoCompleted(false);    //       
-            context.setCheckAllCompleted([])                                                    //
         }                                                                                       //
     }, [context.checkAllCompleted])                                                         //////
-
 
     useEffect(() => {                                                                       //////  ---> Trigers delete function for
         if(context.clearCompletedClick === props.listId) {                                      //       this todo if completed
@@ -52,7 +49,6 @@ export function Todo(props) {
             setDeleteTodo(true);                                                                //       Activeted at DeleteButton componnet
         };                                                                                      //       
     }, [context.deleteTodo]);                                                               //////       
-
 
     useEffect(() => {                                                                       //////  ---> Delete this todo with deley  
         if(deleteTodo) {                                                                        //       to give time for the banner - 'TaDam!'
@@ -102,7 +98,7 @@ export function Todo(props) {
                 todoCompleted={todoCompleted}
                 ></CheckTodo>
             <TodoBody
-                userId={props.listId}
+                userId={props.userId}
                 listId={props.listId}
                 todoId={props.todoId}
                 body={props.body}

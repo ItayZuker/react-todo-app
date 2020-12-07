@@ -14,14 +14,12 @@ export default function useFetchLists(userId, listId) {
         }                                                                               //
     }, [context.renderList])                                                        //////
     
-
     useEffect(() => {                                                               //////  ---> Fetch all todos of this list    
-        if(renderList) {                                                                //       and then trigers render user
-            async function getUsers() {                                                 //
+        if(renderList) {                                                                //       then update listActive state
+            async function getUsers() {                                                 //       then trigers render user
                 setRenderList(false);                                                   //
                 const result = await fetch(`/todos/api/get-todos-list/${listId}`);      //
                 const todos = await result.json();                                      //
-                context.setRenderLists(userId);                                            //
                 setData(todos);                                                         //
             }                                                                           //
             getUsers()                                                                  //
@@ -29,9 +27,45 @@ export default function useFetchLists(userId, listId) {
     }, [renderList]);                                                               //////
 
 
-    useEffect(() => {                                                               //////  ---> Update completed state and 
-        if(data.filter(todo => todo.completed === false).length > 0) {                  //       number of todos for this list 
-            context.setListCompleted([listId, false]);                                  //       at every render
+    useEffect(() => {
+        if (data.length > 0) {                                                      //////  ---> Update completed state and
+            context.setListActive([listId, true])                                       //       todos number for this list
+            if (data.filter(todo => todo.completed === false).length > 0) {             //       then call to render the lists array
+                context.setListCompleted([listId, false]);                              //
+                fetch(`/lists/api/update-list/${listId}`, {                             //
+                    method: 'PUT',                                                      //
+                    headers: {                                                          //
+                        'Content-Type': 'application/json',                             //
+                    },                                                                  //
+                    body: JSON.stringify({                                              //
+                        completed: false,                                               //
+                        todos: data.length,                                             //
+                    }),                                                                 //
+                })                                                                      //
+                .then((res) => {                                                        //
+                    console.log(res);                                                   //
+                    context.setRenderLists(userId);                                     //
+                });                                                                     //
+            } else {                                                                    //
+                context.setListCompleted([listId, true]);                               //
+                fetch(`/lists/api/update-list/${listId}`, {                             //
+                    method: 'PUT',                                                      //
+                    headers: {                                                          //
+                        'Content-Type': 'application/json',                             //
+                    },                                                                  //
+                    body: JSON.stringify({                                              //
+                        completed: true,                                                //
+                        todos: data.length,                                             //
+                    }),                                                                 //
+                })                                                                      //
+                .then((res) => {                                                        //
+                    console.log(res);                                                   //
+                    context.setRenderLists(userId);                                     //
+                });                                                                     //
+            }                                                                           //
+        } else {                                                                        //
+            context.setListActive([listId, false])                                      //
+            context.setListCompleted([listId, false]);                                  //
             fetch(`/lists/api/update-list/${listId}`, {                                 //
                 method: 'PUT',                                                          //
                 headers: {                                                              //
@@ -44,21 +78,7 @@ export default function useFetchLists(userId, listId) {
             })                                                                          //
             .then((res) => {                                                            //
                 console.log(res);                                                       //
-            });                                                                         //
-        } else {                                                                        //
-            context.setListCompleted([listId, true]);                                   //
-            fetch(`/lists/api/update-list/${listId}`, {                                 //
-                method: 'PUT',                                                          //
-                headers: {                                                              //
-                    'Content-Type': 'application/json',                                 //
-                },                                                                      //
-                body: JSON.stringify({                                                  //
-                    completed: true,                                                    //
-                    todos: data.length,                                                 //
-                }),                                                                     //
-            })                                                                          //
-            .then((res) => {                                                            //
-                console.log(res);                                                       //
+                context.setRenderLists(userId);                                         //
             });                                                                         //
         }                                                                               //
     }, [data])                                                                      //////
