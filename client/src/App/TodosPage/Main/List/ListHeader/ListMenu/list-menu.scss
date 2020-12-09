@@ -7,8 +7,9 @@ $dark-gray: #232323;
 .list-menu-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    transform: translatey(20px);
     grid-column: 3 / 4;
     .fa-ellipsis-h {
         font-size: 20px;

@@ -5,6 +5,26 @@ const mongoose = require('mongoose');
 const ListsModel = require('../models/lists.model.js');
 
 
+router.put('/update-list-name/:listId', async (req, res) => {       //////  ---> Update this listName when edited
+    await ListsModel                                                    //       -
+        .updateOne({                                                    //       Activeted at ListHeader component
+            _id: ObjectID.createFromHexString(req.params.listId),       //
+        },                                                              //
+        {                                                               //
+            listName: req.body.listName,                                //
+        }, (err, docs) => {                                             //
+            if(err) {                                                   //
+                console.log(err);                                       //
+                res.status(500).send();                                 //
+            } else if(!docs) {                                          //
+                res.status(404).send();                                 //
+            } else {                                                    //
+                res.json(docs);                                         //
+            };                                                          //
+        });                                                             //
+});                                                                 //////
+
+
 router.put('/update-list/:listId', async (req, res) => {            //////  ---> Update this todos completed state
     await ListsModel                                                    //       and todos number
         .updateOne({                                                    //       -
@@ -30,6 +50,23 @@ router.delete('/delete-user/:userId', async (req, res) => {         //////  --->
     await ListsModel                                                    //       -
         .deleteMany({                                                   //       Activeted at MenuItemDeleteUser component
             userId: ObjectID.createFromHexString(req.params.userId)     //       
+        }, (err, docs) => {                                             //
+            if(err) {                                                   //
+                console.log(err);                                       //
+                res.status(500).send();                                 //
+            } else if(!docs) {                                          //
+                res.status(404).send();                                 //
+            } else {                                                    //
+                res.json(docs);                                         //
+            };                                                          //
+        });                                                             //
+});                                                                 //////
+
+
+router.delete('/delete-list/:listId', async (req, res) => {         //////  ---> Delete this list        
+    await ListsModel                                                    //       -
+        .deleteOne({                                                    //       Activeted at DeleteList component
+            _id: ObjectID.createFromHexString(req.params.listId)        //       
         }, (err, docs) => {                                             //
             if(err) {                                                   //
                 console.log(err);                                       //

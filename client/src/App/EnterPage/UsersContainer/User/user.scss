@@ -4,8 +4,6 @@ $light-gray: lightgray;
 $regular-gray: gray;
 $dark-gray: #232323;
 
-
-
 a:-webkit-any-link {
     display: flex;
     flex-direction: row;
@@ -20,9 +18,11 @@ a:-webkit-any-link {
     background-color: $blue-color;
     color: $dark-gray;
     border-radius: 2px 2px 2px 2px;
-    &:hover {
-        background-color: $red-color;
-        color: white;
-        cursor: pointer;
+    &.link {
+        &:hover {
+            background-color: $red-color;
+            color: white;
+            cursor: pointer;
+        }
     }
 }

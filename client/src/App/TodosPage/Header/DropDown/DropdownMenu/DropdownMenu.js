@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import './dropdown-menu.scss';
 import { MenuItemDeleteUser } from './MenuItemDeleteUser/MenuItemDeleteUser.js';
 
-export function DropdownMenu(props) {
+export function DropdownMenu() {
 
     let [open, setOpen] = useState(false);
  
-    function close(e) {
+    function openClose(e) {
         if(open === false) {
             if(e.target.id === 'dropdown-button') {
                 setOpen(true);
@@ -16,14 +16,13 @@ export function DropdownMenu(props) {
         }   
     }
 
-    document.addEventListener('click', close);
+    document.addEventListener('click', openClose);
 
     return <div
         className={'dropdown-menu-container ' + (open ? 'open' : '')}
         id='dropdown-container'
         >
         <MenuItemDeleteUser
-            user={props.user}
             ></MenuItemDeleteUser>
     </div>
 }

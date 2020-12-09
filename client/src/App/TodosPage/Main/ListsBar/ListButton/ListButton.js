@@ -1,14 +1,39 @@
 import React, {useState, useEffect, useContext} from 'react';
+import {useParams} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { appContext } from '../../../../../AppContext';
 import './list-button.scss';
 
 export function ListButton(props) {
 
     const context = useContext(appContext);
+    const url = useParams()
+    const [selectedList, setSelectedList] = useState(true);
+    const [listActive, setListActive] = useState(false)
+    const [listCompleted, setListCompleted] = useState(props.listCompleted);
+    const [listDeleted, setListDeleted] = useState(false)
 
-    // let [selected, setSelected] = useState(null);
-    let [listActive, setListActive] = useState(false)
-    let [listCompleted, setListCompleted] = useState(props.listCompleted);
+
+
+    useEffect(() => {                                                       //////  ---> Update context.selectedState
+        context.setSelectedList(url.listId)                                     //       when refreshin the page
+    }, [url])                                                               //////
+
+
+    useEffect(() => {                                                       //////  ---> Make this listButton desaper
+        if (context.listDeleted === props.listId) {                             //       from screen instantly
+            setListDeleted(true)                                                //       if this list is deleted
+        }                                                                       //
+    }, [context.listDeleted])                                               //////
+
+
+    useEffect(() => {                                                                       //////  ---> Update this listSelected 'true'
+        if (context.selectedList === props.listId) {                                            //       or 'false' when clicking a
+            setSelectedList(true)                                                               //       ListButton component
+        } else {                                                                                //
+            setSelectedList(false)                                                              //
+        }                                                                                       //
+    }, [context.selectedList])                                                              //////
 
 
     useEffect(() => {                                                                       //////  ---> Update active state for
@@ -38,13 +63,15 @@ export function ListButton(props) {
         }                                                                                       //
     }, [context.checkAllCompleted])                                                         //////
 
-
+    
     return <div
-        className='list-button-container'
+        className={'list-button-container ' + (listDeleted ? 'hide ' : '') + (selectedList ? 'selected ' : '') + (listActive ? 'active ' : '') + (listCompleted ? 'completed ' : '')}
         >
-        <button
-            className={listActive ? 'active ' + (listCompleted ? 'completed' : '') : ''}
-            onClick={() => {context.setSelectedList(props.listId)}}
-            >{props.listName}</button>
+        <Link
+            to={`/lists/${props.userId}/todos/${props.listId}`}
+            className={(selectedList ? 'selected ' : '') + (listActive ? 'active ' : '') + (listCompleted ? 'completed ' : '')}
+            onClick={() => context.setSelectedList(props.listId)}
+            >{props.listName}
+            </Link>
     </div>
 }

@@ -5,27 +5,46 @@ $regular-gray: gray;
 $dark-gray: #232323;
 
 .list-button-container {
-    margin: 0px 0px 5px 0px;
+    margin: 5px 0px 0px 0px;
+    background: $regular-gray;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    max-width: 240px;
-    button {
+    align-items: center;
+    width: fit-content;
+    min-height: 50px;
+    border-radius: 0px 2px 2px 0px;
+    &.hide {
+        display: none;
+    }
+    &:hover {
+        opacity: 90%;
+        cursor: pointer;
+    }
+    &.selected {
+        padding-right: 5px;
+        border-right: 5px solid $light-gray;
+    }
+    &.active {
+        background: $red-color;
+    }
+    &.completed {
+        background-color: $blue-color;
+    }
+    a:-webkit-any-link {
         background: $regular-gray;
-        border-radius: 0px 2px 2px 0px;
-        color: $light-gray;
+        color: white;
         font-size: 20px;
         text-align: left;
-        font-weight: 500;
-        min-height: 50px;
-        padding: 10px 20px 10px 20px;
-        overflow: hidden;
+        font-weight: 600;
+        height: 100%;
+        margin: 0px;
+        padding: 8px 20px 8px 20px;
         &.active {
             background: $red-color;
-            color: white;
-            &.completed {
-                background: $blue-color;
-            }
+        }
+        &.completed {
+            background-color: $blue-color;
         }
     }
 }

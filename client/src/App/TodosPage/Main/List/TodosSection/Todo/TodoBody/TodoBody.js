@@ -5,17 +5,14 @@ import './todo-body.scss';
 export function TodoBody(props) {
 
     const context = useContext(appContext);
-
     const [editActive, setEditActive] = useState(false);
-
     const thisTodo = useRef();
-    
+
     useEffect(() => {                                           //////  ---> Set focus on this todo
         if(editActive) {                                            //       after it become editActive
             thisTodo.current.focus();                               //
         }                                                           //
     }, [editActive]);                                           //////
-
 
     document.addEventListener('click', resetTodo);              
                                                                 
@@ -23,14 +20,13 @@ export function TodoBody(props) {
         if(thisTodo.current !== null) {                             //       if click outside befour submit
             if(context.editActive === props.todoId) {               //
                 context.setEditActive('');                          //
-                if(e.target.id !== props.todoId) {                  //
+                if(e.target.id !== props.todoId) {                  //                  
                     thisTodo.current.innerText = props.body;        //
-                    setEditActive(false);                           //
+                    setEditActive(false);                           //                    
                 };                                                  //
             };                                                      //
         };                                                          //
     };                                                          //////
-
 
     document.addEventListener('keypress', pressEnter);          
                                                                     
@@ -51,6 +47,7 @@ export function TodoBody(props) {
 
 
     function saveUpdate() {                                     //////  ---> function to save this todo update
+        context.setListCompleted([props.listId, false]);            //
         fetch(`/todos/api/save-update/${props.todoId}`, {           //
             method: 'PUT',                                          //
             headers: {                                              //
@@ -61,9 +58,8 @@ export function TodoBody(props) {
                 completed: false,                                   //
             })                                                      //
         })                                                          //
-        .then((res) => {                                            //
-            console.log(res);                                       //
-            context.setRenderList(true);                            //
+        .then(() => {                                               //
+            context.setRenderList(props.listId);                    //
         });                                                         //
     };                                                          //////
 
@@ -75,6 +71,7 @@ export function TodoBody(props) {
         ref={thisTodo}
         onDoubleClick={() => {
             context.setEditActive(props.todoId);
+            context.setTodoCompleted([props.todoId, false]);
             setEditActive(true);
         }}
         contentEditable={editActive ? 'true' : 'false'}

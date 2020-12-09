@@ -33,9 +33,7 @@ export function CheckTodo(props) {
                     });
                 }
             }}
-        >{props.todoCompleted ? <i className="fas fa-check"></i> : <i className="fas fa-times"></i>}
-            
-            
-            </button>
+        ><i className="fas fa-check"></i>           
+        </button>
     </div>
 }

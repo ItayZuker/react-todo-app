@@ -28,7 +28,6 @@ export function Header(props) {
             className='right-side'
             >
             <Dropdown
-                user={props.user}
                 ></Dropdown>
         </div>
     </div>

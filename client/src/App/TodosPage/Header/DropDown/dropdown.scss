@@ -9,6 +9,8 @@ $dark-gray: #232323;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-end;
+    position: relative;
+    right: 20px;
     .fa-angle-down{
         font-size: 40px;
         color: $blue-color;

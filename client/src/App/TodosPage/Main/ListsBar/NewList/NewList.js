@@ -1,37 +1,64 @@
-import React, {useContext} from 'react';
-import { appContext } from '../../../../../AppContext';
+import React, {useContext, useState} from 'react';
+import {useParams, useHistory} from 'react-router-dom';
+import {appContext} from '../../../../../AppContext';
 import './new-list.scss';
 
-export function NewList(props) {
+export function NewList() {
 
+    const url = useParams()
     const context = useContext(appContext);
+    const history = useHistory()
+    const [newListNotification, setNewListNotification] = useState('');
+    const [renderNotification, setRenderNotification] = useState(false);
+
+
+    function handleNewListError() {                                                 //////  ---> Activet notifacation with
+        setRenderNotification(true)                                                     //       .setTimeout()
+        setTimeout(() => {                                                              //
+            setRenderNotification(false)                                                //
+            setNewListNotification('')                                                  //
+        }, 1500);                                                                       //
+    }                                                                               //////
+
 
     return <div
         className='new-list-container'>
         <form
             onSubmit={e => {
                 e.preventDefault();
-                fetch(`/lists/api/create-list/${props.userId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        listName: e.target.listName.value,
-                    })
-                })
-                .then((res) => {
-                    console.log(res);
-                    e.target.listName.value = '';
-                    context.setRenderLists(props.userId);
-                })
-            }}
+                if (e.target.listName.value === '') {                               //////  ---> Validation for new list
+                    e.target.listName.value = '';                                       //
+                    setNewListNotification('Add list!');                                //
+                    handleNewListError();                                               //
+                } else if(context.listsArray.find(list => {                             //
+                    if(list.listName === e.target.listName.value) return true})) {      //
+                    e.target.listName.value = '';                                       //
+                    setNewListNotification('Already exist..');                          //
+                    handleNewListError();                                               //
+                } else {
+                    fetch(`/lists/api/create-list/${url.userId}`, {                     //  ---> Fetch to create the new list
+                        method: 'POST',                                                 //       then change the url state to this list
+                        headers: {                                                      //       then render lists
+                            'Content-Type': 'application/json',                         //
+                        },                                                              //
+                        body: JSON.stringify({                                          //
+                            listName: e.target.listName.value,                          //
+                        })                                                              //
+                    })                                                                  //
+                    .then((res) => res.json())                                          //
+                    .then((res) => {                                                    //
+                        e.target.listName.value = '';                                   //
+                        history.push(`/lists/${url.userId}/todos/${res._id}`)           //
+                        context.setRenderLists(url.userId);                             //
+                    })                                                                  //
+                }                                                                       //
+            }}                                                                      //////
             >
             <input
                 name='listName'
                 className='new-list'
                 type='text'
-                placeholder='Add list'
+                placeholder={renderNotification ? newListNotification : 'Add list'}
                 >
             </input>
             <button

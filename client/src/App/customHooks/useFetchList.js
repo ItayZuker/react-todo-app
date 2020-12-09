@@ -20,6 +20,7 @@ export default function useFetchLists(userId, listId) {
                 setRenderList(false);                                                   //
                 const result = await fetch(`/todos/api/get-todos-list/${listId}`);      //
                 const todos = await result.json();                                      //
+                updateList(todos)                                                       //
                 setData(todos);                                                         //
             }                                                                           //
             getUsers()                                                                  //
@@ -27,10 +28,10 @@ export default function useFetchLists(userId, listId) {
     }, [renderList]);                                                               //////
 
 
-    useEffect(() => {
-        if (data.length > 0) {                                                      //////  ---> Update completed state and
-            context.setListActive([listId, true])                                       //       todos number for this list
-            if (data.filter(todo => todo.completed === false).length > 0) {             //       then call to render the lists array
+    function updateList(todos) {                                                    //////  ---> Update completed state and
+        if (todos.length > 0) {                                                         //       todos number in this list
+            context.setListActive([listId, true])                                       //       then call to render the lists array
+            if (todos.filter(todo => todo.completed === false).length > 0) {            //
                 context.setListCompleted([listId, false]);                              //
                 fetch(`/lists/api/update-list/${listId}`, {                             //
                     method: 'PUT',                                                      //
@@ -39,7 +40,7 @@ export default function useFetchLists(userId, listId) {
                     },                                                                  //
                     body: JSON.stringify({                                              //
                         completed: false,                                               //
-                        todos: data.length,                                             //
+                        todos: todos.length,                                   //
                     }),                                                                 //
                 })                                                                      //
                 .then((res) => {                                                        //
@@ -55,7 +56,7 @@ export default function useFetchLists(userId, listId) {
                     },                                                                  //
                     body: JSON.stringify({                                              //
                         completed: true,                                                //
-                        todos: data.length,                                             //
+                        todos: todos.length,                                   //
                     }),                                                                 //
                 })                                                                      //
                 .then((res) => {                                                        //
@@ -73,7 +74,7 @@ export default function useFetchLists(userId, listId) {
                 },                                                                      //
                 body: JSON.stringify({                                                  //
                     completed: false,                                                   //
-                    todos: data.length,                                                 //
+                    todos: todos.length,                                       //
                 }),                                                                     //
             })                                                                          //
             .then((res) => {                                                            //
@@ -81,9 +82,14 @@ export default function useFetchLists(userId, listId) {
                 context.setRenderLists(userId);                                         //
             });                                                                         //
         }                                                                               //
-    }, [data])                                                                      //////
+    }                                                                                   //    
+    return data                                                                         //
+}                                                                                   //////
 
-    
-    return data
-}
+
+
+
+
+
+
 

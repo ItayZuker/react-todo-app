@@ -12,9 +12,11 @@ export function App() {
     let [renderUser, setRenderUser] = useState(''); // userId
     let [renderList, setRenderList] = useState('');
     let [renderLists, setRenderLists] = useState(''); // userId
-    let [selectedList, setSelectedList] = useState('')
+    let [selectedList, setSelectedList] = useState('')  // listId
+    let [listsArray, setListsArray] = useState([]) // [listId, listId...]
     let [listCompleted, setListCompleted] = useState([]); // [listId, boolean]
     let [listActive, setListActive] = useState([]) // [listId, boolean]
+    let [listDeleted, setListDeleted] = useState('') // listId
     let [todoCompleted, setTodoCompleted] = useState([]); // [todoId, boolean, listId]
     let [checkAllCompleted, setCheckAllCompleted] = useState([]); // [listId, boolean]
     let [deleteTodo, setDeleteTodo] = useState('');
@@ -22,7 +24,6 @@ export function App() {
     let [editActive, setEditActive] = useState('');
     let [displayListState, setDisplayListState] = useState([]); // [listId, string]
     let [clearCompletedClick, setClearCompletedClick] = useState(false);
-
 
 
     let contextValue = {
@@ -38,10 +39,14 @@ export function App() {
         setRenderLists,
         selectedList,
         setSelectedList,
+        listsArray,
+        setListsArray,
         listCompleted,
         setListCompleted,
         listActive,
         setListActive,
+        listDeleted,
+        setListDeleted,
         todoCompleted,
         setTodoCompleted,
         checkAllCompleted,
@@ -61,7 +66,10 @@ export function App() {
     return <appContext.Provider value={contextValue}>
         <BrowserRouter>
             <Switch>
-                <Route path='/todos/:userId'>
+                <Route path='/lists/:userId/todos/:listId'>
+                   <TodosPage></TodosPage>
+                </Route>
+                <Route path='/lists/:userId'>
                    <TodosPage></TodosPage>
                 </Route>    
                 <Route path='/'>

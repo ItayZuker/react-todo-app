@@ -12,6 +12,7 @@ router.put('/save-update/:todoId', async (req, res) => {                   /////
         },                                                                     //
         {                                                                      //
             body: req.body.body,                                               //
+            completed: req.body.completed                                      //
         }, (err, docs) => {                                                    //
             if(err) {                                                          //
                 console.log(err);                                              //
@@ -114,6 +115,24 @@ router.delete('/delete-user/:userId', async (req, res) => {                /////
     await TodosModel                                                           //       -
         .deleteMany({                                                          //       Activeted at MenuItemDeleteUder
             userId: ObjectID.createFromHexString(req.params.userId),           //       component
+        }, (err, docs) => {                                                    //
+            if(err) {                                                          //
+                console.log(err);                                              //
+                res.status(500).send();                                        //
+            } else {                                                           //
+                if(!docs) {                                                    //
+                    res.status(404).send();                                    //
+                }                                                              //
+                res.json(docs);                                                //
+            };                                                                 //
+        });                                                                    //
+});                                                                        //////
+
+
+router.delete('/delete-list/:listId', async (req, res) => {                //////  ---> Delete all todos of one list
+    await TodosModel                                                           //       -
+        .deleteMany({                                                          //       Activeted at DeleteList
+            listId: req.params.listId,                                         //       component
         }, (err, docs) => {                                                    //
             if(err) {                                                          //
                 console.log(err);                                              //

@@ -7,7 +7,6 @@ export function Main(props) {
 
     return <div className='main-container'>
         <ListsBar
-            userId={props.user._id}
             lists={props.lists}
             ></ListsBar>
         <div

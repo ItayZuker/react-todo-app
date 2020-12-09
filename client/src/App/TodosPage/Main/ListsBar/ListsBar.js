@@ -1,6 +1,6 @@
 import React from 'react';
 import {ListButton} from './ListButton/ListButton.js';
-import {NewList, useState} from './NewList/NewList.js';
+import {NewList} from './NewList/NewList.js';
 import './list-bar.scss';
 
 export function ListsBar(props) {
@@ -9,11 +9,10 @@ export function ListsBar(props) {
             className='list-bar-container'
             >
             <NewList
-                userId={props.userId}
                 ></NewList>
             {props.lists.map(list => <ListButton
                 key={list._id}
-                userId={props.userId}
+                userId={list.userId}
                 listId={list._id}
                 listName={list.listName}
                 todos={list.todos}

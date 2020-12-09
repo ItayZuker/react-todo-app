@@ -8,14 +8,19 @@ $dark-gray: #232323;
     width: 100%;
     display: grid;
     grid-template-columns: 50px 1fr 50px;
-    grid-template-rows: 50px;
+    grid-template-rows: minmax(50px, auto);
     h2 {
         grid-column: 2 / 3;
+        overflow: hidden;
         text-align: center;
         color: $regular-gray;
         font-size: 40px;
         font-weight: 400;
         margin: 0px 0px 0px 0px;
+        height: auto;
+        &:focus {
+            outline: none;
+        }
         &.active {
             color: $red-color;
             &.completed {

@@ -10,4 +10,8 @@ $dark-gray: #232323;
     width: 500px;
     height: auto;
     margin: 55px 0px 0px 0px;
+    overflow: hidden;
+    &.hide {
+        display: none;
+    }
 }

@@ -5,8 +5,9 @@ $regular-gray: gray;
 $dark-gray: #232323;
 
 .footer-container {
-    position: fixed;
+    position: relative;
     bottom: 20px;
+    right: 20px;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
