@@ -4,7 +4,7 @@ $light-gray: lightgray;
 $regular-gray: gray;
 $dark-gray: #232323;
 
-.delete-button-container {
+.open-details-container {
     width: 50px;
     border: none;
     font-size: 20px;
@@ -15,9 +15,12 @@ $dark-gray: #232323;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    .delete-button {
+    .open-button {
         color: $regular-gray;
         font-size: 20px;
+        .left {
+            transform: rotate(90deg);
+        }
         &:hover {
             color: $red-color;
             cursor: pointer;

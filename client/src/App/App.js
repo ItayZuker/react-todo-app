@@ -8,22 +8,21 @@ import './app.scss';
 export function App() {
 
     let [renderUsers, setRenderUsers] = useState(true); // Boolean
-    let [usersArray, setUsersArray] = useState([]);
+    let [usersArray, setUsersArray] = useState([]); // usersArray from fetch
     let [renderUser, setRenderUser] = useState(''); // userId
-    let [renderList, setRenderList] = useState('');
+    let [renderList, setRenderList] = useState(''); // listId
     let [renderLists, setRenderLists] = useState(''); // userId
     let [selectedList, setSelectedList] = useState('')  // listId
     let [listsArray, setListsArray] = useState([]) // [listId, listId...]
     let [listCompleted, setListCompleted] = useState([]); // [listId, boolean]
     let [listActive, setListActive] = useState([]) // [listId, boolean]
     let [listDeleted, setListDeleted] = useState('') // listId
+    let [listName, setListName] = useState([]) // [listId, string]
     let [todoCompleted, setTodoCompleted] = useState([]); // [todoId, boolean, listId]
     let [checkAllCompleted, setCheckAllCompleted] = useState([]); // [listId, boolean]
-    let [deleteTodo, setDeleteTodo] = useState('');
-    let [saveTodo, setSaveTodo] = useState('');
-    let [editActive, setEditActive] = useState('');
+    let [deleteTodo, setDeleteTodo] = useState(''); // todoId
     let [displayListState, setDisplayListState] = useState([]); // [listId, string]
-    let [clearCompletedClick, setClearCompletedClick] = useState(false);
+    let [clearCompletedClick, setClearCompletedClick] = useState(''); // listId
 
 
     let contextValue = {
@@ -47,16 +46,14 @@ export function App() {
         setListActive,
         listDeleted,
         setListDeleted,
+        listName,
+        setListName,
         todoCompleted,
         setTodoCompleted,
         checkAllCompleted,
         setCheckAllCompleted,
         deleteTodo,
         setDeleteTodo,
-        saveTodo,
-        setSaveTodo,
-        editActive,
-        setEditActive,
         displayListState,
         setDisplayListState,
         clearCompletedClick,

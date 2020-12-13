@@ -9,6 +9,9 @@ export function TodoInput(props) {
     const [todoNotification, setTodoNotification] = useState('');
     const [renderTodoNotification, setRenderTodoNotification] = useState(false);
 
+    // let date = new Date()
+    // console.log(date)
+    // console.log(typeof date)
 
     function handleNewTodoError() {                                     //
         setRenderTodoNotification(true)                                 //  ---> This function trigers notification
@@ -25,13 +28,13 @@ export function TodoInput(props) {
                 e.target.todo.value = '';                               //       triger notification
                 setTodoNotification('Nothig todo...');                  //
                 handleNewTodoError();                                   
-            } else if(props.list.find(todo => {                   //  
+            } else if(props.list.find(todo => {                         //  
                 if(todo.body === e.target.todo.value) return true})) {  //  ---> Submit with string that's
                 e.target.todo.value = '';                               //       alredy exist would block submit
                 setTodoNotification("Don't do it twice!");              //       and triger notification
                 handleNewTodoError();                                   //
             } else {                                                    
-                context.setListActive([props.listId, true])
+                context.setListActive([props.listId, true])             //
                 fetch('/todos/api/new-todo', {                          //  
                     method: 'POST',                                     //  ---> This fech create a new todo      
                     headers: {                                          //       for a specific list and then 
@@ -42,6 +45,7 @@ export function TodoInput(props) {
                         listId: props.listId,                           //
                         body: e.target.todo.value,                      //
                         completed: false,                               //
+                        created: new Date(),                            //
                     }),                                                 //
                 }).then((res) => {                                      //
                     console.log(res);                                   //

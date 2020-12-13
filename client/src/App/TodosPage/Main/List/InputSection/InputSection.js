@@ -21,8 +21,9 @@ export function InputSection(props) {
                 list={props.list}
                 ></TodoInput>
         </div>
-         <h2
-            className={props.list.length > 0 ? 'hide' : ''}
-            >Nothing<br/>Todo...</h2>
+        <div className={'h2-container ' + (props.list.length > 0 ? 'hide' : '')}>
+            <h2
+                >Nothing<br/>Todo...</h2>
+        </div>
     </div>
 }

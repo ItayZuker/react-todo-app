@@ -13,6 +13,7 @@ export function TodosSection(props) {
                 todoId={todo._id}
                 body={todo.body}
                 todoCompleted={todo.completed}
+                created={todo.created}
             >
             </Todo>
         )}

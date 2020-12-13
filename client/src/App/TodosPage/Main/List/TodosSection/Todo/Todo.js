@@ -1,17 +1,21 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {CheckTodo} from './CheckTodo/CheckTodo.js';
 import {TodoBody} from './TodoBody/TodoBody.js';
-import {DeleteButton} from './DeleteButton/DeleteButton.js';
+import {OpenDetails} from './OpenDetails/OpenDetails.js';
+import {TodoDetails} from './TodoDetails/TodoDetails.js';
 import {appContext} from '../../../../../../AppContext';
 import './todo.scss';
 
 export function Todo(props) {
+
+    console.log(typeof props.created)
 
     const context = useContext(appContext);
 
     const [displayStatus, setDisplayStatus] = useState(null);
     const [deleteTodo, setDeleteTodo] = useState(false);
     const [todoCompleted, setTodoCompleted] = useState(props.todoCompleted);
+    const [openDetails, setOpenDetails] = useState(false)
     const [TaDam, setTaDam] = useState(false);
 
 
@@ -52,7 +56,7 @@ export function Todo(props) {
 
     useEffect(() => {                                                                       //////  ---> Delete this todo with deley  
         if(deleteTodo) {                                                                        //       to give time for the banner - 'TaDam!'
-            setTaDam(true);                                                                     //       -
+            setTaDam(true);                                                                   //       -
             setTimeout(() => setTaDam(false), 1500);                                            //       Activeted by ClearCompleted component
             setTimeout(() => {                                                                  //       or by DeleteButton component
                 fetch(`/todos/api/delete-todo/${props.todoId}`, {                               //       
@@ -92,22 +96,30 @@ export function Todo(props) {
         <div
             className={'todo-components-container ' + (TaDam ? 'hide' : '')}
             >
-            <CheckTodo
-                todoId={props.todoId}
-                listId={props.listId}
-                todoCompleted={todoCompleted}
+            <div className='todo-main'>
+                <CheckTodo
+                    todoId={props.todoId}
+                    listId={props.listId}
+                    todoCompleted={todoCompleted}
                 ></CheckTodo>
-            <TodoBody
-                userId={props.userId}
-                listId={props.listId}
+                <TodoBody
+                    userId={props.userId}
+                    listId={props.listId}
+                    todoId={props.todoId}
+                    body={props.body}
+                    todoCompleted={todoCompleted}
+                    ></TodoBody>
+                <OpenDetails
+                    openDetails={openDetails}
+                    setOpenDetails={() => setOpenDetails(!openDetails)}
+                    ></OpenDetails>
+            </div>
+            <TodoDetails
                 todoId={props.todoId}
-                body={props.body}
-                todoCompleted={todoCompleted}
-                ></TodoBody>
-            <DeleteButton
-                listId={props.listId}
-                todoId={props.todoId}
-                ></DeleteButton>
+                created={props.created}
+                openDetails={openDetails}
+                setDeleteTodo={() => setDeleteTodo(true)}
+                ></TodoDetails>
         </div>
     </div>
 }

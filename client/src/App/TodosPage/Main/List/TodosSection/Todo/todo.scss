@@ -40,12 +40,19 @@ $dark-gray: #232323;
         }
     }    
     .todo-components-container {
-        display: grid;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
         width: 100%;
-        grid-template-columns: 50px auto minmax(50px, max-content);
-        min-height: 50px;
         &.hide {
             display: none;
+        }
+        .todo-main {
+            display: grid;
+            width: 100%;
+            grid-template-columns: 50px auto minmax(50px, max-content);
+            min-height: 50px;
         }   
     }
 }

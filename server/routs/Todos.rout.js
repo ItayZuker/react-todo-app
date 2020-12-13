@@ -171,7 +171,8 @@ router.post('/new-todo', async (req, res) => {                             /////
             userId: req.body.userId,                                           //       Activeted by TodoInput component
             listId: req.body.listId,                                           //       
             body: req.body.body,                                               //       
-            completed: req.body.completed,                                     //
+            completed: req.body.completed,
+            created: req.body.created, //  <---                                //
         }, (err, docs) => {                                                    //
             if(err) {                                                          //
                 console.log(err);                                              //

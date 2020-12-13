@@ -10,7 +10,7 @@ export function Main(props) {
             lists={props.lists}
             ></ListsBar>
         <div
-            className='list-container'
+            className='one-list-container'
             >
             {props.lists.map(list => {
                 return <List

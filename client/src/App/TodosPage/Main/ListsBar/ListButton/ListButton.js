@@ -12,7 +12,18 @@ export function ListButton(props) {
     const [listActive, setListActive] = useState(false)
     const [listCompleted, setListCompleted] = useState(props.listCompleted);
     const [listDeleted, setListDeleted] = useState(false)
+    const [listName, setListName] = useState(props.listName)
 
+
+    useEffect(() => {                                                       //////  ---> Update listName with
+        setListName(props.listName)                                             //       data from fetch
+    }, [props.listName])                                                    //////
+
+    useEffect(() => {                                                       //////  ---> Update listName when edited
+        if (context.listName[0] === props.listId) {                             //       befour the fetch for quick response
+            setListName(context.listName[1])                                    //       but would be confirmd with the fetch
+        }                                                                       //
+    }, [context.listName])                                                  //////
 
 
     useEffect(() => {                                                       //////  ---> Update context.selectedState
@@ -71,7 +82,7 @@ export function ListButton(props) {
             to={`/lists/${props.userId}/todos/${props.listId}`}
             className={(selectedList ? 'selected ' : '') + (listActive ? 'active ' : '') + (listCompleted ? 'completed ' : '')}
             onClick={() => context.setSelectedList(props.listId)}
-            >{props.listName}
+            >{listName}
             </Link>
     </div>
 }

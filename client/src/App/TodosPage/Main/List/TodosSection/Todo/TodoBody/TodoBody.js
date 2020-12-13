@@ -18,12 +18,9 @@ export function TodoBody(props) {
                                                                 
     function resetTodo(e) {                                     //////  ---> Reset this todo's body
         if(thisTodo.current !== null) {                             //       if click outside befour submit
-            if(context.editActive === props.todoId) {               //
-                context.setEditActive('');                          //
-                if(e.target.id !== props.todoId) {                  //                  
-                    thisTodo.current.innerText = props.body;        //
-                    setEditActive(false);                           //                    
-                };                                                  //
+            if(e.target.id !== props.todoId) {                      //                  
+                thisTodo.current.innerText = props.body;            //
+                setEditActive(false);                               //                    
             };                                                      //
         };                                                          //
     };                                                          //////
@@ -70,7 +67,6 @@ export function TodoBody(props) {
         id={props.todoId}
         ref={thisTodo}
         onDoubleClick={() => {
-            context.setEditActive(props.todoId);
             context.setTodoCompleted([props.todoId, false]);
             setEditActive(true);
         }}

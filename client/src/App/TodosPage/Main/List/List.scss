@@ -8,9 +8,9 @@ $dark-gray: #232323;
     display: flex;
     flex-direction: column;
     width: 500px;
-    height: auto;
     margin: 55px 0px 0px 0px;
     overflow: hidden;
+    transform: translate(-120px);
     &.hide {
         display: none;
     }
