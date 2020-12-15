@@ -41,7 +41,7 @@ export function ListHeader(props) {
                 if(editActive) {                                                    //
                     setEditActive(false);                                           //
                     if(thisListName.current.innerText === '') {                     //
-                        setListName(listName);  // <---                             //
+                        setListName(props.listName);  // <---                             //
                     } else {                                                        //
                         saveUpdate();                                               //
                     };                                                              //

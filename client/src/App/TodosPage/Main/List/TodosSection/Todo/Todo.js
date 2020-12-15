@@ -8,10 +8,7 @@ import './todo.scss';
 
 export function Todo(props) {
 
-    console.log(typeof props.created)
-
     const context = useContext(appContext);
-
     const [displayStatus, setDisplayStatus] = useState(null);
     const [deleteTodo, setDeleteTodo] = useState(false);
     const [todoCompleted, setTodoCompleted] = useState(props.todoCompleted);
@@ -56,7 +53,7 @@ export function Todo(props) {
 
     useEffect(() => {                                                                       //////  ---> Delete this todo with deley  
         if(deleteTodo) {                                                                        //       to give time for the banner - 'TaDam!'
-            setTaDam(true);                                                                   //       -
+            setTaDam(true);                                                                     //       -
             setTimeout(() => setTaDam(false), 1500);                                            //       Activeted by ClearCompleted component
             setTimeout(() => {                                                                  //       or by DeleteButton component
                 fetch(`/todos/api/delete-todo/${props.todoId}`, {                               //       

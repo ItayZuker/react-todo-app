@@ -1,4 +1,5 @@
 import React from 'react';
+import {TodoSince} from './TodoSince/TodoSince.js';
 import './todo-details.scss';
 
 export class TodoDetails extends React.Component {
@@ -18,10 +19,9 @@ export class TodoDetails extends React.Component {
         return <div className={'todo-details-container ' + (this.props.openDetails ? '' : 'hide')}>
             <hr></hr>
             <div className='details-container'>
-                <div className='time-container'>
-                    <i class="far fa-calendar-alt"></i>{this.props.created} {/* <--- */}
-                    <i class="fas fa-history"></i>{this.props.created} {/* <--- */}
-                </div>
+                <TodoSince
+                    created={this.props.created}
+                    ></TodoSince>
                 <button
                     className='close-button'
                     onClick={() => {

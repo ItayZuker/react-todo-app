@@ -18,7 +18,8 @@ $dark-gray: #232323;
     }
     hr {
         width: 95%;
-        border-top: 2px solid $regular-gray;
+        border: none;
+        border-top: 1.5px solid $regular-gray;
         margin: 0px;
     }
     .details-container {
@@ -28,23 +29,8 @@ $dark-gray: #232323;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        .time-container {
-            width: 200px;
-            height: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-            color: $regular-gray;
-            font-size: 18px;
-            .fa-calendar-alt {
-                font-size: 20px;
-                margin: 0px 15px 0px 15px;
-            }
-            .fa-history {
-                margin: 0px 15px 0px 15px;
-            }
-        }
+        font-size: 20px;
+        color: $regular-gray;
         .close-button {
             color: $regular-gray;
             font-size: 20px;
@@ -61,8 +47,6 @@ $dark-gray: #232323;
             }
             &:focus {
                 outline: none;
-            }
-            .fa-times {
             }
         }
     }
