@@ -27,5 +27,8 @@ $dark-gray: #232323;
             color: $light-gray;
             background-color: transparent;
         }
+        &:active {
+            opacity: 80%;
+        }
     }
 }

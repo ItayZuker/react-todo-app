@@ -48,6 +48,9 @@ $dark-gray: #232323;
             &:focus {
                 outline: none;
             }
+            &:active {
+                opacity: 80%;
+            }
         }
     }
 }

@@ -22,12 +22,18 @@ $dark-gray: #232323;
             color: $red-color;
             cursor: pointer;
         }
+        &:active {
+            opacity: 95%;
+        }
     }
     &.false {
         color: $light-gray;
         &:hover {
             color: $blue-color;
             cursor: pointer;
+        }
+        &:active {
+            opacity: 95%;
         }
     }
 }

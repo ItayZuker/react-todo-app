@@ -41,8 +41,11 @@ $dark-gray: #232323;
             font-weight: 700;
             border-radius: 0px 2px 2px 0px;
             &:hover {
-                color: $dark-gray;
+                opacity: 90%;
                 cursor: pointer;
+            }
+            &:active {
+                opacity: 80%;
             }
         }
     }

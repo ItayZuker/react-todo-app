@@ -51,7 +51,7 @@ const SmallTitel = styled.h3`
     font-weight: 500;
 `
 const MaxFive = styled.span`
-    ${props => props.allUsers > 5 &&`
+    ${props => props.allUsers > 4 &&`
         color: #FF6E6E;
     `}
 `
@@ -69,7 +69,7 @@ export function EnterPage() {
         </LogoContainer>
         <MainUsersContainet>
             <SmallTitel>
-                {allUsers > 0 ? 'Choose /' : '' } Create your list (<MaxFive allUsers>{allUsers}/5</MaxFive>):
+                {allUsers > 0 ? 'Choose /' : '' } Create your list (<MaxFive allUsers={allUsers}>{allUsers}/5</MaxFive>):
             </SmallTitel>
             <UsersContainer></UsersContainer>
             <NewUser

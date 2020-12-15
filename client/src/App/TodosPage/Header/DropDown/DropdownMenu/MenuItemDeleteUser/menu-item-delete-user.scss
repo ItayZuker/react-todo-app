@@ -19,6 +19,9 @@ $dark-gray: #232323;
         color: white;
         cursor: pointer;
     }
+    &:active {
+        opacity: 80%;
+    }
     p {
         text-indent: 10px;
         font-size: 20px;

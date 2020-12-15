@@ -26,12 +26,18 @@ $dark-gray: #232323;
                 color: $red-color;
                 cursor: pointer;
             }
+            &:active {
+                opacity: 95%;
+            }
         }
         &.x {
             color: $red-color;
             &:hover {
                 color: $blue-color;
                 cursor: pointer;
+            }
+            &:active {
+                opacity: 95%;
             }
         }
     }

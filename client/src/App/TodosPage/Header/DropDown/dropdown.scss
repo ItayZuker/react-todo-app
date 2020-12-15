@@ -18,5 +18,8 @@ $dark-gray: #232323;
             color: $red-color;
             cursor: pointer;
         }
+        &:active {
+            opacity: 80%;
+        }
     }    
 }

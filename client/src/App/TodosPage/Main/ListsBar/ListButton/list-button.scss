@@ -22,6 +22,9 @@ $dark-gray: #232323;
         opacity: 90%;
         cursor: pointer;
     }
+    &:active {
+        opacity: 80%;
+    }
     &.selected {
         border-right: 5px solid $light-gray;
         box-sizing: content-box;
