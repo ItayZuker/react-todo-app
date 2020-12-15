@@ -16,71 +16,71 @@ export function Todo(props) {
     const [TaDam, setTaDam] = useState(false);
 
 
-    useEffect(() => {                                                                       //////  ---> Update todoCompleted state when 
-        setTodoCompleted(props.todoCompleted)                                                   //       update coming from props
-    }, [props.todoCompleted])                                                               //////
+    useEffect(() => {                                                                           //////  ---> Update todoCompleted state when 
+        setTodoCompleted(props.todoCompleted)                                                       //       update coming from props
+    }, [props.todoCompleted])                                                                   //////
 
 
-    useEffect(() => {                                                                       //////  ---> Update todoCompleted stat
-        if (context.todoCompleted[0] === props.todoId) {                                        //       when CheckTodo click
-            context.todoCompleted[1] ? setTodoCompleted(true) : setTodoCompleted(false);        //
-            context.setTodoCompleted([])                                                        //
-        }                                                                                       //
-    }, [context.todoCompleted])                                                             //////
+    useEffect(() => {                                                                           //////  ---> Update todoCompleted stat
+        if (context.todoCompleted.todoId === props.todoId) {                                        //       when CheckTodo click
+            context.todoCompleted.completed ? setTodoCompleted(true) : setTodoCompleted(false);     //
+            context.setTodoCompleted({})                                                            //
+        }                                                                                           //
+    }, [context.todoCompleted])                                                                 //////
 
-    useEffect(() => {                                                                       //////  ---> Update todoCompleted stat
-        if (context.checkAllCompleted[0] === props.listId) {                                    //       when CheckAll click
-            context.checkAllCompleted[1] ? setTodoCompleted(true) : setTodoCompleted(false);    //       
-        }                                                                                       //
-    }, [context.checkAllCompleted])                                                         //////
+    useEffect(() => {                                                                           //////  ---> Update todoCompleted stat
+        if (context.checkAllCompleted.listId === props.listId) {                                    //       when CheckAll click
+            context.checkAllCompleted.completed ? setTodoCompleted(true) : setTodoCompleted(false); //       
+        }                                                                                           //
+    }, [context.checkAllCompleted])                                                             //////
 
-    useEffect(() => {                                                                       //////  ---> Trigers delete function for
-        if(context.clearCompletedClick === props.listId) {                                      //       this todo if completed
-            if(todoCompleted) {                                                                 //       -
-                context.setClearCompletedClick('');                                             //       Activeted by ClearCompleted componnet
-                setDeleteTodo(true);                                                            //
-            };                                                                                  //
-        };                                                                                      //
-    }, [context.clearCompletedClick]);                                                      //////
-
-
-    useEffect(() => {                                                                       //////  ---> Trigers delete function for
-        if(context.deleteTodo === props.todoId) {                                               //       this todo
-            context.setDeleteTodo('');                                                          //       -
-            setDeleteTodo(true);                                                                //       Activeted at DeleteButton componnet
-        };                                                                                      //       
-    }, [context.deleteTodo]);                                                               //////       
-
-    useEffect(() => {                                                                       //////  ---> Delete this todo with deley  
-        if(deleteTodo) {                                                                        //       to give time for the banner - 'TaDam!'
-            setTaDam(true);                                                                     //       -
-            setTimeout(() => setTaDam(false), 1500);                                            //       Activeted by ClearCompleted component
-            setTimeout(() => {                                                                  //       or by DeleteButton component
-                fetch(`/todos/api/delete-todo/${props.todoId}`, {                               //       
-                    method: 'DELETE'                                                            //       
-                    })                                                                          //
-                    .then((res) => {                                                            //
-                        console.log(res);                                                       //
-                        context.setRenderList(props.listId);                                    //
-                    });                                                                         //
-            }, 1000)                                                                            //
-        };                                                                                      //
-    }, [deleteTodo])                                                                        //////
+    useEffect(() => {                                                                           //////  ---> Trigers delete function for
+        if(context.clearCompletedClick === props.listId) {                                          //       this todo if completed
+            if(todoCompleted) {                                                                     //       -
+                context.setClearCompletedClick('');                                                 //       Activeted by ClearCompleted componnet
+                setDeleteTodo(true);                                                                //
+            };                                                                                      //
+        };                                                                                          //
+    }, [context.clearCompletedClick]);                                                          //////
 
 
-    useEffect(() => {                                                                       //////  ---> Update display state for this
-        if(context.displayListState[0] || context.renderList === props.listId) {                //       todo component
-            if(context.displayListState[1] === 'active') {                                      //       -
-                todoCompleted ? setDisplayStatus(false) : setDisplayStatus(true);               //       Activeted at FilterDisplayPanel
-            } else if(context.displayListState[1] === 'completed') {                            //       component, and update when
-                todoCompleted ? setDisplayStatus(true) : setDisplayStatus(false);               //       list is renderd
-            } else {                                                                            //
-                setDisplayStatus(true);                                                         //
-            }                                                                                   //
-        } else {                                                                                //
-            setDisplayStatus(true);                                                             //
-        }                                                                                       //
-    }, [context.displayListState, context.renderList]);                                     //////
+    useEffect(() => {                                                                           //////  ---> Trigers delete function for
+        if(context.deleteTodo === props.todoId) {                                                   //       this todo
+            context.setDeleteTodo('');                                                              //       -
+            setDeleteTodo(true);                                                                    //       Activeted at DeleteButton componnet
+        };                                                                                          //       
+    }, [context.deleteTodo]);                                                                   //////       
+
+    useEffect(() => {                                                                           //////  ---> Delete this todo with deley  
+        if(deleteTodo) {                                                                            //       to give time for the banner - 'TaDam!'
+            setTaDam(true);                                                                         //       -
+            setTimeout(() => setTaDam(false), 1500);                                                //       Activeted by ClearCompleted component
+            setTimeout(() => {                                                                      //       or by DeleteButton component
+                fetch(`/todos/api/delete-todo/${props.todoId}`, {                                   //       
+                    method: 'DELETE'                                                                //       
+                    })                                                                              //
+                    .then((res) => {                                                                //
+                        console.log(res);                                                           //
+                        context.setRenderList(props.listId);                                        //
+                    });                                                                             //
+            }, 1000)                                                                                //
+        };                                                                                          //
+    }, [deleteTodo])                                                                            //////
+
+
+    useEffect(() => {                                                                           //////  ---> Update display state for this
+        if(context.displayListState.listId || context.renderList === props.listId) {                //       todo component
+            if(context.displayListState.state === 'active') {                                       //       -
+                todoCompleted ? setDisplayStatus(false) : setDisplayStatus(true);                   //       Activeted at FilterDisplayPanel
+            } else if(context.displayListState.state === 'completed') {                             //       component, and update when
+                todoCompleted ? setDisplayStatus(true) : setDisplayStatus(false);                   //       list is renderd
+            } else {                                                                                //
+                setDisplayStatus(true);                                                             //
+            }                                                                                       //
+        } else {                                                                                    //
+            setDisplayStatus(true);                                                                 //
+        }                                                                                           //
+    }, [context.displayListState, context.renderList]);                                         //////
 
 
     return <div

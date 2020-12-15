@@ -44,7 +44,7 @@ export function TodoBody(props) {
 
 
     function saveUpdate() {                                     //////  ---> function to save this todo update
-        context.setListCompleted([props.listId, false]);            //
+        context.setListCompleted({listId: props.listId, completed: false});            //
         fetch(`/todos/api/save-update/${props.todoId}`, {           //
             method: 'PUT',                                          //
             headers: {                                              //
@@ -67,7 +67,7 @@ export function TodoBody(props) {
         id={props.todoId}
         ref={thisTodo}
         onDoubleClick={() => {
-            context.setTodoCompleted([props.todoId, false]);
+            context.setTodoCompleted({todoId: props.todoId, completed: false});
             setEditActive(true);
         }}
         contentEditable={editActive ? 'true' : 'false'}

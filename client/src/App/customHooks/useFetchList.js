@@ -30,9 +30,9 @@ export default function useFetchLists(userId, listId) {
 
     function updateList(todos) {                                                    //////  ---> Update completed state and
         if (todos.length > 0) {                                                         //       todos number in this list
-            context.setListActive([listId, true])                                       //       then call to render the lists array
+            context.setListActive({listId: listId, active: true})                       //       then call to render the lists array
             if (todos.filter(todo => todo.completed === false).length > 0) {            //
-                context.setListCompleted([listId, false]);                              //
+                context.setListCompleted({listId: listId, completed: false});           //
                 fetch(`/lists/api/update-list/${listId}`, {                             //
                     method: 'PUT',                                                      //
                     headers: {                                                          //
@@ -40,7 +40,7 @@ export default function useFetchLists(userId, listId) {
                     },                                                                  //
                     body: JSON.stringify({                                              //
                         completed: false,                                               //
-                        todos: todos.length,                                   //
+                        todos: todos.length,                                            //
                     }),                                                                 //
                 })                                                                      //
                 .then((res) => {                                                        //
@@ -48,7 +48,7 @@ export default function useFetchLists(userId, listId) {
                     context.setRenderLists(userId);                                     //
                 });                                                                     //
             } else {                                                                    //
-                context.setListCompleted([listId, true]);                               //
+                context.setListCompleted({listId: listId, completed: true});            //
                 fetch(`/lists/api/update-list/${listId}`, {                             //
                     method: 'PUT',                                                      //
                     headers: {                                                          //
@@ -56,7 +56,7 @@ export default function useFetchLists(userId, listId) {
                     },                                                                  //
                     body: JSON.stringify({                                              //
                         completed: true,                                                //
-                        todos: todos.length,                                   //
+                        todos: todos.length,                                            //
                     }),                                                                 //
                 })                                                                      //
                 .then((res) => {                                                        //
@@ -65,8 +65,8 @@ export default function useFetchLists(userId, listId) {
                 });                                                                     //
             }                                                                           //
         } else {                                                                        //
-            context.setListActive([listId, false])                                      //
-            context.setListCompleted([listId, false]);                                  //
+            context.setListActive({listId: listId, active: false})                      //
+            context.setListCompleted({listId: listId, completed: false});               //
             fetch(`/lists/api/update-list/${listId}`, {                                 //
                 method: 'PUT',                                                          //
                 headers: {                                                              //
@@ -74,7 +74,7 @@ export default function useFetchLists(userId, listId) {
                 },                                                                      //
                 body: JSON.stringify({                                                  //
                     completed: false,                                                   //
-                    todos: todos.length,                                       //
+                    todos: todos.length,                                                //
                 }),                                                                     //
             })                                                                          //
             .then((res) => {                                                            //

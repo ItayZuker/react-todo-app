@@ -16,8 +16,8 @@ export function FilterSection(props) {
     }, [props.list]);                                                                       //////
 
     useEffect(() => {                                                                       //////  ---> Update active component state true instantly                                                   //       instantly when creating new todo
-        if (context.listActive[0] === props.listId) {                                           //       and update false if no todos after
-            context.listActive[1] ? setActive(true) : setActive(false);                         //       fetch list
+        if (context.listActive.listId === props.listId) {                                       //       and update false if no todos after
+            context.listActive.active ? setActive(true) : setActive(false);                     //       fetch list
         }                                                                                       //
     }, [context.listActive])                                                                //////
 

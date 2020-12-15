@@ -20,8 +20,8 @@ export function ListButton(props) {
     }, [props.listName])                                                    //////
 
     useEffect(() => {                                                       //////  ---> Update listName when edited
-        if (context.listName[0] === props.listId) {                             //       befour the fetch for quick response
-            setListName(context.listName[1])                                    //       but would be confirmd with the fetch
+        if (context.listName.listId === props.listId) {                         //       befour the fetch for quick response
+            setListName(context.listName.listName)                              //       but would be confirmd with the fetch
         }                                                                       //
     }, [context.listName])                                                  //////
 
@@ -52,8 +52,8 @@ export function ListButton(props) {
     }, [props.todos])                                                                       //////
 
     useEffect(() => {                                                                       //////  ---> Update active component state true instantly                                                   //       instantly when creating new todo
-        if (context.listActive[0] === props.listId) {                                           //       and update false if no todos after
-            context.listActive[1] ? setListActive(true) : setListActive(false);                 //       fetch list
+        if (context.listActive.listId === props.listId) {                                       //       and update false if no todos after
+            context.listActive.active ? setListActive(true) : setListActive(false);             //       fetch list
         }                                                                                       //
     }, [context.listActive])                                                                //////
 
@@ -63,14 +63,14 @@ export function ListButton(props) {
     }, [props.listCompleted])                                                               //////
 
     useEffect(() => {                                                                       //////  ---> Update listCompleted state 'false' instantly
-        if (context.listCompleted[0] === props.listId) {                                        //       when CheckTodo click
-            context.listCompleted[1] ? setListCompleted(true) : setListCompleted(false);        //       and update 'true' after list render
+        if (context.listCompleted.listId === props.listId) {                                    //       when CheckTodo click
+            context.listCompleted.completed ? setListCompleted(true) : setListCompleted(false); //       and update 'true' after list render
         }                                                                                       //
     }, [context.listCompleted])                                                             //////
 
     useEffect(() => {                                                                       //////  ---> Update completed stat instantly
-        if (context.checkAllCompleted[0] === props.listId) {                                    //       when CheckAll click
-            context.checkAllCompleted[1] ? setListCompleted(true) : setListCompleted(false);    //       
+        if (context.checkAllCompleted.listId === props.listId) {                                    //       when CheckAll click
+            context.checkAllCompleted.completed ? setListCompleted(true) : setListCompleted(false);    //       
         }                                                                                       //
     }, [context.checkAllCompleted])                                                         //////
 

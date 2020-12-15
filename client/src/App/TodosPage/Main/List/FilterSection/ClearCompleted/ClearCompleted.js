@@ -9,8 +9,8 @@ export function ClearCompleted(props) {
     let [someCompleted, setSomeCompleted] = useState(false)
 
     useEffect(() => {                                                                       //////  ---> Update someCompleted state 'true'
-        if (context.todoCompleted[2] === props.listId) {                                        //       instantly when checkTodo component
-            if (context.todoCompleted[1]) {                                                     //       in this list is set completed
+        if (context.todoCompleted.listId === props.listId) {                                        //       instantly when checkTodo component
+            if (context.todoCompleted.completed) {                                                     //       in this list is set completed
                 setSomeCompleted(true)                                                          //
             }                                                                                   //
         }                                                                                       //
@@ -25,8 +25,8 @@ export function ClearCompleted(props) {
     }, [props.list])                                                                        //////
 
     useEffect(() => {                                                                       //////  ---> Update completed stat instantly
-        if (context.checkAllCompleted[0] === props.listId) {                                    //       when CheckAll click
-            context.checkAllCompleted[1] ? setSomeCompleted(true) : setSomeCompleted(false);    //
+        if (context.checkAllCompleted.listId === props.listId) {                                    //       when CheckAll click
+            context.checkAllCompleted.completed ? setSomeCompleted(true) : setSomeCompleted(false);    //
         }                                                                                       //
     }, [context.checkAllCompleted])                                                         //////
 

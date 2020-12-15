@@ -19,8 +19,8 @@ export function CheckAll(props) {
     }, [props.listCompleted])                                                                       //////       or chenge back if the fetch hed problem
 
     useEffect(() => {                                                                               //////  ---> Update listCompleted instantly false
-        if (context.listCompleted[0] === props.listId) {                                                //       when any CheckTodo update false
-            context.listCompleted[1] ? setlistCompleted(true) : setlistCompleted(false);                //
+        if (context.listCompleted.listId === props.listId) {                                                //       when any CheckTodo update false
+            context.listCompleted.completed ? setlistCompleted(true) : setlistCompleted(false);                //
         }                                                                                               //    
     }, [context.listCompleted])                                                                     //////
 
@@ -30,24 +30,24 @@ export function CheckAll(props) {
         onClick={() => {
             if(listCompleted) {                                                                     //////  ---> When clicked, the activeButton state
                 setlistCompleted(false)                                                                 //       and listCompleted state are updated instantly
-                context.setCheckAllCompleted([props.listId, false]);                                    //       -
+                context.setCheckAllCompleted({listId: props.listId, completed: false});                                    //       -
                 fetch(`/todos/api/all-todos-completed-false/${props.listId}`, {                         //       then call to render this list
                     method: 'PUT',                                                                      //       -
                 })                                                                                      //       then activeButton state and listCompleted state
                 .then((res) => {                                                                        //       reconfirm or chenge back if the fetch hed problem
                     console.log(res);                                                                   //
-                    context.setCheckAllCompleted([])                                                    //
+                    context.setCheckAllCompleted({})                                                    //
                     context.setRenderList(props.listId)                                                 //
                 });                                                                                     //
             } else {                                                                                    //
                 setlistCompleted(true)                                                                  //
-                context.setCheckAllCompleted([props.listId, true]);                                     //
+                context.setCheckAllCompleted({listId: props.listId, completed: true});                                     //
                 fetch(`/todos/api/all-todos-completed-true/${props.listId}`, {                          //
                     method: 'PUT',                                                                      //
                 })                                                                                      //
                 .then((res) => {                                                                        //
                     console.log(res);                                                                   //
-                    context.setCheckAllCompleted([])                                                    //
+                    context.setCheckAllCompleted({})                                                    //
                     context.setRenderList(props.listId)                                                 //
                 });                                                                                     //
             };                                                                                          //

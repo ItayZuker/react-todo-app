@@ -12,7 +12,7 @@ export function FilterDisplayPanel(props) {
         <div
             className={'filter-item ' + (props.active ? 'on ' + (selectedButton === 'all' ? 'selected' : '') : '')}
             onClick={() => {
-                context.setDisplayListState([props.listId, 'all']);
+                context.setDisplayListState({listId: props.listId, state: 'all'});
                 setSelectedButton('all');  
             }}
         >
@@ -20,7 +20,7 @@ export function FilterDisplayPanel(props) {
         <div
             className={'filter-item ' + (props.active ? 'on ' + (selectedButton === 'active' ? 'selected' : '') : '')}
             onClick={() => {
-                context.setDisplayListState([props.listId, 'active']);
+                context.setDisplayListState({listId: props.listId, state: 'active'});
                 setSelectedButton('active');
             }}
         >Active
@@ -28,7 +28,7 @@ export function FilterDisplayPanel(props) {
         <div
             className={'filter-item ' + (props.active ? 'on ' + (selectedButton === 'completed' ? 'selected' : '') : '')}
             onClick={() => {
-                context.setDisplayListState([props.listId, 'completed']);
+                context.setDisplayListState({listId: props.listId, state: 'completed'});
                 setSelectedButton('completed');
             }}
         >

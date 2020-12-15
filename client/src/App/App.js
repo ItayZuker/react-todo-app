@@ -14,14 +14,14 @@ export function App() {
     let [renderLists, setRenderLists] = useState(''); // userId
     let [selectedList, setSelectedList] = useState('')  // listId
     let [listsArray, setListsArray] = useState([]) // [listId, listId...]
-    let [listCompleted, setListCompleted] = useState([]); // [listId, boolean]
-    let [listActive, setListActive] = useState([]) // [listId, boolean]
+    let [listCompleted, setListCompleted] = useState({}); // {listId: listId, completed: Boolean}
+    let [listActive, setListActive] = useState({}) // {listId: listId, active: Boolean}
     let [listDeleted, setListDeleted] = useState('') // listId
-    let [listName, setListName] = useState([]) // [listId, string]
-    let [todoCompleted, setTodoCompleted] = useState([]); // [todoId, boolean, listId]
-    let [checkAllCompleted, setCheckAllCompleted] = useState([]); // [listId, boolean]
+    let [listName, setListName] = useState({}) // {listId: listId, listNam: string}
+    let [todoCompleted, setTodoCompleted] = useState({}); // {listId: listId, todoId: todoId, completed: Boolean}
+    let [checkAllCompleted, setCheckAllCompleted] = useState({}); // {listId: listId, completed: Boolean}
     let [deleteTodo, setDeleteTodo] = useState(''); // todoId
-    let [displayListState, setDisplayListState] = useState([]); // [listId, string]
+    let [displayListState, setDisplayListState] = useState({}); // {listId: listId, state: string}
     let [clearCompletedClick, setClearCompletedClick] = useState(''); // listId
 
 

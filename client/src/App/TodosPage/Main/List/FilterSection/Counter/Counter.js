@@ -14,8 +14,8 @@ export function Counter(props) {
     }, [props.list])                                                                        //////
 
     useEffect(() => {                                                                       //////  ---> Update notCompletedTodos to zero
-        if (context.checkAllCompleted[0] === props.listId) {                                    //       instantly when CheckAll click
-            if (context.checkAllCompleted[1]) setNotCompletedTodos(0)                           //       
+        if (context.checkAllCompleted.listId === props.listId) {                                    //       instantly when CheckAll click
+            if (context.checkAllCompleted.completed) setNotCompletedTodos(0)                           //       
         }                                                                                       //
     }, [context.checkAllCompleted])                                                         //////
 
