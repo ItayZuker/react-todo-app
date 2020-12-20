@@ -12,6 +12,11 @@ app.use(express.json());
 app.use('/todos/api', todosRout);
 app.use('/lists/api', listsRout)
 app.use('/users/api', usersRout);
+app.use('/', express.static(path.join(__dirname, '../client/build')))
 
+let port = 8080
+if(process.env.PORT) {
+    port = process.env.PORT
+}
 
 app.listen(8080);
