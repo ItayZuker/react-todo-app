@@ -1,7 +1,15 @@
 $blue-color: #6DD3FF;
+$blue-color-hover: #61aece;
+$blue-color-click: #599fbd;
 $red-color: #FF6E6E;
-$light-gray: lightgray;
-$regular-gray: gray;
+$red-color-hover: #db6365;
+$red-color-click: #c85a5c;
+$light-gray: #d3d3d3;
+$light-gray-hover: #c1c2c1;
+$light-gray-click: #b0b1b1;
+$regular-gray: #808080;
+$regular-gray-hover: #747575;
+$regular-gray-click: #696a6a;
 $dark-gray: #232323;
 
 .all-green-button {
@@ -23,7 +31,7 @@ $dark-gray: #232323;
             cursor: pointer;
         }
         &:active {
-            opacity: 95%;
+            color: $red-color-click;
         }
     }
     &.false {
@@ -33,7 +41,7 @@ $dark-gray: #232323;
             cursor: pointer;
         }
         &:active {
-            opacity: 95%;
+            color: $blue-color-click;
         }
     }
 }
