@@ -3,6 +3,7 @@ const app = express();
 const todosRout = require('./routs/Todos.rout.js');
 const listsRout = require('./routs/Lists.rout.js');
 const usersRout = require('./routs/Users.rout.js');
+const path = require('path')
 require('./db.js');
 
 app.set('json spaces', 2);
@@ -19,4 +20,4 @@ if(process.env.PORT) {
     port = process.env.PORT
 }
 
-app.listen(8080);
+app.listen(port);
