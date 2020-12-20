@@ -1,28 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './dropdown-menu.scss';
 import { MenuItemDeleteUser } from './MenuItemDeleteUser/MenuItemDeleteUser.js';
 
-export function DropdownMenu() {
-
-    let [open, setOpen] = useState(false);
- 
-    function openClose(e) {
-        if(open === false) {
-            if(e.target.id === 'dropdown-button') {
-                setOpen(true);
-            }
-        } else if(e.target.id !== 'dropdown-container') {
-                setOpen(false);
-        }   
-    }
-
-    document.addEventListener('click', openClose);
+export function DropdownMenu(props) {
 
     return <div
-        className={'dropdown-menu-container ' + (open ? 'open' : '')}
-        id='dropdown-container'
+        className={'dropdown-menu-container ' + (props.open ? 'open' : '')}
+        onClick={() => props.setOpen(false)}
         >
-        <MenuItemDeleteUser
-            ></MenuItemDeleteUser>
+        <MenuItemDeleteUser></MenuItemDeleteUser>
     </div>
 }

@@ -1,35 +1,45 @@
 import React, {useState, useContext} from 'react';
+import {useParams} from 'react-router-dom';
 import { appContext } from '../../../../../../AppContext';
 import './filter-display-panel.scss';
 
-export function FilterDisplayPanel(props) {
+export function FilterDisplayPanel() {
 
+    const url = useParams()
     const context = useContext(appContext);
+    const list = context.listsArray.find(list => list._id === url.listId) || {}
 
-    let [selectedButton, setSelectedButton] = useState('all');
+
+    let [display, setDisplay] = useState('all')
 
     return <div className='filter-display-container'>
         <div
-            className={'filter-item ' + (props.active ? 'on ' + (selectedButton === 'all' ? 'selected' : '') : '')}
+            className={'filter-item ' + (list.active ? 'on ' + (display === 'all' ? 'selected' : '') : '')}
             onClick={() => {
-                context.setDisplayListState({listId: props.listId, state: 'all'});
-                setSelectedButton('all');  
+                if (list.active) {
+                    context.setDisplayState({listId: url.listId, state: 'all'})
+                    setDisplay('all')
+                }
             }}
         >
         All</div>
         <div
-            className={'filter-item ' + (props.active ? 'on ' + (selectedButton === 'active' ? 'selected' : '') : '')}
+            className={'filter-item ' + (list.active ? 'on ' + (display === 'active' ? 'selected' : '') : '')}
             onClick={() => {
-                context.setDisplayListState({listId: props.listId, state: 'active'});
-                setSelectedButton('active');
+                if (list.active) {
+                    context.setDisplayState({listId: url.listId, state: 'active'})
+                    setDisplay('active')
+                }
             }}
         >Active
         </div>
         <div
-            className={'filter-item ' + (props.active ? 'on ' + (selectedButton === 'completed' ? 'selected' : '') : '')}
+            className={'filter-item ' + (list.active ? 'on ' + (display === 'completed' ? 'selected' : '') : '')}
             onClick={() => {
-                context.setDisplayListState({listId: props.listId, state: 'completed'});
-                setSelectedButton('completed');
+                if (list.active) {
+                    context.setDisplayState({listId: url.listId, state: 'completed'})
+                    setDisplay('completed')
+                }
             }}
         >
         Completed</div>

@@ -1,21 +1,22 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {useParams} from 'react-router-dom';
+import { appContext } from '../../../../../AppContext.js';
 import {Todo} from './Todo/Todo.js';
 import './todos-section.scss';
 
-export function TodosSection(props) {
+export function TodosSection() {
+
+    const url = useParams()
+    const context = useContext(appContext)
+    const todos = context.todosArray.filter(todo => todo.listId === url.listId)
 
     return <div className='todos-section-container'>
-        {props.list.map(todo => 
+        {todos.map(todo => 
             <Todo
                 key={todo._id}
-                userId={todo.userId}
-                listId={props.listId}
                 todoId={todo._id}
-                body={todo.body}
-                todoCompleted={todo.completed}
-                created={todo.created}
-            >
-            </Todo>
+                >
+                </Todo>
         )}
     </div>
 }

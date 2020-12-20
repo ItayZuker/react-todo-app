@@ -1,33 +1,22 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, {useContext} from 'react';
+import {useParams} from 'react-router-dom';
 import { appContext } from '../../../../../../AppContext';
 import './counter.scss';
 
-export function Counter(props) {
+export function Counter() {
 
+    const url = useParams()
     const context = useContext(appContext)
-
-    let [notCompletedTodos, setNotCompletedTodos] = useState(props.list.filter(todo => todo.completed === false).length)
-
-
-    useEffect(() => {                                                                       //////  ---> Update notCompletedTodos number
-        setNotCompletedTodos(props.list.filter(todo => todo.completed === false).length)        //       with data from fetch
-    }, [props.list])                                                                        //////
-
-    useEffect(() => {                                                                       //////  ---> Update notCompletedTodos to zero
-        if (context.checkAllCompleted.listId === props.listId) {                                    //       instantly when CheckAll click
-            if (context.checkAllCompleted.completed) setNotCompletedTodos(0)                           //       
-        }                                                                                       //
-    }, [context.checkAllCompleted])                                                         //////
-
-
+    const list = context.listsArray.find(list => list._id === url.listId) || {}
+    
     return <div
         className='counter-container'>
         <p
-            className={props.active ? 'active' : ''}
+            className={list.active ? 'active' : ''}
             ><span
-                className={props.active ? notCompletedTodos > 0 ? 'red' : 'green' : ''}
+                className={list.active ? list.todos - list.completed > 0 ? 'red' : 'green' : ''}
             >
-            {notCompletedTodos}</span> left
+            {list.todos - list.completed || 0}</span> left
         </p>
     </div>
 }

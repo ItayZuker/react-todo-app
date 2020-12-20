@@ -5,134 +5,117 @@ const mongoose = require('mongoose');
 const ListsModel = require('../models/lists.model.js');
 
 
-router.put('/update-list-name/:listId', async (req, res) => {       //////  ---> Update this listName when edited
-    await ListsModel                                                    //       -
-        .updateOne({                                                    //       Activeted at ListHeader component
-            _id: ObjectID.createFromHexString(req.params.listId),       //
-        },                                                              //
-        {                                                               //
-            listName: req.body.listName,                                //
-        }, (err, docs) => {                                             //
-            if(err) {                                                   //
-                console.log(err);                                       //
-                res.status(500).send();                                 //
-            } else if(!docs) {                                          //
-                res.status(404).send();                                 //
-            } else {                                                    //
-                res.json(docs);                                         //
-            };                                                          //
-        });                                                             //
-});                                                                 //////
+router.put('/update-list-name/:listId', async (req, res) => {
+    await ListsModel
+        .updateOne({
+            _id: ObjectID.createFromHexString(req.params.listId),
+        },
+        {
+            listName: req.body.listName,
+        }, (err, docs) => {
+            if(err) {
+                console.log(err)
+                res.status(500).send()
+            } else if(!docs) {
+                res.status(404).send()
+            } else {
+                res.json(docs)
+            }
+        })
+})
 
 
-router.put('/update-list/:listId', async (req, res) => {            //////  ---> Update this todos completed state
-    await ListsModel                                                    //       and todos number
-        .updateOne({                                                    //       -
-            _id: ObjectID.createFromHexString(req.params.listId),       //       Activeted at List component
-        },                                                              //
-        {                                                               //
-            completed: req.body.completed,                              //
-            todos: req.body.todos,                                      //
-        }, (err, docs) => {                                             //
-            if(err) {                                                   //
-                console.log(err);                                       //
-                res.status(500).send();                                 //
-            } else if(!docs) {                                          //
-                res.status(404).send();                                 //
-            } else {                                                    //
-                res.json(docs);                                         //
-            };                                                          //
-        });                                                             //
-});                                                                 //////
+router.put('/update-list/:listId', async (req, res) => {
+    await ListsModel
+        .updateOne({
+            _id: ObjectID.createFromHexString(req.params.listId),
+        },
+        {
+            todos: req.body.todos,
+            completed: req.body.completed,
+            allCompleted: req.body.allCompleted,
+            active: req.body.active,
+        }, (err, docs) => {
+            if(err) {
+                console.log(err)
+                res.status(500).send()
+            } else if(!docs) {
+                res.status(404).send()
+            } else {
+                res.json(docs)
+            }
+        })
+})
 
 
-router.delete('/delete-user/:userId', async (req, res) => {         //////  ---> Delete all lists for this user        
-    await ListsModel                                                    //       -
-        .deleteMany({                                                   //       Activeted at MenuItemDeleteUser component
-            userId: ObjectID.createFromHexString(req.params.userId)     //       
-        }, (err, docs) => {                                             //
-            if(err) {                                                   //
-                console.log(err);                                       //
-                res.status(500).send();                                 //
-            } else if(!docs) {                                          //
-                res.status(404).send();                                 //
-            } else {                                                    //
-                res.json(docs);                                         //
-            };                                                          //
-        });                                                             //
-});                                                                 //////
+router.delete('/delete-user/:userId', async (req, res) => {
+    await ListsModel
+        .deleteMany({
+            userId: ObjectID.createFromHexString(req.params.userId)
+        }, (err, docs) => {
+            if(err) {
+                console.log(err)
+                res.status(500).send()
+            } else if(!docs) {
+                res.status(404).send()
+            } else {
+                res.json(docs)
+            }
+        })
+})
 
 
-router.delete('/delete-list/:listId', async (req, res) => {         //////  ---> Delete this list        
-    await ListsModel                                                    //       -
-        .deleteOne({                                                    //       Activeted at DeleteList component
-            _id: ObjectID.createFromHexString(req.params.listId)        //       
-        }, (err, docs) => {                                             //
-            if(err) {                                                   //
-                console.log(err);                                       //
-                res.status(500).send();                                 //
-            } else if(!docs) {                                          //
-                res.status(404).send();                                 //
-            } else {                                                    //
-                res.json(docs);                                         //
-            };                                                          //
-        });                                                             //
-});                                                                 //////
+router.delete('/delete-list/:listId', async (req, res) => {
+    await ListsModel
+        .deleteOne({
+            _id: ObjectID.createFromHexString(req.params.listId)
+        }, (err, docs) => {
+            if(err) {
+                console.log(err)
+                res.status(500).send()
+            } else if(!docs) {
+                res.status(404).send()
+            } else {
+                res.json(docs)
+            }
+        })
+})
 
 
-router.post('/create-list/:userId', async (req, res) => {           //////  ---> Create new list for this user
-    await ListsModel                                                    //       -
-        .create({                                                       //       Activeted at NewUser component
-            userId: req.params.userId,                                  //       when creating new user
-            listName: req.body.listName,                                //       or when edding new list at
-            completed: false,                                            //       (NOT YET EXIST)
-            todos: 0,                                                   //       
-        }, (err, docs) => {                                             //       
-            if(err) {                                                   //       
-                console.log(err);                                       //
-                res.status(500).send();                                 //
-            } else if(!docs) {                                          //
-                res.status(404).send();                                 //
-            } else {                                                    //
-                res.json(docs);                                         //
-            };                                                          //
-        });                                                             //
-});                                                                 //////
+router.post('/create-list/:userId', async (req, res) => {
+    await ListsModel
+        .create({
+            userId: req.params.userId,
+            listName: req.body.listName,
+            todos: 0,
+        }, (err, docs) => {
+            if(err) {
+                console.log(err)
+                res.status(500).send()
+            } else if(!docs) {
+                res.status(404).send()
+            } else {
+                res.json(docs)
+            }
+        })
+})
 
 
-
-// router.get('/get-list/:listId', async (req, res) => {               //////  ---> This fetch send one list item
-//     await ListsModel                                                    //       for this user
-//         .findOne({                                                      //       -
-//             _id: ObjectID.createFromHexString(req.params.listId),       //       (NOT ACTIVETED)
-//         }, (err, docs) => {                                             //       
-//             if(err) {                                                   //       
-//                 console.log(err);                                       //
-//                 res.status(500).send();                                 //       
-//             } else if(!docs) {                                          //
-//                 res.status(404).send();                                 //
-//             } else {                                                    //
-//                 res.json(docs);                                         //
-//             };                                                          //
-//         });                                                             //
-// });                                                                 //////
-
-
-router.get('/get-user-lists/:userId', async (req, res) => {              //////  ---> This fetch send all the lists
-    await ListsModel                                                    //       for this user
-        .find({                                                         //       -
-            userId: req.params.userId,                                  //       Activeted in TodosPage component
-        }, (err, docs) => {                                             //       
-            if(err) {                                                   //       
-                console.log(err);                                       //
-                res.status(500).send();                                 //       
-            } else if(!docs) {                                          //
-                res.status(404).send();                                 //
-            } else {                                                    //
-                res.json(docs);                                         //
-            };                                                          //
-        });                                                             //
-});                                                                 //////
+router.get('/get-user-lists/:userId', async (req, res) => {
+    await ListsModel
+        .find({
+            userId: req.params.userId,
+        }, (err, docs) => {
+            if(err) {
+                console.log(err)
+                res.status(500).send()
+            } else if(!docs) {
+                res.status(404).send()
+            } else {
+                res.json(docs)
+            }
+        })
+})
 
 
-module.exports = router;
+module.exports = router

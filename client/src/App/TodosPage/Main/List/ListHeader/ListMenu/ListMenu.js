@@ -1,32 +1,29 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {MenuContainer} from './MenuContainer/MenuContainer.js';
+import { appContext } from '../../../../../../AppContext.js';
 import './list-menu.scss';
 
-export function ListMenu(props) {
+export function ListMenu() {
 
+    const context = useContext(appContext)
     let [listMenuOpen, setListMenuOpen] = useState(false)
 
-    function openClose(e) {
-        if (e.target.id === ('list-menu ' + props.listId)) {
-            setListMenuOpen(true)
-        } else {
-            setListMenuOpen(false)
-        }
-    }
 
-    document.addEventListener('click', openClose)
+    useEffect(() => {
+        setListMenuOpen(false)
+    }, [context.listDeleted])
 
     return <div
-        className={'list-menu-container ' + (props.listMenuOpen ? '' : 'hide')}>
+        className={'list-menu-container ' + (listMenuOpen ? '' : 'hide')}
+        tabindex={-1}
+        onClick={() => setListMenuOpen(true)} 
+        onBlur={() => setListMenuOpen(false)}
+        >
         <i
             className="fas fa-ellipsis-h"
-            id={'list-menu ' + props.listId}
             ></i>
         <MenuContainer
             listMenuOpen={listMenuOpen}
-            listId={props.listId}
-            userId={props.userId}
-            >
-            </MenuContainer>
+            ></MenuContainer>
     </div>
 }

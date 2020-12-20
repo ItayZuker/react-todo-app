@@ -6,83 +6,24 @@ import './list-button.scss';
 
 export function ListButton(props) {
 
-    const context = useContext(appContext);
     const url = useParams()
-    const [selectedList, setSelectedList] = useState(true);
-    const [listActive, setListActive] = useState(false)
-    const [listCompleted, setListCompleted] = useState(props.listCompleted);
+    const context = useContext(appContext);
+    const list = context.listsArray.find(list => list._id === props.listId) || {};
     const [listDeleted, setListDeleted] = useState(false)
-    const [listName, setListName] = useState(props.listName)
 
+    useEffect(() => {
+        if (context.listDeleted === props.listId) {
+            setListDeleted(true)
+        }
+    }, [context.listDeleted])
 
-    useEffect(() => {                                                       //////  ---> Update listName with
-        setListName(props.listName)                                             //       data from fetch
-    }, [props.listName])                                                    //////
-
-    useEffect(() => {                                                       //////  ---> Update listName when edited
-        if (context.listName.listId === props.listId) {                         //       befour the fetch for quick response
-            setListName(context.listName.listName)                              //       but would be confirmd with the fetch
-        }                                                                       //
-    }, [context.listName])                                                  //////
-
-
-    useEffect(() => {                                                       //////  ---> Update context.selectedState
-        context.setSelectedList(url.listId)                                     //       when refreshin the page
-    }, [url])                                                               //////
-
-
-    useEffect(() => {                                                       //////  ---> Make this listButton desaper
-        if (context.listDeleted === props.listId) {                             //       from screen instantly
-            setListDeleted(true)                                                //       if this list is deleted
-        }                                                                       //
-    }, [context.listDeleted])                                               //////
-
-
-    useEffect(() => {                                                                       //////  ---> Update this listSelected 'true'
-        if (context.selectedList === props.listId) {                                            //       or 'false' when clicking a
-            setSelectedList(true)                                                               //       ListButton component
-        } else {                                                                                //
-            setSelectedList(false)                                                              //
-        }                                                                                       //
-    }, [context.selectedList])                                                              //////
-
-
-    useEffect(() => {                                                                       //////  ---> Update active state for
-        props.todos > 0 ? setListActive(true) : setListActive(false);                           //       this list after render
-    }, [props.todos])                                                                       //////
-
-    useEffect(() => {                                                                       //////  ---> Update active component state true instantly                                                   //       instantly when creating new todo
-        if (context.listActive.listId === props.listId) {                                       //       and update false if no todos after
-            context.listActive.active ? setListActive(true) : setListActive(false);             //       fetch list
-        }                                                                                       //
-    }, [context.listActive])                                                                //////
-
-
-    useEffect(() => {                                                                       //////  ---> Update listCompleted state for
-        setListCompleted(props.listCompleted)                                                   //       this list after render
-    }, [props.listCompleted])                                                               //////
-
-    useEffect(() => {                                                                       //////  ---> Update listCompleted state 'false' instantly
-        if (context.listCompleted.listId === props.listId) {                                    //       when CheckTodo click
-            context.listCompleted.completed ? setListCompleted(true) : setListCompleted(false); //       and update 'true' after list render
-        }                                                                                       //
-    }, [context.listCompleted])                                                             //////
-
-    useEffect(() => {                                                                       //////  ---> Update completed stat instantly
-        if (context.checkAllCompleted.listId === props.listId) {                                    //       when CheckAll click
-            context.checkAllCompleted.completed ? setListCompleted(true) : setListCompleted(false);    //       
-        }                                                                                       //
-    }, [context.checkAllCompleted])                                                         //////
-
-    
     return <div
-        className={'list-button-container ' + (listDeleted ? 'hide ' : '') + (selectedList ? 'selected ' : '') + (listActive ? 'active ' : '') + (listCompleted ? 'completed ' : '')}
+        className={'list-button-container ' + (listDeleted ? 'hide ' : '')}
         >
         <Link
             to={`/lists/${props.userId}/todos/${props.listId}`}
-            className={(selectedList ? 'selected ' : '') + (listActive ? 'active ' : '') + (listCompleted ? 'completed ' : '')}
-            onClick={() => context.setSelectedList(props.listId)}
-            >{listName}
+            className={(url.listId === props.listId ? 'selected ' : '') + (list.active ? 'active ' : '') + (list.allCompleted ? 'completed ' : '')}
+            >{list.listName}
             </Link>
     </div>
 }

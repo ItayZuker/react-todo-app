@@ -1,30 +1,23 @@
 import {useState, useEffect, useContext} from 'react';
+import {useParams} from 'react-router-dom';
 import { appContext } from '../../AppContext';
 
-export default function useFetchUser(userId) {
-
+export default function useFetchUser() {
+    
+    const url = useParams()
     const context = useContext(appContext)
     const [data, setData] = useState({})
-    const [renderUser, setRenderUser] = useState(true);
 
     useEffect(() => {
-        if (context.renderUser === userId) {
-            context.setRenderUser('')
-            setRenderUser(true)
-        }
-    }, [context.renderUser])
-
-    useEffect(() => {
-        if(renderUser) {
+        context.setRenderUser(false)
             async function getUsers() {
-                const resulte = await fetch(`/users/api/get-user/${userId}`);
-                const user = await resulte.json();
-                setRenderUser(false)
+                const resulte = await fetch(`/users/api/get-user/${url.userId}`)
+                const user = await resulte.json()
+                context.setUser(user)
                 setData(user)
             }
             getUsers()
-        }
-    }, [renderUser]);
+    }, [context.renderUser])
 
     return data
 }

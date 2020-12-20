@@ -8,13 +8,21 @@ const listSchema = mongoose.Schema({
         type: String,
         require: true,
     },
-    completed: {
-        type: Boolean,
-        require: true,
-    },
     todos: {
         type: Number,
         require: true,
+    },
+    completed: {
+        type: Number,
+        default: 0,
+    },
+    allCompleted: {
+        type: Boolean,
+        default: false,
+    },
+    active: {
+        type: Boolean,
+        default: false,
     },
 });
 

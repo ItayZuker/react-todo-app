@@ -14,7 +14,7 @@ $dark-gray: #232323;
     width: fit-content;
     min-height: 50px;
     border-radius: 0px 2px 2px 0px;
-    border-right: 5px solid transparent;
+    border-right: 0px solid transparent;
     &.hide {
         display: none;
     }
@@ -24,16 +24,6 @@ $dark-gray: #232323;
     }
     &:active {
         opacity: 80%;
-    }
-    &.selected {
-        border-right: 5px solid $light-gray;
-        box-sizing: content-box;
-    }
-    &.active {
-        background: $red-color;
-    }
-    &.completed {
-        background-color: $blue-color;
     }
     a:-webkit-any-link {
         background: $regular-gray;
@@ -49,6 +39,10 @@ $dark-gray: #232323;
         }
         &.completed {
             background-color: $blue-color;
+        }
+        &.selected {
+            border-right: 5px solid $light-gray;
+            box-sizing: content-box;
         }
     }
 }

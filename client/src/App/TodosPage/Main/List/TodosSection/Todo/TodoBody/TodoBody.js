@@ -1,76 +1,74 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
+import {useParams} from 'react-router-dom';
 import { appContext } from '../../../../../../../AppContext';
 import './todo-body.scss';
 
 export function TodoBody(props) {
 
-    const context = useContext(appContext);
-    const [editActive, setEditActive] = useState(false);
-    const thisTodo = useRef();
+    const url = useParams()
+    const context = useContext(appContext)
+    const thisTodo = useRef()
+    const [editActive, setEditActive] = useState(false)
+    const [todoCompleted, setTodoCompleted] = useState(props.todoCompleted)
 
-    useEffect(() => {                                           //////  ---> Set focus on this todo
-        if(editActive) {                                            //       after it become editActive
-            thisTodo.current.focus();                               //
-        }                                                           //
-    }, [editActive]);                                           //////
+    useEffect(() => {
+        setTodoCompleted(props.todoCompleted)
+    }, [props.todoCompleted])
 
-    document.addEventListener('click', resetTodo);              
-                                                                
-    function resetTodo(e) {                                     //////  ---> Reset this todo's body
-        if(thisTodo.current !== null) {                             //       if click outside befour submit
-            if(e.target.id !== props.todoId) {                      //                  
-                thisTodo.current.innerText = props.body;            //
-                setEditActive(false);                               //                    
-            };                                                      //
-        };                                                          //
-    };                                                          //////
+    useEffect(() => {
+        if(editActive) {
+            thisTodo.current.focus();
+        }
+    }, [editActive])
 
-    document.addEventListener('keypress', pressEnter);          
-                                                                    
-    function pressEnter(e) {                                    ////// ---> Submit the change for this todo
-        if(thisTodo.current !== null) {                             //      when press Enter
-            if(e.charCode === 13) {                                 //
-                if(editActive) {                                    //
-                    setEditActive(false);                           //
-                    if(thisTodo.current.innerText === '') {         //
-                        context.setDeleteTodo(props.todoId);        //
-                    } else {                                        //
-                        saveUpdate();                               //
-                    };                                              //
-                };                                                  //
-            };                                                      //
-        };                                                          //
-    };                                                          //////
-
-
-    function saveUpdate() {                                     //////  ---> function to save this todo update
-        context.setListCompleted({listId: props.listId, completed: false});            //
-        fetch(`/todos/api/save-update/${props.todoId}`, {           //
-            method: 'PUT',                                          //
-            headers: {                                              //
-                'Content-Type': 'application/json',                 //
-            },                                                      //
-            body: JSON.stringify({                                  //
-                body: thisTodo.current.innerText,                   //
-                completed: false,                                   //
-            })                                                      //
-        })                                                          //
-        .then(() => {                                               //
-            context.setRenderList(props.listId);                    //
-        });                                                         //
-    };                                                          //////
+    function saveUpdate(e) {
+        fetch(`/todos/api/save-update/${props.todoId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                body: e.target.innerText,
+                completed: false,
+            })
+        })
+        .then(() => {
+            context.setRenderTodos(true)
+        })
+    }
 
 
     return <span
-        className={'todo-body-container ' + (props.todoCompleted ? 'completed' : '')}
+        className={'todo-body-container ' + (todoCompleted ? 'completed' : '')}
         suppressContentEditableWarning={true}
         id={props.todoId}
         ref={thisTodo}
         onDoubleClick={() => {
-            context.setTodoCompleted({todoId: props.todoId, completed: false});
-            setEditActive(true);
+            setTodoCompleted(false)
+            setEditActive(true)
+        }}
+        onBlur={() => {
+            thisTodo.current.innerText = props.todoBody
+            setTodoCompleted(props.todoCompleted)
+            setEditActive(false);
+        }}
+        onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+                setEditActive(false);
+                if(e.target.innerText === '') {
+                    context.setDeleteTodo(props.todoId)
+                } else {
+                    context.listsArray.forEach(list => {
+                        if (list._id === url.listId) list.allCompleted = false
+                    })
+                    context.todosArray.forEach(todo => {
+                        if (todo._id === props.todoId) todo.completed = false
+                    })
+                    saveUpdate(e);
+                }
+            }
         }}
         contentEditable={editActive ? 'true' : 'false'}
-        >{props.body}
+        >{props.todoBody}
     </span>             
 }

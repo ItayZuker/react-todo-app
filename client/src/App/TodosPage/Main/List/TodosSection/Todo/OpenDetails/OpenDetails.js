@@ -9,10 +9,10 @@ export function OpenDetails(props) {
         <button
             className='open-button'
             onClick={() => {
-                props.setOpenDetails();
+                props.setOpenDetails()
             }}
         >
-        <i class={"fas fa-angle-down " + (props.openDetails ? '' : 'left')}></i>
+        <i className={"fas fa-angle-down " + (props.openDetails ? '' : 'left')}></i>
         </button>
     </div>
 }

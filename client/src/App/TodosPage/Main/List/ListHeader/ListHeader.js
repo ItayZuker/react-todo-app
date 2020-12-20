@@ -1,120 +1,67 @@
 import React, {useContext, useState, useEffect, useRef} from 'react';
+import {useParams} from 'react-router-dom'
 import {ListMenu} from './ListMenu/ListMenu.js';
-import { appContext } from '../../../../../AppContext';
+import {appContext} from '../../../../../AppContext';
 import './list-header.scss';
 
-export function ListHeader(props) {
+export function ListHeader() {
 
+    const url = useParams()
     const context = useContext(appContext)
-    const [listCompleted, setListCompleted] = useState(props.listCompleted);
-    const [active, setActive] = useState(false);
-    const [listName, setListName] = useState(props.listName)
-    const [prevListName, setPrevListName] = useState(listName)
-    const [editActive, setEditActive] = useState(false);
-    const thisListName = useRef();
+    const list = context.listsArray.find(list => list._id === url.listId) || {}
+    const [editActive, setEditActive] = useState(false)
+    const thisListName = useRef()
 
+    useEffect(() => {
+        if(editActive) thisListName.current.focus()
+    }, [editActive])
 
-    useEffect(() => {                                                           //////  ---> update listName with
-        setListName(props.listName)                                                 //       data from fetch
-    }, [props.listName])                                                        //////
-
-
-    useEffect(() => {                                                           //////  ---> Set focus on thisListName
-        if(editActive) {                                                            //       after it become editActive
-            thisListName.current.focus();                                           //
-        }                                                                           //
-    }, [editActive]);                                                           //////
-
-    document.addEventListener('click', resetTitle);                             //////  ---> Reset this todo's body
-    function resetTitle(e) {                                                        //       if click outside befour submit
-        if(thisListName.current !== null) {                                         //       
-            if(e.target.id !== ('list-name-' + props.listId)) {                     //
-                thisListName.current.innerText = props.listName;                    //
-                setEditActive(false);                                               //
-            };                                                                      //
-        };                                                                          //
-    };                                                                          //////
-
-    document.addEventListener('keypress', pressEnter)                           ////// ---> Submit the listName change
-    function pressEnter(e) {                                                        //      for this list when press Enter
-        if(thisListName.current !== null) {                                         //       
-            if(e.charCode === 13) {                                                 //
-                if(editActive) {                                                    //
-                    setEditActive(false);                                           //
-                    if(thisListName.current.innerText === '') {                     //
-                        setListName(prevListName);                                  //
-                    } else {                                                        //
-                        saveUpdate();                                               //
-                    };                                                              //
-                };                                                                  //
-            };                                                                      //
-        };                                                                          //
-    };                                                                          //////
-
-    function saveUpdate() {                                                     //////  ---> function to save this list update
-        context.setListName({listId: props.listId, listName: thisListName.current.innerText})         //
-        fetch(`/lists/api/update-list-name/${props.listId}`, {                      //
-            method: 'PUT',                                                          //
-            headers: {                                                              //
-                'Content-Type': 'application/json',                                 //
-            },                                                                      //
-            body: JSON.stringify({                                                  //
-                listName: thisListName.current.innerText,                           //
-            })                                                                      //
-        })                                                                          //
-        .then(() => {                                                               //
-            context.setRenderLists(props.userId);                                   //
-        });                                                                         //
-    };                                                                          //////
-
-
-    useEffect(() => {                                                                       //////  ---> Update active component state    
-        props.list.length > 0 ? setActive(true) : setActive(false);                             //       with data from render
-    }, [props.list]);                                                                       //////
-
-    useEffect(() => {                                                                       //////  ---> Update active component state true instantly                                                   //       instantly when creating new todo
-        if (context.listActive.listId === props.listId) {                                       //       and update false if no todos after
-            context.listActive.active ? setActive(true) : setActive(false);                     //       fetch list
-        }                                                                                       //
-    }, [context.listActive])                                                                //////
-
-
-    useEffect(() => {                                                                       //////  ---> Update listCompleted with
-        setListCompleted(props.listCompleted)                                                   //       data from fetch, after rebder
-    }, [props.listCompleted])                                                               //////
-
-
-    
-
-    useEffect(() => {                                                                       //////  ---> Update listCompleted state
-        if (context.listCompleted.listId === props.listId) {                                    //       for this h2 title
-            context.listCompleted.completed ? setListCompleted(true) : setListCompleted(false); //
-        }                                                                                       //
-    }, [context.listCompleted])                                                             //////
-    
-    useEffect(() => {                                                                       //////  ---> Update listCompleted stat instantly
-        if (context.checkAllCompleted.listId === props.listId) {                                    //       when CheckAll click
-            context.checkAllCompleted.completed ? setListCompleted(true) : setListCompleted(false);    //       
-        }                                                                                       //
-    }, [context.checkAllCompleted])                                                         //////
+    function saveUpdate(e) {
+        fetch(`/lists/api/update-list-name/${list._id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                listName: e.target.innerText,
+            })
+        })
+        .then(() => {
+            context.setRenderLists(true)
+        })
+    }
 
 
     return <div
         className='list-header-container'>
         <h2
-            className={active ? 'active ' + (listCompleted ? 'completed' : '') : ''}
-            suppressContentEditableWarning={true}
-            id={'list-name-' + props.listId}
+            id={list._id}
             ref={thisListName}
-            onDoubleClick={() => {
-                setEditActive(true);
+            className={list.active ? 'active ' + (list.allCompleted ? 'completed' : '') : ''}
+            suppressContentEditableWarning={true}
+            onDoubleClick={(e) => {
+                setEditActive(true)
+            }}
+            onBlur={(e) => {
+                e.target.innerText = list.listName
+                setEditActive(false)
+            }}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                    setEditActive(false)
+                    if(e.target.innerText === '') {
+                        e.target.innerText = list.listName;
+                    } else {
+                        context.listsArray.forEach(list => {
+                            if (list._id === url.listId) list.listName = e.target.innerText
+                        })
+                        saveUpdate(e)
+                    }
+                }
             }}
             contentEditable={editActive ? 'true' : 'false'}
-            >{listName}
+            >{list.listName}
             </h2>
-        <ListMenu
-            userId={props.userId}
-            listId={props.listId}
-            ></ListMenu>
+        <ListMenu></ListMenu>
     </div>
 }

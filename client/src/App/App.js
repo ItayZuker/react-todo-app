@@ -7,25 +7,24 @@ import './app.scss';
 
 export function App() {
 
-    let [renderUsers, setRenderUsers] = useState(true); // Boolean
-    let [usersArray, setUsersArray] = useState([]); // usersArray from fetch
-    let [renderUser, setRenderUser] = useState(''); // userId
-    let [renderList, setRenderList] = useState(''); // listId
-    let [renderLists, setRenderLists] = useState(''); // userId
-    let [selectedList, setSelectedList] = useState('')  // listId
-    let [listsArray, setListsArray] = useState([]) // [listId, listId...]
-    let [listCompleted, setListCompleted] = useState({}); // {listId: listId, completed: Boolean}
-    let [listActive, setListActive] = useState({}) // {listId: listId, active: Boolean}
+    let [user, setUser] = useState({}) // {user}
+    let [renderUsers, setRenderUsers] = useState(true) // Boolean
+    let [usersArray, setUsersArray] = useState([]) // usersArray from fetch
+    let [renderUser, setRenderUser] = useState('') // userId
+    let [renderList, setRenderList] = useState('') // Boolean
+    let [renderLists, setRenderLists] = useState('') // userId
+    let [listsArray, setListsArray] = useState([]) // [{list}, {list}...]
+    let [todosArray, setTodosArray] = useState([]) // [{todo}, {todo}...]
+    let [renderTodos, setRenderTodos] = useState('') // Boolean
     let [listDeleted, setListDeleted] = useState('') // listId
-    let [listName, setListName] = useState({}) // {listId: listId, listNam: string}
-    let [todoCompleted, setTodoCompleted] = useState({}); // {listId: listId, todoId: todoId, completed: Boolean}
-    let [checkAllCompleted, setCheckAllCompleted] = useState({}); // {listId: listId, completed: Boolean}
-    let [deleteTodo, setDeleteTodo] = useState(''); // todoId
-    let [displayListState, setDisplayListState] = useState({}); // {listId: listId, state: string}
-    let [clearCompletedClick, setClearCompletedClick] = useState(''); // listId
+    let [deleteTodo, setDeleteTodo] = useState('') // todoId
+    let [displayState, setDisplayState] = useState({}) // {listId: listId, state: string}
+    let [clearCompletedClick, setClearCompletedClick] = useState('') // listId
 
 
     let contextValue = {
+        user,
+        setUser,
         renderUsers,
         setRenderUsers,
         usersArray,
@@ -36,29 +35,21 @@ export function App() {
         setRenderList,
         renderLists,
         setRenderLists,
-        selectedList,
-        setSelectedList,
         listsArray,
         setListsArray,
-        listCompleted,
-        setListCompleted,
-        listActive,
-        setListActive,
+        todosArray,
+        setTodosArray,
+        renderTodos,
+        setRenderTodos,
         listDeleted,
         setListDeleted,
-        listName,
-        setListName,
-        todoCompleted,
-        setTodoCompleted,
-        checkAllCompleted,
-        setCheckAllCompleted,
         deleteTodo,
         setDeleteTodo,
-        displayListState,
-        setDisplayListState,
+        displayState,
+        setDisplayState,
         clearCompletedClick,
         setClearCompletedClick,
-    };
+    }
 
     return <appContext.Provider value={contextValue}>
         <BrowserRouter>

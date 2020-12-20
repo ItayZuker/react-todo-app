@@ -7,33 +7,29 @@ import './menu-item-delete-user.scss';
 export function MenuItemDeleteUser() {
 
     const url = useParams()
-    const context = useContext(appContext);
-    const history = useHistory();
-
+    const context = useContext(appContext)
+    const history = useHistory()
 
     return <div
         className='menu-item-container'
         onClick={() => {
-            fetch(`/todos/api/delete-user/${url.userId}`, {          //////  ---> Delete all this users todos
-                method: 'DELETE'                                         //
-            })                                                           //
-            .then((res) => {                                             //
-                console.log(res);                                    //////
-            });
-            fetch(`/lists/api/delete-user/${url.userId}`, {          //////  ---> Delete all this users lists
-                method: 'DELETE'                                         //
-            })                                                           //
-            .then((res) => {                                             //
-                console.log(res)                                     //////
-            });
-            fetch(`/users/api/delete-user/${url.userId}`, {          //////  ---> Delete this user
-                method: 'DELETE'                                         //       and then go to home page
-            })                                                           //
-            .then((res) => {                                             //
-                console.log(res)                                         //
-                context.setRenderUsers(url.userId);                      //
-                history.push('/');                                   //////
-            });
+            context.usersArray.map((user, index) => {
+                if (user._id === url.userId) context.usersArray.splice(index, 1)
+            })
+            context.setListsArray([])
+            history.push('/')
+            fetch(`/todos/api/delete-user/${url.userId}`, {
+                method: 'DELETE'
+            })
+            fetch(`/lists/api/delete-user/${url.userId}`, {
+                method: 'DELETE'
+            })
+            fetch(`/users/api/delete-user/${url.userId}`, {
+                method: 'DELETE'
+            })
+            .then(() => {
+                context.setRenderUsers(url.userId)
+            })
         }}
         >
         <p>Delete user</p>

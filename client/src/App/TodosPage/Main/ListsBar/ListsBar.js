@@ -1,16 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {ListButton} from './ListButton/ListButton.js';
 import {NewList} from './NewList/NewList.js';
 import './list-bar.scss';
+import { appContext } from '../../../../AppContext.js';
 
-export function ListsBar(props) {
+export function ListsBar() {
+
+    const context = useContext(appContext)
 
     return <div
             className='list-bar-container'
             >
             <NewList
                 ></NewList>
-            {props.lists.map(list => <ListButton
+            {context.listsArray.map(list => <ListButton
                 key={list._id}
                 userId={list.userId}
                 listId={list._id}

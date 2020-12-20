@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useHistory} from 'react-router-dom';
+import { appContext } from '../../../AppContext.js';
 import {Dropdown} from './DropDown/Dropdown.js';
 import './header.scss';
 
-export function Header(props) {
+export function Header() {
 
+    const context = useContext(appContext)
+    const todos = context.todosArray.filter(todo => todo.userId === context.user._id)
     const history = useHistory();
 
     return <div
@@ -16,19 +19,19 @@ export function Header(props) {
                 id='back-button'
                 onClick={() => {
                     history.push('/');
+                    context.setListsArray([])
                 }}
                 >
             </i>
             <h1
-                className={props.todos.length > 0 ? 'red' : ''}
-                >{props.user.name} todos
+                className={todos.length > 0 ? 'red' : ''}
+                >{context.user.name} todos
             </h1>
         </div>
         <div
             className='right-side'
             >
-            <Dropdown
-                ></Dropdown>
+            <Dropdown></Dropdown>
         </div>
     </div>
 }

@@ -4,7 +4,6 @@ import {UsersContainer} from './UsersContainer/UsersContainer.js';
 import {NewUser} from './NewUser/NewUser.js';
 import {appContext} from '../../AppContext.js';
 import styled from 'styled-components';
-// import './enter-page.scss';
 
 const EnterPageDiv = styled.div`
     display: flex;
@@ -58,9 +57,9 @@ const MaxFive = styled.span`
 
 export function EnterPage() {
 
-    const context = useContext(appContext);
-    const url = useParams();
-    const allUsers = context.usersArray.length;
+    const context = useContext(appContext)
+    const url = useParams()
+    const allUsers = context.usersArray.length
 
     return <EnterPageDiv>
         <LogoContainer>

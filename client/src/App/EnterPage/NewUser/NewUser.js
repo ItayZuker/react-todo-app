@@ -4,65 +4,66 @@ import './new-user.scss';
 
 export function NewUser(props){
 
-    const context = useContext(appContext);
+    const context = useContext(appContext)
 
-    const [newUserNotification, setNewUserNotification] = useState('');
-    const [renderNewUserNotification, setRenderNewUserNotification] = useState(false);
+    const [newUserNotification, setNewUserNotification] = useState('')
+    const [renderNewUserNotification, setRenderNewUserNotification] = useState(false)
 
 
-    function handleNewUserError() {                                         //////  ---> Activet notifacation with
-        setRenderNewUserNotification(true)                                      //       .setTimeout()
-        setTimeout(() => {                                                      //
-            setRenderNewUserNotification(false)                                 //
-            setNewUserNotification('')                                          //
-        }, 1500);                                                           //////
+    function handleNewUserError() {
+        setRenderNewUserNotification(true)
+        setTimeout(() => {
+            setRenderNewUserNotification(false)
+            setNewUserNotification('')
+        }, 1500)
     }
 
     return <div className={'new-user-container'}>
         <form
             onSubmit={(e) => {
-                e.preventDefault();
-                if(e.target.user.value === '') {                            //////  ---> Validation for new user
-                    e.target.user.value = '';                                   //
-                    setNewUserNotification('Enter name!');                      //
-                    handleNewUserError();                                       //
-                } else if(context.usersArray.find(user => {                     //
-                    if(user.name === e.target.user.value) return true})) {      //
-                    e.target.user.value = '';                                   //
-                    setNewUserNotification('Already exist..');                  //
-                    handleNewUserError();                                       //
-                } else if(context.usersArray.length >= 5) {                     //
-                    e.target.user.value = '';                                   //
-                    setNewUserNotification('Max five users');                   //
-                    handleNewUserError();                                       //
+                e.preventDefault()
+                if(e.target.user.value === '') {
+                    e.target.user.value = ''
+                    setNewUserNotification('Enter name!')
+                    handleNewUserError()
+                } else if(context.usersArray.find(user => {
+                    if(user.name === e.target.user.value) return true})) {
+                    e.target.user.value = ''
+                    setNewUserNotification('Already exist..')
+                    handleNewUserError()
+                } else if(context.usersArray.length >= 5) {
+                    e.target.user.value = ''
+                    setNewUserNotification('Max five users')
+                    handleNewUserError()
                 } else {
-                    fetch('/users/api/create-user', {                           //  ---> fetch to create the new user
-                        method: 'POST',                                         // 
-                        headers: {                                              //
-                            'Content-Type': 'application/json',                 //
-                        },                                                      //
-                        body: JSON.stringify({                                  //
-                            name: e.target.user.value,                          //
-                        }),                                                     //
-                    })                                                          //
-                    .then(res => res.json())                                    //
-                    .then(res => {                                              
-                        e.target.user.value = '';                               //  ---> Then fetch create first empty list
-                        fetch(`/lists/api/create-list/${res._id}`, {            //       for this user
-                                method: 'POST',                                 //
-                                headers: {                                      //
-                                    'Content-Type': 'application/json',         //
-                                },                                              //
-                                body: JSON.stringify({                          //
-                                    listName: 'Master list'                     //
-                                }),                                             //
-                            })                                                  //
-                            .then(() => {                                       //
-                                context.setRenderUsers(props.userId);       //////  ---> then render users
-                            })
-                    });
-                };              
-        }}>
+                    context.usersArray.push({name: e.target.user.value})
+                    fetch('/users/api/create-user', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: e.target.user.value,
+                        }),
+                    })
+                    .then(res => res.json())
+                    .then(res => {
+                        e.target.user.value = ''
+                        fetch(`/lists/api/create-list/${res._id}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                listName: 'Master list'
+                            }),
+                        })
+                        .then(() => {
+                            context.setRenderUsers(props.userId)
+                        })
+                    })
+                }
+            }}>
             <input
                 className={renderNewUserNotification ? 'notification' : ''}
                 name='user'

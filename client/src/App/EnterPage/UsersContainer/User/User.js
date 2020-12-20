@@ -1,31 +1,25 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { appContext } from '../../../../AppContext';
-import useFetchLists from '../../../customHooks/useFetchLists';
+import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import './user.scss';
 
 export function User(props) {
 
-    const lists = useFetchLists(props.userId)
-    const context = useContext(appContext)
-    const [listIdToGoTo, setListIdToGoTo] = useState('')
-
-
-    useEffect(() => {                                           //////  ---> Update listToGoTo state
-        if (lists.length > 0) {                                     //       to be the first list of
-            setListIdToGoTo(lists[0]._id)                           //       this user
-        } else {                                                    //
-            setListIdToGoTo('')                                     //
-        }                                                           //
-    }, [lists])                                                 //////
-
+    const [userLists, setUserLists] = useState([])
+    
+    useEffect(() => {
+        async function getLists() {
+            const result = await fetch(`/lists/api/get-user-lists/${props.userId}`)
+            const lists = await result.json() 
+            setUserLists(lists)
+        }
+        getLists()
+    }, [])
 
     return <div
         className='link-container'
-        onClick={() => context.setSelectedList(listIdToGoTo)}
         >
         <Link
-            to={`/lists/${props.userId}/todos/${listIdToGoTo}`}
+            to={`/lists/${props.userId}/todos/${userLists.length > 0 ? userLists[0]._id : ''}`}
             className='link'
             >{props.name}
         </Link>

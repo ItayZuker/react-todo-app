@@ -11,6 +11,9 @@ $dark-gray: #232323;
     align-items: center;
     transform: translatey(20px);
     grid-column: 3 / 4;
+    &:focus {
+        outline: none;
+    }
     .fa-ellipsis-h {
         font-size: 20px;
         color: $regular-gray;

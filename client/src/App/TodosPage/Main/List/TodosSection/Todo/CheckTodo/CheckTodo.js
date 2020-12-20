@@ -1,9 +1,11 @@
 import React, {useContext} from 'react';
+import {useParams} from 'react-router-dom';
 import { appContext } from '../../../../../../../AppContext';
 import './check-todo.scss';
 
 export function CheckTodo(props) {
     
+    const url = useParams()
     const context = useContext(appContext);
 
     return <div
@@ -11,26 +13,41 @@ export function CheckTodo(props) {
         >
         <button
             className={'check ' + (props.todoCompleted ? 'v' : 'x')}
-            onClick={() => {                                            //////  ---> Update this todoCompleted state instatnly       
-                if(props.todoCompleted) {                                   //       then fetch the update and render this list  
-                    context.setTodoCompleted({todoId: props.todoId, completed: false});        //       -
-                    context.setListCompleted({listId: props.listId, completed: false});        //       then todoCompleted state is reconfirm or
-                    fetch(`/todos/api/todo-false/${props.todoId}`, {        //       chenge back if the fetch hed problem
-                        method: "PUT",                                      //       
-                    })                                                      //
-                    .then((res) => {                                        //
-                        console.log(res);                                   //
-                        context.setRenderList(props.listId);                //
-                    });                                                     //
-                } else {                                                    //
-                    context.setTodoCompleted({listId: props.listId, todoId: props.todoId, completed: true});         //
-                    fetch(`/todos/api/todo-true/${props.todoId}`, {         //
-                        method: "PUT",                                      //
-                    })                                                      //
-                    .then((res) => {                                        //
-                        console.log(res);                                   //
-                        context.setRenderList(props.listId);            //////
-                    });
+            onClick={() => {
+                if(props.todoCompleted) {
+                    context.listsArray.forEach(list => {
+                        if (list._id === url.listId) {
+                            list.completed --
+                        }
+                    })
+                    context.todosArray.forEach(todo => {
+                        if (todo._id === props.todoId) todo.completed = false
+                    })                    
+                    context.listsArray.forEach(list => {
+                        if (list._id === url.listId) list.allCompleted = false
+                    })
+                    fetch(`/todos/api/todo-false/${props.todoId}`, {
+                        method: "PUT",
+                    })
+                    .then(() => {
+                        context.setRenderTodos(true)
+                    })
+                } else {
+                    context.listsArray.forEach(list => {
+                        if (list._id === url.listId) {
+                            list.completed ++
+                            if (list.completed === list.todos) list.allCompleted = true
+                        }
+                    })
+                    context.todosArray.forEach(todo => {
+                        if (todo._id === props.todoId) todo.completed = true;
+                    })
+                    fetch(`/todos/api/todo-true/${props.todoId}`, {
+                        method: "PUT",
+                    })
+                    .then(() => {
+                        context.setRenderTodos(true)
+                    })
                 }
             }}
         ><i className="fas fa-check"></i>           

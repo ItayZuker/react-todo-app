@@ -1,54 +1,61 @@
 import React, {useContext, useState} from 'react';
+import {useParams} from 'react-router-dom';
 import { appContext } from '../../../../../../AppContext';
 import './todo-input.scss';
 
-export function TodoInput(props) {
+export function TodoInput() {
 
+    const url = useParams()
     const context = useContext(appContext);
-    const [todoNotification, setTodoNotification] = useState('');
-    const [renderTodoNotification, setRenderTodoNotification] = useState(false);
+    const todos = context.todosArray.filter(todo => todo.listId === url.listId)
+    const [todoNotification, setTodoNotification] = useState('')
+    const [renderTodoNotification, setRenderTodoNotification] = useState(false)
 
-
-    function handleNewTodoError() {                                          //
-        setRenderTodoNotification(true)                                      //  ---> This function trigers notification
-        setTimeout(() => {                                                   //       with a deley
-            setRenderTodoNotification(false)                                 //
-            setTodoNotification('')                                          //
-        }, 1500);                                                            //
-    }                                                                        //
+    function handleNewTodoError() {
+        setRenderTodoNotification(true)
+        setTimeout(() => {
+            setRenderTodoNotification(false)
+            setTodoNotification('')
+        }, 1500)
+    }
 
     return <form
-        onSubmit={(e) => {                                                   //
-            e.preventDefault();                                              //  ---> Submit with empty string
-            if(e.target.todo.value === '') {                                 //       will block submit and 
-                e.target.todo.value = '';                                    //       triger notification
-                setTodoNotification('Nothig todo...');                       //
-                handleNewTodoError();                                   
-            } else if(props.list.find(todo => {                              //  
-                if(todo.body === e.target.todo.value) return true})) {       //  ---> Submit with string that's
-                e.target.todo.value = '';                                    //       alredy exist would block submit
-                setTodoNotification("Don't do it twice!");                   //       and triger notification
-                handleNewTodoError();                                        //
-            } else {                                                    
-                context.setListActive({listId: props.listId, active: true})  //
-                fetch('/todos/api/new-todo', {                               //  
-                    method: 'POST',                                          //  ---> This fech create a new todo      
-                    headers: {                                               //       for a specific list and then 
-                        'Content-Type': 'application/json',                  //       activets render for this List 
-                    },                                                       //       component with props
-                    body: JSON.stringify({                                   //
-                        userId: props.userId,                                //
-                        listId: props.listId,                                //
-                        body: e.target.todo.value,                           //
-                        completed: false,                                    //
-                        created: new Date(),                                 //
-                    }),                                                      //
-                }).then((res) => {                                           //
-                    console.log(res);                                        //
-                    e.target.todo.value = '';                                //
-                    context.setRenderList(props.listId);                     //
-                });
-            };
+        onSubmit={(e) => {
+            e.preventDefault()
+            if(e.target.todo.value === '') {
+                e.target.todo.value = ''
+                setTodoNotification('Nothig todo...')
+                handleNewTodoError()
+            } else if(todos.find(todo => {
+                if(todo.body === e.target.todo.value) return true})) {
+                e.target.todo.value = ''
+                setTodoNotification("Don't do it twice!")
+                handleNewTodoError()
+            } else {
+                context.listsArray.forEach(list => {
+                    if (list._id === url.listId) {
+                        list.allCompleted = false
+                        list.active = true
+                        list.todos ++
+                    }
+                })
+                fetch('/todos/api/new-todo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: url.userId,
+                        listId: url.listId,
+                        body: e.target.todo.value,
+                        completed: false,
+                        created: new Date(),
+                    }),
+                }).then(() => {
+                    e.target.todo.value = ''
+                    context.setRenderTodos(true)
+                })
+            }
         }}>
         <input
             className={renderTodoNotification ? 'notification' : ''}
