@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/todo-app', {useNewUrlParser: true});
+
+let dburl = 'mongodb://localhost:27017/todo-app'
+if (process.env.DB_URL) {
+    dburl = process.env.DB_URL
+}
+
+mongoose.connect(dburl, {useNewUrlParser: true});
 
 
 // this lines are not requierd
