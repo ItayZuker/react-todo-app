@@ -15,6 +15,7 @@ $dark-gray: #232323;
 
 .new-user-container {
     margin: 0px 0px 0px 0px;
+    position: relative;
     form {
         margin: 0px 0px 0px 0px;
         display: flex;
@@ -54,10 +55,12 @@ $dark-gray: #232323;
             font-weight: 700;
             &:hover {
                 color: $light-gray-hover;
+                background-color: $regular-gray-hover;
                 cursor: pointer;
             }
             &:active {
                 color: $light-gray-click;
+                background-color: $regular-gray-click;
             }
         }
     }

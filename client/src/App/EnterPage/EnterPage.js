@@ -9,7 +9,7 @@ const EnterPageDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     height: 100vh;
 `;
 const LogoContainer = styled.div`
@@ -18,11 +18,11 @@ const LogoContainer = styled.div`
     justify-content: center;
     align-items: center;
     color: #FF6E6E;
-    margin: 0px 0px 10vh 0px;
+    margin: 15vh 0px 15vh 0px;
 `;
 const LogoMain = styled.h1`
     font-size: 80px;
-    font-weight: 400;
+    font-weight: 600;
     margin: 0px;
 `
 const LogoSecond = styled.h2`
@@ -42,7 +42,6 @@ const MainUsersContainet = styled.div`
     justify-content: flex-start;
     align-items: center;
     margin: 0px 0px 0px 0px;
-    color: $red-color;
 `
 const SmallTitel = styled.h3`
     color: lightgray;
@@ -63,12 +62,12 @@ export function EnterPage() {
 
     return <EnterPageDiv>
         <LogoContainer>
-            <LogoMain>TaDam!</LogoMain>
+            <LogoMain>TADAM!</LogoMain>
             <LogoSecond>It's Done.</LogoSecond>
         </LogoContainer>
         <MainUsersContainet>
             <SmallTitel>
-                {allUsers > 0 ? 'Choose /' : '' } Create your list (<MaxFive allUsers={allUsers}>{allUsers}/5</MaxFive>):
+                {allUsers > 0 ? 'Choose /' : '' } Create user (<MaxFive allUsers={allUsers}>{allUsers}/5</MaxFive>):
             </SmallTitel>
             <UsersContainer></UsersContainer>
             <NewUser

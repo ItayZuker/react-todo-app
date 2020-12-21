@@ -11,6 +11,7 @@ $regular-gray: #808080;
 $regular-gray-hover: #747575;
 $regular-gray-click: #696a6a;
 $dark-gray: #232323;
+$dark-gray-click: #2e2e2d;
 
 .check-todo-container {
     grid-column: 1 / 2;
@@ -36,6 +37,7 @@ $dark-gray: #232323;
             }
             &:active {
                 color: $red-color-click;
+                background-color: $dark-gray-click;
             }
         }
         &.x {
@@ -46,6 +48,7 @@ $dark-gray: #232323;
             }
             &:active {
                 color: $blue-color-click;
+                background-color: $dark-gray-click;
             }
         }
     }

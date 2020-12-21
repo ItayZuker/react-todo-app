@@ -14,7 +14,7 @@ $dark-gray: #232323;
 
 .list-button-container {
     margin: 5px 0px 0px 0px;
-    background: $regular-gray;
+    background-color: $regular-gray;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -26,13 +26,6 @@ $dark-gray: #232323;
     &.hide {
         display: none;
     }
-    &:hover {
-        background: $regular-gray-hover;
-        cursor: pointer;
-    }
-    &:active {
-        background: $regular-gray-click;
-    }
     a:-webkit-any-link {
         background: $regular-gray;
         color: white;
@@ -42,11 +35,30 @@ $dark-gray: #232323;
         height: 100%;
         margin: 0px;
         padding: 0px 20px 0px 20px;
+        &:hover {
+            background-color: $regular-gray-hover;
+            cursor: pointer;
+        }
+        &:active {
+            background-color: $regular-gray-click;
+        }
         &.active {
-            background: $red-color;
+            background-color: $red-color;
+            &:hover {
+                background-color: $red-color-hover;
+            }
+            &:active {
+                background-color: $red-color-click;
+            }
         }
         &.completed {
             background-color: $blue-color;
+            &:hover {
+                background-color: $blue-color-hover;
+            }
+            &:active {
+                background-color: $blue-color-click;
+            }
         }
         &.selected {
             border-right: 5px solid $light-gray;

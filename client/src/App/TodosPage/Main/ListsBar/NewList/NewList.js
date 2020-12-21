@@ -11,7 +11,6 @@ export function NewList() {
     const [newListNotification, setNewListNotification] = useState('')
     const [renderNotification, setRenderNotification] = useState(false)
 
-
     function handleNewListError() {
         setRenderNotification(true)
         setTimeout(() => {
@@ -19,7 +18,6 @@ export function NewList() {
             setNewListNotification('')
         }, 1500)
     }
-
 
     return <div
         className='new-list-container'>
