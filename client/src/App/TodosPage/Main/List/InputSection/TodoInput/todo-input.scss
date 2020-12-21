@@ -25,7 +25,7 @@ form {
         outline: none;
         font-weight: 700;
         &.notification::placeholder {
-            color: $red-color;
+            color: white;
         }
         &::placeholder {
             color: $dark-gray;
