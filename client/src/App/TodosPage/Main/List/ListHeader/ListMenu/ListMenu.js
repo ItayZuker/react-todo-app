@@ -15,7 +15,7 @@ export function ListMenu() {
 
     return <div
         className={'list-menu-container ' + (listMenuOpen ? '' : 'hide')}
-        tabindex={-1}
+        tabIndex={-1}
         onClick={() => setListMenuOpen(true)} 
         onBlur={() => setListMenuOpen(false)}
         >

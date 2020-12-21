@@ -8,7 +8,7 @@ export function Dropdown() {
 
     return <div
             className='dropdown-container'
-            tabindex={-1}
+            tabIndex={-1}
             onFocus={() => setOpen(true)} 
             onBlur={() => setOpen(false)}
         >
