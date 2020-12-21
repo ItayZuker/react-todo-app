@@ -74,7 +74,7 @@ export function Todo(props) {
         >
         <div
             className={'tadam-contaoner ' + (TaDam ? 'active' : '')}>
-            <h3>{TaDam ? 'TaDam!' : ''}</h3>
+            <h3>{TaDam ? 'TADAM!' : ''}</h3>
         </div>
         <div
             className={'todo-components-container ' + (TaDam ? 'hide' : '')}

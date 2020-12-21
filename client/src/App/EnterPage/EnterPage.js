@@ -46,7 +46,7 @@ const MainUsersContainet = styled.div`
 `
 const SmallTitel = styled.h3`
     color: lightgray;
-    margin: 0px 0px 0px 0px;
+    margin: 25px 0px 0px 0px;
     font-weight: 500;
 `
 const MaxFive = styled.span`

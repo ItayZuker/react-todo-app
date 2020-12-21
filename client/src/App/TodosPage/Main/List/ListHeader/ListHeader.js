@@ -10,6 +10,8 @@ export function ListHeader() {
     const context = useContext(appContext)
     const list = context.listsArray.find(list => list._id === url.listId) || {}
     const [editActive, setEditActive] = useState(false)
+    const [titleNotification, setTitleNotification] = useState('')
+    const [renderNotification, setRenderNotification] = useState(false)
     const thisListName = useRef()
 
     useEffect(() => {
@@ -31,13 +33,20 @@ export function ListHeader() {
         })
     }
 
+    function handleError() {
+        setRenderNotification(true)
+        setTimeout(() => {
+            setRenderNotification(false)
+            setTitleNotification('')
+        }, 1500)
+    }
 
     return <div
         className='list-header-container'>
         <h2
             id={list._id}
             ref={thisListName}
-            className={list.active ? 'active ' + (list.allCompleted ? 'completed' : '') : ''}
+            className={(list.active ? 'active ' + (list.allCompleted ? 'completed ' : '') : '') + (renderNotification ? 'notification' : '')}
             suppressContentEditableWarning={true}
             onDoubleClick={(e) => {
                 setEditActive(true)
@@ -51,6 +60,9 @@ export function ListHeader() {
                     setEditActive(false)
                     if(e.target.innerText === '') {
                         e.target.innerText = list.listName;
+                    } else if (context.listsArray.find(list => list.listName === e.target.innerText)) {
+                        setTitleNotification("Already exist..")
+                        handleError()
                     } else {
                         context.listsArray.forEach(list => {
                             if (list._id === url.listId) list.listName = e.target.innerText
@@ -60,7 +72,7 @@ export function ListHeader() {
                 }
             }}
             contentEditable={editActive ? 'true' : 'false'}
-            >{list.listName}
+            >{renderNotification ? titleNotification : list.listName}
             </h2>
         <ListMenu></ListMenu>
     </div>

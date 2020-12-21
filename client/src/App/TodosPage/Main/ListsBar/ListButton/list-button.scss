@@ -14,7 +14,6 @@ $dark-gray: #232323;
 
 .list-button-container {
     margin: 5px 0px 0px 0px;
-    background-color: $regular-gray;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -33,7 +32,7 @@ $dark-gray: #232323;
         text-align: left;
         font-weight: 600;
         height: 100%;
-        margin: 0px;
+        margin: 5px 0px 5px 0px;
         padding: 0px 20px 0px 20px;
         &:hover {
             background-color: $regular-gray-hover;

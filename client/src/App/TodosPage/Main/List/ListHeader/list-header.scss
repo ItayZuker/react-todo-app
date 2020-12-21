@@ -33,7 +33,13 @@ $dark-gray: #232323;
             color: $red-color;
             &.completed {
                 color: $blue-color;
+                &.notification {
+                    color: $red-color;
+                }
             }
+        }
+        &.notification {
+            color: $red-color;
         }
     }
 }
