@@ -10,7 +10,7 @@ export function CheckAll() {
     const list = context.listsArray.find(list => list._id === url.listId) || {}
     
     return <button
-        className={'all-green-button ' + (list.active ? list.completed ? 'true' : 'false' : 'not-active')}
+        className={'all-green-button ' + (list.active ? list.allCompleted ? 'true' : 'false' : 'not-active')}
         onClick={() => {
             if(list.completed === list.todos) {
                 context.listsArray.forEach(list => {
