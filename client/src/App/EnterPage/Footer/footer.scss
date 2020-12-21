@@ -1,0 +1,42 @@
+$blue-color: #6DD3FF;
+$blue-color-hover: #61aece;
+$blue-color-click: #599fbd;
+$red-color: #FF6E6E;
+$red-color-hover: #db6365;
+$red-color-click: #c85a5c;
+$light-gray: #d3d3d3;
+$light-gray-hover: #c1c2c1;
+$light-gray-click: #b0b1b1;
+$regular-gray: #808080;
+$regular-gray-hover: #747575;
+$regular-gray-click: #696a6a;
+$dark-gray: #232323;
+
+.footer-container {
+    position: relative;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    color: $regular-gray;
+    width: 100%;
+    p {
+        margin: 0px 10px 0px 0px
+    }
+    .fa-linkedin {
+        font-size: 20px;
+        margin: 0px 20px 0px 0px;
+        padding: 0px;
+        height: auto;
+        background-color: transparent;
+        color: $regular-gray;
+        &:hover {
+            color: $light-gray-hover;
+            background-color: transparent;
+        }
+        &:active {
+            color: $light-gray-click;
+        }
+    }
+}

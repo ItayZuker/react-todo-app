@@ -3,13 +3,14 @@ import {useParams} from 'react-router-dom';
 import {UsersContainer} from './UsersContainer/UsersContainer.js';
 import {NewUser} from './NewUser/NewUser.js';
 import {appContext} from '../../AppContext.js';
+import {Footer} from './Footer/Footer.js';
 import styled from 'styled-components';
 
 const EnterPageDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     height: 100vh;
 `;
 const LogoContainer = styled.div`
@@ -18,7 +19,7 @@ const LogoContainer = styled.div`
     justify-content: center;
     align-items: center;
     color: #FF6E6E;
-    margin: 15vh 0px 15vh 0px;
+    margin: 15vh 0px -30vh 0px;
 `;
 const LogoMain = styled.h1`
     font-size: 80px;
@@ -74,5 +75,6 @@ export function EnterPage() {
                 userId={url.userId}
                 ></NewUser>
         </MainUsersContainet>
+        <Footer></Footer>
     </EnterPageDiv>
 }
