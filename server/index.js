@@ -3,6 +3,7 @@ const app = express();
 const todosRout = require('./routs/Todos.rout.js');
 const listsRout = require('./routs/Lists.rout.js');
 const usersRout = require('./routs/Users.rout.js');
+const visitorsRout = require('./routs/Visitors.rout.js');
 const path = require('path')
 require('./db.js');
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use('/todos/api', todosRout);
 app.use('/lists/api', listsRout)
 app.use('/users/api', usersRout);
+app.use('/visitors/api', visitorsRout);
 app.use('/', express.static(path.join(__dirname, '../client/build')))
 
 let port = 8080

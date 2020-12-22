@@ -31,7 +31,7 @@ router.post('/create-user', async (req, res) => {
                 console.log(err)
                 res.status(500).send()
             } else if(!docs) {
-                res.status(404)
+                res.status(404).send()
             } else {
                 res.json(docs)
             }

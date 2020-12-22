@@ -1,5 +1,6 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
+import emailjs from 'emailjs-com';
 import {UsersContainer} from './UsersContainer/UsersContainer.js';
 import {NewUser} from './NewUser/NewUser.js';
 import {appContext} from '../../AppContext.js';
@@ -13,6 +14,7 @@ const EnterPageDiv = styled.div`
     justify-content: space-between;
     height: 100vh;
 `;
+
 const LogoContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -61,7 +63,73 @@ export function EnterPage() {
     const url = useParams()
     const allUsers = context.usersArray.length
 
-    return <EnterPageDiv>
+    function getTime() {
+        const minutes = addZiro(new Date().getMinutes())
+        const hours = addZiro(new Date().getHours())
+        return (`${hours}:${minutes}`)
+    }
+
+    function getDay() {
+        const day = addZiro(new Date().getDate())
+        const month = addZiro(new Date().getMonth() + 1)
+        const year = new Date().getFullYear()
+        return (`${day}/${month}/${year}`)
+    }
+
+    function addZiro(num) {
+        return num < 10 ? `0${num}` : num
+    }
+
+    const time = getTime()
+    const day = getDay()
+
+    useEffect(() => {
+        async function getUser() {
+            const result = await fetch('http://api.ipify.org/?format=json')
+            const visitor = await result.json()
+            const dbResult = await fetch(`/visitors/api/look-for-metch/${visitor.ip}`)
+            const dbVisitor = await dbResult.json()
+            if (dbVisitor.message === 'no-metch') {
+                fetch('/visitors/api/new-visitor', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        ip: visitor.ip,
+                        lastTime: time,
+                        lastDay: day,
+                        visits: 1,
+                    })
+                })
+                return {ip: visitor.ip, lastTime: time, lastDay: day, visits: 1}
+            } else {
+                fetch(`/visitors/api/update-visitor/${dbVisitor._id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        visits: dbVisitor.visits + 1,
+                        lastTime: time,
+                        lastDay: day,
+                    })
+                })
+                return {ip: visitor.ip, lastTime: time, lastDay: day, visits: dbVisitor.visits + 1}
+            }
+        }
+        getUser()
+            .then((res) => {
+                emailjs.send('gmail', 'enter_notification', {ip: res.ip, visits: res.visits, lastTime: res.lastTime, lastDay: res.lastDay}, 'user_isbKMcCXhDYiE3zZ3tzbF')
+                .then((result) => {
+                    console.log(result.text);
+                }, (error) => {
+                    console.log(error.text);
+                });
+            })
+    }, [])
+
+      return <EnterPageDiv>
         <LogoContainer>
             <LogoMain>TADAM!</LogoMain>
             <LogoSecond>It's Done.</LogoSecond>
