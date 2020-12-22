@@ -85,7 +85,7 @@ export function EnterPage() {
 
     useEffect(() => {
         async function getUser() {
-            const result = await fetch('http://api.ipify.org/?format=json')
+            const result = await fetch('https://api.ipify.org/?format=json')
             const visitor = await result.json()
             const dbResult = await fetch(`/visitors/api/look-for-metch/${visitor.ip}`)
             const dbVisitor = await dbResult.json()
