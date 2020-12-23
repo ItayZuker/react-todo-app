@@ -50,7 +50,6 @@ router.get('/get-user/:userId', async (req, res) => {
             } else if(!docs) {
                 res.status(404)
             } else {
-                res.sendFile(path.join(__dirname, '../client/public/index.html'))
                 res.json(docs)
             }
         })
