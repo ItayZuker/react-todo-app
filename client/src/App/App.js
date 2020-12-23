@@ -21,7 +21,6 @@ export function App() {
     let [displayState, setDisplayState] = useState({}) // {listId: listId, state: string}
     let [clearCompletedClick, setClearCompletedClick] = useState('') // listId
 
-
     let contextValue = {
         user,
         setUser,

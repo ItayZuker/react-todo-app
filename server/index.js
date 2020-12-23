@@ -10,6 +10,9 @@ require('./db.js');
 app.set('json spaces', 2);
 app.use(express.json());
 
+app.use('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '/'))
+});
 
 app.use('/todos/api', todosRout);
 app.use('/lists/api', listsRout)
