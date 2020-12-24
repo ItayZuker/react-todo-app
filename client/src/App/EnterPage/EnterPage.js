@@ -14,7 +14,6 @@ const EnterPageDiv = styled.div`
     justify-content: space-between;
     height: 100vh;
 `;
-
 const LogoContainer = styled.div`
     display: flex;
     flex-direction: column;
