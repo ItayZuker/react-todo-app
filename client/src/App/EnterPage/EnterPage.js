@@ -67,18 +67,15 @@ export function EnterPage() {
         const hours = addZiro(new Date().getHours())
         return (`${hours}:${minutes}`)
     }
-
     function getDay() {
         const day = addZiro(new Date().getDate())
         const month = addZiro(new Date().getMonth() + 1)
         const year = new Date().getFullYear()
         return (`${day}/${month}/${year}`)
     }
-
     function addZiro(num) {
         return num < 10 ? `0${num}` : num
     }
-
     const time = getTime()
     const day = getDay()
 
