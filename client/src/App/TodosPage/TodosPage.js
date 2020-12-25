@@ -8,11 +8,11 @@ import {Footer} from './Footer/Footer.js';
 import './todos-page.scss';
 
 export function TodosPage() {
-    
+
     useFetchUser()
     useFetchLists()
     useFetchTodos()
-    
+
     return <div
         className='todo-page-container'>
         <div
