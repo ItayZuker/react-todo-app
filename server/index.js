@@ -10,7 +10,7 @@ require('./db.js');
 app.set('json spaces', 2);
 app.use(express.json());
 
-app.use('/', express.static(path.join(__dirname, '../client/build')))
+app.get('/*', express.static(path.join(__dirname, '../client/build')))
 
 app.use('/todos/api', todosRout);
 app.use('/lists/api', listsRout);
