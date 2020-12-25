@@ -15,7 +15,7 @@ app.use('/todos/api', todosRout);
 app.use('/lists/api', listsRout)
 app.use('/users/api', usersRout);
 app.use('/visitors/api', visitorsRout);
-app.use('/', express.static(path.join(__dirname, '../client/build')))
+app.use('/*', express.static(path.join(__dirname, '../client/build')))
 
 // app.get('/*', function(req, res) {
 //     res.sendFile(path.join(__dirname, 'path/to/your/index.html'), function(err) {
