@@ -17,6 +17,9 @@ app.use('/users/api', usersRout);
 app.use('/visitors/api', visitorsRout);
 app.use('/', express.static(path.join(__dirname, '../client/build')))
 
+app.use('/', (req, res) => {
+    res.sendFile(path.join('../client/public'))
+})
 
 let port = 8080
 if(process.env.PORT) {
