@@ -4,8 +4,6 @@ const router = express.Router();
 const mongoose = require('mongoose'); 
 const TodosModel = require('../models/Todos.model.js');
 
-router.get('/*', express.static(path.join(__dirname, '../../client/build')))
-
 router.put('/save-update/:todoId', async (req, res) => {
     await TodosModel
         .updateOne({

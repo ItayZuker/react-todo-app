@@ -3,8 +3,6 @@ const { ObjectID } = require('mongodb')
 const router = express.Router()
 const VisitorsModel = require('../models/Visitors.model')
 
-router.get('/*', express.static(path.join(__dirname, '../../client/build')))
-
 router.put('/update-visitor/:id', async (req, res) => {
     await VisitorsModel
         .updateOne({

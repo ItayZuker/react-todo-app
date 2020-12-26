@@ -11,7 +11,7 @@ export function UsersContainer() {
 
     return <div className='users-container'>
         {context.usersArray.map(user => <User
-                key={user._id}
+                key={'key:' + user._id}
                 userId={user._id}
                 name={user.name}>
             </User>

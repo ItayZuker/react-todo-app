@@ -10,18 +10,11 @@ require('./db.js');
 app.set('json spaces', 2);
 app.use(express.json());
 
-
 app.use('/todos/api', todosRout);
 app.use('/lists/api', listsRout);
 app.use('/users/api', usersRout);
 app.use('/visitors/api', visitorsRout);
 app.use('/', express.static(path.join(__dirname, '../client/build')))
-
-// app.use('/', express.static(path.join(__dirname, '../client/public')))
-
-// app.use('/', (req, res) => {
-//     res.sendFile(path.join('../client/build'))
-// })
 
 let port = 8080
 if(process.env.PORT) {
