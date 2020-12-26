@@ -4,6 +4,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const UsersModel = require('../models/Users.model.js');
 
+router.get('/*', express.static(path.join(__dirname, '../../client/build')))
 
 router.delete('/delete-user/:userId', async (req, res) => {
     await UsersModel

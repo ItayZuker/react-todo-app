@@ -4,7 +4,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const ListsModel = require('../models/lists.model.js');
 
-
+router.get('/*', express.static(path.join(__dirname, '../../client/build')))
 
 router.put('/update-list-name/:listId', async (req, res) => {
     await ListsModel

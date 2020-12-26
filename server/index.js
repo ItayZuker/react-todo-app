@@ -17,7 +17,7 @@ app.use('/users/api', usersRout);
 app.use('/visitors/api', visitorsRout);
 app.use('/', express.static(path.join(__dirname, '../client/build')))
 
-app.use('/', express.static(path.join(__dirname, '../client/public')))
+// app.use('/', express.static(path.join(__dirname, '../client/public')))
 
 // app.use('/', (req, res) => {
 //     res.sendFile(path.join('../client/build'))
