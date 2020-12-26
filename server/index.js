@@ -15,10 +15,10 @@ app.use('/todos/api', todosRout);
 app.use('/lists/api', listsRout);
 app.use('/users/api', usersRout);
 app.use('/visitors/api', visitorsRout);
-app.use('/', express.static(path.join(__dirname, '../client/build')))
+// app.use('/', express.static(path.join(__dirname, '../client/build')))
 
 app.use('/', (req, res) => {
-    res.sendFile(path.join('../client/public'))
+    res.sendFile(path.join('../client/build'))
 })
 
 let port = 8080
