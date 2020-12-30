@@ -23,16 +23,28 @@ router.delete('/delete-user/:userId', async (req, res) => {
 
 router.post('/create-user', async (req, res) => {
     await UsersModel
-        .create({
-            name: req.body.name,
-        }, (err, docs) => {
+        .find({}, (err, docs) => {
             if(err) {
                 console.log(err)
                 res.status(500).send()
             } else if(!docs) {
                 res.status(404).send()
+            } else if(docs.length > 4) {
+                res.json({'message': 'max-5'})
             } else {
-                res.json(docs)
+                UsersModel.create({
+                    name: req.body.name,
+                }, (err, docs) => {
+                    console.log('123')
+                    if(err) {
+                        console.log(err)
+                        res.status(500).send()
+                    } else if(!docs) {
+                        res.status(404).send()
+                    } else {
+                        res.json(docs)
+                    }
+                })
             }
         })
 })

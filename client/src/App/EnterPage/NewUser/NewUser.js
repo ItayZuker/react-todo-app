@@ -49,18 +49,22 @@ export function NewUser(props){
                     .then(res => res.json())
                     .then(res => {
                         e.target.user.value = ''
-                        fetch(`/lists/api/create-list/${res._id}`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                listName: 'Master list'
-                            }),
-                        })
-                        .then(() => {
-                            context.setRenderUsers(props.userId)
-                        })
+                        if (res === 'max-5') {
+                            context.usersArray.pop()
+                        } else {
+                            fetch(`/lists/api/create-list/${res._id}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    listName: 'Master list'
+                                }),
+                            })
+                            .then(() => {
+                                context.setRenderUsers(props.userId)
+                            })
+                        }
                     })
                 }
             }}>

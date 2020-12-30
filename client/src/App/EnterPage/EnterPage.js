@@ -79,12 +79,12 @@ export function EnterPage() {
     const time = getTime()
     const day = getDay()
 
-    emailjs.send('gmail', 'enter_notification', {time: time, day: day}, 'user_isbKMcCXhDYiE3zZ3tzbF')
-        .then((result) => {
-            console.log(result.text);
-        }, (error) => {
-            console.log(error.text);
-        });
+    // emailjs.send('gmail', 'enter_notification', {time: time, day: day}, 'user_isbKMcCXhDYiE3zZ3tzbF')
+    //     .then((result) => {
+    //         console.log(result.text);
+    //     }, (error) => {
+    //         console.log(error.text);
+    //     });
 
       return <EnterPageDiv>
         <LogoContainer>
