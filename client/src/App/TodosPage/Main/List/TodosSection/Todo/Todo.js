@@ -12,6 +12,7 @@ export function Todo(props) {
     const url = useParams()
     const context = useContext(appContext)
     const todo = context.todosArray.find(todo => todo._id === props.todoId) || {}
+    
     const [display, setDisplay] = useState(true)
     const [deleteTodo, setDeleteTodo] = useState(false)
     const [openDetails, setOpenDetails] = useState(false)

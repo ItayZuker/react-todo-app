@@ -79,51 +79,12 @@ export function EnterPage() {
     const time = getTime()
     const day = getDay()
 
-    useEffect(() => {
-        async function getUser() {
-            const result = await fetch('https://api.ipify.org/?format=json')
-            const visitor = await result.json()
-            const dbResult = await fetch(`/visitors/api/look-for-metch/${visitor.ip}`)
-            const dbVisitor = await dbResult.json()
-            if (dbVisitor.message === 'no-metch') {
-                fetch('/visitors/api/new-visitor', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        ip: visitor.ip,
-                        lastTime: time,
-                        lastDay: day,
-                        visits: 1,
-                    })
-                })
-                return {ip: visitor.ip, lastTime: time, lastDay: day, visits: 1}
-            } else {
-                fetch(`/visitors/api/update-visitor/${dbVisitor._id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        visits: dbVisitor.visits + 1,
-                        lastTime: time,
-                        lastDay: day,
-                    })
-                })
-                return {ip: visitor.ip, lastTime: time, lastDay: day, visits: dbVisitor.visits + 1}
-            }
-        }
-        getUser()
-            .then((res) => {
-                emailjs.send('gmail', 'enter_notification', {ip: res.ip, visits: res.visits, lastTime: res.lastTime, lastDay: res.lastDay}, 'user_isbKMcCXhDYiE3zZ3tzbF')
-                .then((result) => {
-                    console.log(result.text);
-                }, (error) => {
-                    console.log(error.text);
-                });
-            })
-    }, [])
+    emailjs.send('gmail', 'enter_notification', {time: time, day: day}, 'user_isbKMcCXhDYiE3zZ3tzbF')
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
 
       return <EnterPageDiv>
         <LogoContainer>
